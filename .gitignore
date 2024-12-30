@@ -24,6 +24,7 @@ sftp.json
 event_test.tin
 *.log
 tmp/
+.pass
 
 chars/chad/
 chars/droptable/
