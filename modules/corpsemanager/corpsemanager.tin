@@ -5,13 +5,17 @@
 #var corpse_check 0;
 #var corpse_check_toggle 1;
 #var corpses[inventory] 0;
-#var corpses[smuggle] 0;
+#NOP #var corpses[smuggle] 0;
 #var corpses[cooler] 0;
 #var corpses[coffin] 0;
 #var corpses[freezer] 0;
 #var corpses[servant] 0;
 #var corpses[golem] 0;
 
+#NOP Follower corpses are coming from HPbar for necromancers so its best to just update the value based on the HPbar 
+#var corpses[follower] $my[corpse][minion][current];
+#NOP Make sure to update this value to a safe number that you know for sure the minion can carry (depends on str)
+#var corpses[follower][max] 30; 
 
 #NOP -- Block certain things from picking up as "corpse";
 #act {There is no corpse in this room master.} {#NOP} {1};
@@ -78,31 +82,33 @@
 	#NOP -- If any of them happen to go negative, set to 0;
 	#if {$corpses[coffin] < 0} {#var corpses[coffin] 0;};
 	#if {$corpses[inventory] < 0} {#var corpses[inventory] 0;};
-	#if {$corpses[smuggle] < 0} {#var corpses[smuggle] 0;};
+	#NOP #if {$corpses[smuggle] < 0} {#var corpses[smuggle] 0;};
 	#if {$corpses[freezer]  < 0} {#var corpses[freezer] 0;};
 	#if {$corpses[cooler] < 0} {#var corpses[cooler] 0;};
 	#if {$corpses[servant] < 0} {#var corpses[servant] 0;};
+	#if {$corpses[follower] < 0} {#var corpses[follower] 0;};
 	#if {$corpses[golem] < 0} {#var corpses[golem] 0;};
-	#math corpses[total] {$corpses[coffin] + $corpses[inventory] + $corpses[smuggle] + $corpses[freezer] + $corpses[cooler] + $corpses[servant] + $corpses[golem]};
+	#math corpses[total] {$corpses[coffin] + $corpses[inventory] + $corpses[follower] + $corpses[freezer] + $corpses[cooler] + $corpses[servant] + $corpses[golem]};
 	#delay 0.1 {
 		#var corpse_string <088>💀 <ceb>$corpses[total] <088>Corpses 💀\n;
 	    #if {$corpses[coffin] > 0} {#var corpse_string $corpse_string C: $corpses[coffin];};
 		#if {$corpses[inventory] > 0} {#var corpse_string $corpse_string I: $corpses[inventory];};
-		#if {$corpses[smuggle] > 0} {#var corpse_string $corpse_string S: $corpses[smuggle];};
+		#NOP #if {$corpses[smuggle] > 0} {#var corpse_string $corpse_string S: $corpses[smuggle];};
 		#if {$corpses[freezer] > 0} {#var corpses[freezer] @min{$corpses[freezer];50};#var corpse_string $corpse_string F: $corpses[freezer];};
 		#if {$corpses[cooler] > 0} {#var corpses[cooler] @min{$corpses[cooler];50};#var corpse_string $corpse_string Clr: $corpses[cooler];};
 		#if {$corpses[servant] > 0} {#var corpse_string $corpse_string Srv: $corpses[servant];};
+		#if {$corpses[follower] > 0} {#var corpses[follower] @min{$corpses[follower];$corpses[follower][max]};#var corpse_string $corpse_string Fol: $corpses[follower];};
 		#if {$corpses[golem] > 0} {#var corpse_string $corpse_string Gol: $corpses[golem];};
 		#if {"$draw[caption][active]" == "on"} {draw_caption_corpses};
 	};
 };
 
-#NOP -- Corpse use order is:  Coffin -> Freezer -> Cooler -> Golem/Servant -> Inventory -> Smuggle;
+#NOP -- Corpse use order is:  Coffin -> Freezer -> Cooler -> Golem/Servant/Nec-Follower -> Inventory;
 #alias corpse_select {
 
-	#if {$corpses[smuggle] && !$corpses[inventory] && !$corpses[coffin] && !$corpses[freezer] && !$corpses[golem] && !$corpses[servant]} {
-		smuggle remove corpse;drop corpse;
-	};
+	#NOP #if {$corpses[smuggle] && !$corpses[inventory] && !$corpses[coffin] && !$corpses[freezer] && !$corpses[golem] && !$corpses[servant]} {
+	#NOP 	smuggle remove corpse;drop corpse;
+	#NOP };
 	#if $corpses[coffin] {
 		unwrap;
 	} {
@@ -112,10 +118,14 @@
 			#if $corpses[cooler] {
 				uncooler corpse;
 			} {
-				#if {$corpses[golem] || $corpses[servant]} {
+				#if {$corpses[golem] || $corpses[servant] || $corpses[follower]} {
 					#if $corpses[golem] {
 						golem drop corpse;
-					} {
+					};
+					#elseif $corpses[follower] {
+						=drop corpse;
+					};						
+					#else {
 						#NOP -- I forget what the command for servant to drop is;
 					}
 				} {
@@ -265,25 +275,25 @@
 } {2};
 
 #NOP -- Corpse Management SMUGGLE;
-#act {^Items you are currently smuggling (%*):} {
-	#var smuggle_update 1;
-	#var corpses[smuggle] 0;
-	#action {{^>(.*)(corpse|remains)(.*)}} {
-		#if $smuggle_update {#math corpses[smuggle] {$corpses[smuggle] + 1}};
-	} {6};
-	#delay 2 {
-		#var smuggle_update 0;
-	};
-	
-} {2};
-
-#action {%*Smuggling%s\[%s%d\/%s%d|%*%\|%s%dc]%*} {
-	#if $corpse_check {
-		#if {%9 != $corpses[smuggle]} {
-			#var corpses[smuggle] %9;
-		};
-	};
-} {2};
+#NOP #act {^Items you are currently smuggling (%*):} {
+#NOP 	#var smuggle_update 1;
+#NOP 	#var corpses[smuggle] 0;
+#NOP 	#action {{^>(.*)(corpse|remains)(.*)}} {
+#NOP 		#if $smuggle_update {#math corpses[smuggle] {$corpses[smuggle] + 1}};
+#NOP 	} {6};
+#NOP 	#delay 2 {
+#NOP 		#var smuggle_update 0;
+#NOP 	};
+#NOP 	
+#NOP } {2};
+#NOP 
+#NOP #action {%*Smuggling%s\[%s%d\/%s%d|%*%\|%s%dc]%*} {
+#NOP 	#if $corpse_check {
+#NOP 		#if {%9 != $corpses[smuggle]} {
+#NOP 			#var corpses[smuggle] %9;
+#NOP 		};
+#NOP 	};
+#NOP } {2};
 
 #NOP -- Corpse Management PRIEST SERVANT;
 #act {%* swirls slowly and reveals that it is carrying:$} {
