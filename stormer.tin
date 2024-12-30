@@ -1,0 +1,24 @@
+#echo {Connect to:};
+#echo {3kingdoms};
+
+#kill all;
+
+#echo {1: Stormer};
+
+#macro {1} {#read chars/stormer/stormer.tin;stormer;#textin chars/stormer/.pass;um};
+#NOP #macro {2} {#read chars/oscar/oscar.tin;oscar;um};
+#NOP #macro {3} {#read chars/martyr/martyr.tin;martyr;um};
+#NOP #macro {4} {#read chars/toren/toren.tin;toren;um};
+#NOP #macro {5} {#read chars/antiochus/antiochus.tin;antiochus;um};
+#NOP #macro {6} {#read chars/boscar/boscar.tin;boscar;um};
+#NOP #macro {7} {#read chars/psyron/psyron.tin;psyron;um};
+#NOP #macro {8} {#read chars/maximon/maximon.tin;maximon;um};
+#NOP #macro {9} {#read chars/byron/byron.tin;spyron;um};
+#NOP #macro {0} {#read chars/porflavor/porflavor.tin;porflavor;um};
+
+
+#event {SESSION DEACTIVATED} {
+    #echo {1: Stormer};
+};
+
+#alias {um} {#unmacro {%d}};
