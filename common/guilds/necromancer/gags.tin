@@ -87,10 +87,14 @@
 #gag {You call the chest from the ethereal plane.};
 #gag {The chest fades into nothingness.};
 #gag {Your maximum dream factor is %1 mistress, invoking that now.};
+#gag {Shadowy powers compel you to};
+
+#NOP {Alpha}
 #gag {^C:D=};
 #gag {^B:D=};
+#gag {^C:\/\\};
+#gag {^B:\/\\};
 #gag {^D=};
-#gag {Shadowy powers compel you to};
 #gag {^C:-,};
 #gag {^C:O=};
 
