@@ -1,6 +1,6 @@
 #class {deadman} {open}
 
-#var deadmanIdleTimeout 900;
+#var deadmanIdleTimeout 3600;
 
 #alias deadman {
     #math deadmanIdleTimeout {60 * %1};
