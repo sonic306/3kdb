@@ -1,0 +1,21 @@
+#class {numpad} {open}
+#NOP If using PuTTy, be sure "Disable application keypad mode" is unchecked in Settings -> Terminal -> Features
+
+/* Number Pad Movement */
+#macro {\eOq} {sw}
+#macro {\eOr} {s}
+#macro {\eOs} {se}
+#macro {\eOt} {w}
+#macro {\eOu} {look}
+#macro {\eOv} {e}
+#macro {\eOw} {nw}
+#macro {\eOx} {n}
+#macro {\eOy} {ne}
+#NOP #macro {\e0p} {d}
+#NOP #macro {\e0n} {u}
+
+/* Alternate up/down using - for up and + for down */
+#macro {\eOS} {u}
+#macro {\eOl} {d}
+
+#class {numpad} {close}
