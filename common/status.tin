@@ -55,6 +55,7 @@
         #var mob[maim] 0;
         #var mob[bloodarc] 0;
         #var mob[bloodfuse] 0;
+        #var mob[convoke] 0;
     };
 
     #if {"$guild" == "breed"} {

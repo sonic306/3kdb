@@ -23,6 +23,7 @@
 #list strategyList add {{{guild} {necromancer} {name} {shackle} {active} {0} {description} {Pure: Shackle}}};
 #list strategyList add {{{guild} {necromancer} {name} {diurnum} {active} {0} {description} {Necro: Diurnum}}};
 #list strategyList add {{{guild} {necromancer} {name} {nocturnum} {active} {0} {description} {Necro: Nocturnum}}};
+#list strategyList add {{{guild} {necromancer} {name} {convokeR} {active} {0} {description} {Necro: Convoke Ravens}}};
 #list strategyList add {{{guild} {necromancer} {name} {iprime} {active} {0} {description} {Invoke Prime}}};
 #list strategyList add {{{guild} {necromancer} {name} {conjure} {active} {0} {description} {Conjure Undead: Conjure and Nuke Them (Unholy Ground)}}};
 #list strategyList add {{{guild} {necromancer} {name} {conjure1} {active} {0} {description} {Conjure Undead: Conjure and Nuke Them (No Unholy Ground)}}};
@@ -60,7 +61,7 @@
         };
 
         #if {$my[necromancer][bloodarc] > 0 && !$mob[bloodarc]} {
-            checkStrategy {bloodarc} {bloodarc};
+            checkStrategy {bloodarc} {bloodarc $enemy[target]};
         };
             
         #if {$my[necromancer][harvest] > 0} {
@@ -92,6 +93,7 @@
     #if {$my[necromancer][glamors][current] >= 1 && $my[gp1][current] < 50000 && !$my[necromancer][glamors][illuming]} {
         checkStrategy {illume} {illume};
     };
+    checkStrategy {convokeR} {convoke ravens};
 };
 
 #NOP -- Actions to perform the first rounds of combat;
@@ -104,6 +106,7 @@
     checkStrategy {scythe} {scythe};
     checkStrategy {call} {call};
     checkStrategy {psibleed} {psibleed};
+    checkStrategy {convokeR} {convoke ravens};
     checkStrategy {fury_prime} {#if {$my[necromancer][glamors][current]} {fury prime}};
     checkStrategy {fury} {#if {$my[necromancer][glamors][current]} {fury}};
     checkStrategy {rage_prime} {#if {$my[necromancer][glamors][current]} {rage prime}};
