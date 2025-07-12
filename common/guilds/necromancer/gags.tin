@@ -3,6 +3,7 @@
 
 #gag {  The %* is already infected with rabies.$};
 #gag {Breq attacks Toren's %*!};
+#gag {Dollar attacks Stormer's %*!};
 
 #gag {Innocence and light permeate the room, making your enemy stumble!}
 #gag {Remembering summers lost, never to be regained, your foe halts!}
@@ -20,7 +21,6 @@
 #gag {Your foe is blinded as the innocent soul reveals itself before it!}
 #gag {Your foe is overcome with innocence and succumbs to your attack!}
 #gag {Your foe screams as souls of the innocent materialize around him!}
-#gag {Breq tells you:}
 #gag {Somewhere, an innocent dies, and you capture its soul in this room.}
 #gag {You cannot change your atrance while it is activated.}
 #gag {Your link to the guild tells you:}
@@ -30,19 +30,24 @@
 
 #nop {Gag the fury emotes}
 #gag {Ripples of power channel along %1 body}
+
 #gag {With a %1 strike, Breq %2 his enemy %3}
+#gag {With a %1 strike, Dollar %2 his enemy %3}
 
 #nop {gag the familiars}
 #gag {Breq bites Toren's enemy!}
+#gag {%* bites %* enemy!}
 
 #nop {gag the qtrance stuff}
 #gag {* You blink into unconsciousness *}
 #gag {You alter back to your normal, human form.}
 #gag {Breq tells you:}
+#gag {Dollar tells you:}
 #gag {  Your maximum alter degree is %1 master.  Invoking that now.}
 #gag {(%1)You alter into the embodimental spirit of the bear!}
 #gag {* You recover your senses *}
 #gag {You hand 10 coins to Breq, who then %1 guild.}
+#gag {You hand 10 coins to Dollar, who then %1 guild.}
 
 
 #nop {Naturian}
