@@ -12,6 +12,7 @@ common/map/backups
 
 # don't commit any password files
 password.tin
+.pass
 
 # other stuff not to commit
 krat/
@@ -42,6 +43,7 @@ chars/ryst
 chars/tarnished
 chars/void
 chars/zorbaine
+chars/stormer
 chars/*/private
 chars/*/vars.tin
 
@@ -54,6 +56,7 @@ Psicorps Notes.xlsx
 common/bot/generic_old.tin
 common/bot/generic_new.tin
 byron.tin
+stormer.tin
 setup.sh
 common/private.tin
 breed.map
