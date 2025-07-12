@@ -31,3 +31,6 @@
 
 #NOP dupe levels on items;
 #SUBSTITUTE {Your Eternal instincts sense %* %* connected to this item.} {Your Eternal instincts sense $numbersRoman %2 connected to this item.};
+
+#NOP Require Numbers
+#SUBSTITUTE {[Dmg]: You hit %* %d time%*for %d damage.} {<128>[DMG]:<088> <178>You hit<088> <168>{%1}<088> <138>%2<088> <178>time%3<088><178>for<088> <158>%4<088> <178>damage<088>.}
