@@ -118,7 +118,7 @@
 	#if {$corpses[smuggle] < 0} {#var corpses[smuggle] 0;};
 	#if {$corpses[freezer]  < 0} {#var corpses[freezer] 0;};
 	#if {$corpses[cooler] < 0} {#var corpses[cooler] 0;};
-	#math corpses[total] {$corpses[coffin] + $corpses[inventory] + $corpses[smuggle] + $corpses[freezer] + $corpses[cooler] + $corpses[servant] + $corpses[golem]};
+	#math corpses[total] {$corpses[coffin] + $corpses[inventory] + $corpses[smuggle] + $corpses[freezer] + $corpses[cooler] + $corpses[servant] + $corpses[golem] + $my[corpse][minion][current]};
 	#delay 0.1 {
 		#var corpse_string <088>💀 <ceb>$corpses[total] <088>Corpses 💀\n;
 	    #if {$corpses[coffin] > 0} {#var corpse_string $corpse_string C: $corpses[coffin];};
@@ -126,6 +126,7 @@
 		#if {$corpses[smuggle] > 0} {#var corpse_string $corpse_string S: $corpses[smuggle];};
 		#if {$corpses[freezer] > 0} {#var corpses[freezer] @min{$corpses[freezer];50};#var corpse_string $corpse_string F: $corpses[freezer];};
 		#if {$corpses[cooler] > 0} {#var corpses[cooler] @min{$corpses[cooler];50};#var corpse_string $corpse_string Clr: $corpses[cooler];};
+		#if {$my[corpse][minion][current] > 0} {#var my[corpse][minion][current] @min{$my[corpse][minion][current];30};#var corpse_string $corpse_string Fol: $my[corpse][minion][current];};
 		#if {$corpses[servant] > 0} {#var corpse_string $corpse_string Srv: $corpses[servant];};
 		#if {$corpses[golem] > 0} {#var corpse_string $corpse_string Gol: $corpses[golem];};
 		#if {"$draw[caption][active]" == "on"} {draw_caption_corpses};
