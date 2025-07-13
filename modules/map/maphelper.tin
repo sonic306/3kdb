@@ -557,7 +557,7 @@
 #action {You are corraled by the mass of people and carried out the doors.} {#map goto 1818} {2};
 
 #NOP Carnegie Hall;
-#action {^The Usher says: Excuse me, may I see your ticket?$} {mapUndo} {2}:
+#action {^The Usher says: Excuse me, may I see your ticket?$} {mapUndo} {2};
 #action {^The movie usher asks for your movie ticket. When you fail to come up with} {mapUndo} {2};
 
 #action {You fight against the current but are unable to move!} {mapUndo};
