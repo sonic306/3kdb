@@ -2,20 +2,20 @@
 #NOP If using PuTTy, be sure "Disable application keypad mode" is unchecked in Settings -> Terminal -> Features
 
 /* Number Pad Movement */
-#macro {\eOq} {sw}
-#macro {\eOr} {s}
-#macro {\eOs} {se}
-#macro {\eOt} {w}
+#macro {\eOq} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};sw}
+#macro {\eOr} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};s}
+#macro {\eOs} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};se}
+#macro {\eOt} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};w}
 #macro {\eOu} {look}
-#macro {\eOv} {e}
-#macro {\eOw} {nw}
-#macro {\eOx} {n}
-#macro {\eOy} {ne}
+#macro {\eOv} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};e}
+#macro {\eOw} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};nw}
+#macro {\eOx} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};n}
+#macro {\eOy} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};ne}
 #NOP #macro {\e0p} {d}
 #NOP #macro {\e0n} {u}
 
 /* Alternate up/down using - for up and + for down */
-#macro {\eOS} {u}
-#macro {\eOl} {d}
+#macro {\eOS} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};u}
+#macro {\eOl} {#if {"$guild" == "necromancer"} {#var minion[inroom] 0};d}
 
 #class {numpad} {close}
