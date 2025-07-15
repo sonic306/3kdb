@@ -16,6 +16,10 @@
         #NOP Assassin;
         #gag {Your insidious inspiration flows through you as you make the most of each attack!};
         #gag {Your insidious inspiration fades.};
+        #gag {A flash of insidious insight strikes you!};
+        #gag {The energies of the magical nexus empower you!};
+        #gag {With a POP the magical nexus snaps shut.};
+        #gag {The shabby black top hat belches forth magical nexus that fuels your attacks!};
 
         #NOP Drunken Master;
         #gag {^You drunkenly hurl a spell with maximum effectiveness!$};
