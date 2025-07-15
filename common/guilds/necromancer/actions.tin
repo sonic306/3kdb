@@ -85,7 +85,7 @@
 #action {You can only alter your form into beast form %w.}{#var my[necromancer][altered] 0} {2};
 #action {You have already skullfired this repower %w.} {#var my[necromancer][skullfire] 0} {2};
 #action {^You currently have %d/%d open memory globes,} {#var powers[globes][open] %1;} {2};
-#action {^Necromantic energy flows into your phylactery.} {#send {!repower}}; {2}
+#action {^Necromantic energy flows into your phylactery.} {#send {!repower}} {2};
 #action {Before the repowering, you attempt a last minute %*} {
     #if {!$idle_flag} {
         #var make_con 1;
