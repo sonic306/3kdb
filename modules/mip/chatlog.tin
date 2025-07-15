@@ -3,12 +3,12 @@
 #NOP -- Discord Message Sending;
 #NOP -- Update the below with the webhook URL for each particular discord channel;
 #NOP -- Set these variables in the user/player variables;
-#NOP -- #var webhook[url][general] https://discord.com/api/webhooks/long_token;
-#NOP -- #var webhook[url][tells] https://discord.com/api/webhooks/long_token;
-#NOP -- #var webhook[url][clan] https://discord.com/api/webhooks/long_token;
-#NOP -- #var webhook[url][guild] https://discord.com/api/webhooks/long_token;
-#NOP -- #var webhook[url][high_mortal] https://discord.com/api/webhooks/long_token;
-#NOP -- #var webhook[url][party] https://discord.com/api/webhooks/long_token;
+#var webhook[url][general] https://discord.com/api/webhooks/1394361983750377565/3Z0Q6iYZea0tbe4xsra9MmrWSte2GRKzyJnlJktrLl3WJtw8mkorH9nt2kcI89jCAerV;
+#var webhook[url][tells] https://discord.com/api/webhooks/1394362091669946378/nLYa7HMcyialYonY94mujnwTKBwYWgq3ZMjHG8o1XJVYFBF1BAA3G73LJlaXdAxmirzE;
+#var webhook[url][clan] https://discord.com/api/webhooks/1394362171030372444/1dMZ9IqKryLK49oWuStKH2bWf2xVzxB7Aqcs4xr7ETzTeBPL9Ypf0-jAptWd2s9ngJsA;
+#var webhook[url][guild] https://discord.com/api/webhooks/1394362256132804739/bgNOS54W3c22tmx8APF6tX-oqnyZ70QdSV1oQtLTsrYLfDfmcpftCtltUlai4ttvVNMx;
+#var webhook[url][high_mortal] https://discord.com/api/webhooks/1394362335132651600/KNxYr88KdGOEqJKEkIAQQIiWOhBl6YnK4FROy0ClFw4yXaNUi4Z6OwavDS_TbSNeqsGW;
+#var webhook[url][party] https://discord.com/api/webhooks/1394362416099233914/m4gOMbeTk2gkXLfssRjhpC7dJDDH3X7y26Cg9aJB0jnZDKMbAMeH7t7IZcy8SdKzyL52;
 
 
 #NOP -- Variables for the chat categories;
