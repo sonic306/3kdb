@@ -5,7 +5,9 @@
 *.swp
 
 logs/
-
+chatlog
+trcc
+trcx
 
 # don't commit backups of the map
 common/map/backups
