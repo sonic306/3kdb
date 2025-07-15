@@ -94,7 +94,22 @@
 #gag {Your maximum dream factor is %1 mistress, invoking that now.};
 #gag {Shadowy powers compel you to};
 
+#NOP Health Gags
+#gag {Ripped flesh closes upon itself.};
+#gag {Relief spreads through your healing body.};
+#gag {In great pleasure, you feel your body heal itself.};
+#gag {Shards of bone combine to help make you whole again.};
+#gag {Tendons come together, strengthening your body.};
+#gag {Grisly bruises lighten and fade away.};
+#gag {Shredded entrails pull themselves back into your abdomen.};
+#gag {Bloody wounds stitch themselves closed.};
+#gag {Broken bones mesh together once again.};
+#gag {Blood, once again, flows through your body.};
+#gag {Cracked bones join again, becoming whole.};
+
+
 #NOP {Alpha}
+#gag {^\/\\\/\\\/\\\/\\\/*};
 #gag {^C:D=};
 #gag {^B:D=};
 #gag {^C:\/\\};
@@ -102,5 +117,6 @@
 #gag {^D=};
 #gag {^C:-,};
 #gag {^C:O=};
+#gag {^>>C:HSN};
 
 #class guild_gags close
