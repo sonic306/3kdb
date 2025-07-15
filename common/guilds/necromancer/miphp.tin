@@ -90,12 +90,60 @@
 
 	#cat bloodfuse_string { (${decanter_powered_string}/${decanter_full_string}/${decanter_empty_string})};
 
+	#NOP	#list temp clear;
+	#NOP	#list temp add {HP:$hp/$hp_max SP:$sp/$sp_max NP:$gp1/$gp1_max E:$ehealth};
+	#NOP	#list temp add {H:$my[hp][graph] S:$my[sp][graph] NP:$my[gp1][graph]  E:$enemy[graph]};
+	#NOP	#list temp add {Status[w$my[necromancer][worth]%|p$my[necromancer][protection]|v$my[necromancer][veil]|r$my[gp2][current]%] Cr[$my[necromancer][progress]%] TG[$my[necromancer][teleports][current]|$my[necromancer][glamors][current]|$my[necromancer][glamors][active]] $[$my[coins]]};
+	#NOP	#list temp add {<dda>Prime:$iprime_string/2 <dda>Bfuse:$bloodfuse_string <dda>Maim:$maim_string <dda>Di/Nocturnum:$diurnum_string <dda>GH:$harvest_string <dda>BA:$bloodarc_string };
+	#NOP	#list temp add {<dda>Souls:$souls_string <dda>Soulbind:$soulbind_string <dda>Skullfire:$skullfire_string <dda>CU:$conjure_undead_string <dda>UG:$unholy_ground_string};
+
+	#if {$hp * 100 / $hp_max > 75} {
+		#var hp_color \e[32m
+	} {
+		#if {$hp * 100 / $hp_max > 50} {
+			#var hp_color \e[33m
+		} {
+			#if {$hp * 100 / $hp_max > 25} {
+				#var hp_color \e[31m
+			} {
+				#var hp_color \e[31m
+			}
+		}
+	};
+	#if {$sp * 100 / $sp_max > 75} {
+		#var sp_color \e[32m
+	} {
+		#if {$sp * 100 / $sp_max > 50} {
+			#var sp_color \e[33m
+		} {
+			#if {$sp * 100 / $sp_max > 25} {
+				#var sp_color \e[31m
+			} {
+				#var sp_color \e[31m
+			}
+		}
+	};
+	#if {$gp1 * 100 / $gp1_max > 75} {
+		#var np_color \e[32m
+	} {
+		#if {$gp1 * 100 / $gp1_max > 50} {
+			#var np_color \e[33m
+		} {
+			#if {$gp1 * 100 / $gp1_max > 25} {
+				#var np_color \e[31m
+			} {
+				#var np_color \e[31m
+			}
+		}
+	};
+
 	#list temp clear;
-	#list temp add {HP:$hp/$hp_max SP:$sp/$sp_max NP:$gp1/$gp1_max E:$ehealth};
-	#list temp add {H:$my[hp][graph] S:$my[sp][graph] NP:$my[gp1][graph]  E:$enemy[graph]};
-	#list temp add {Status[w$my[necromancer][worth]%|p$my[necromancer][protection]|v$my[necromancer][veil]|r$my[gp2][current]%] Cr[$my[necromancer][progress]%] TG[$my[necromancer][teleports][current]|$my[necromancer][glamors][current]|$my[necromancer][glamors][active]] $[$my[coins]]};
-	#list temp add {<dda>Prime:$iprime_string/2 <dda>Bfuse:$bloodfuse_string <dda>Maim:$maim_string <dda>Di/Nocturnum:$diurnum_string <dda>GH:$harvest_string <dda>BA:$bloodarc_string };
-	#list temp add {<dda>Souls:$souls_string <dda>Soulbind:$soulbind_string <dda>Skullfire:$skullfire_string <dda>CU:$conjure_undead_string <dda>UG:$unholy_ground_string};
+	#list temp add {<bfa>\e[32m╔═[HP:\e[0m${hp_color}$hp\e[0m/\e[31m$hp_max\e[0m \e[96mSP:\e[0m${sp_color}$sp\e[0m/\e[96m$sp_max\e[0m \e[33mNP:\e[0m${np_color}$gp1\e[0m/\e[33m$gp1_max\e[0m \e[35mE:\e[0m\e[35m$ehealth\e[0m\e[32m]\e[0m};
+	#list temp add {<bfa>║ <088> \e[32mHP:\e[0m${hp_color}$my[hp][graph]\e[0m  \e[96mSP:\e[0m${sp_color}$my[sp][graph]\e[0m  \e[33mNP:\e[0m${np_color}$my[gp1][graph]\e[0m  \e[35mE:\e[0m$enemy[graph]\e[0m};
+	#list temp add {<bfa>║ <088> \e[36mWorth:\e[32m$my[necromancer][worth]%  \e[36mProtection:\e[32m$my[necromancer][protection]  \e[36mVeil:\e[32m$my[necromancer][veil]  \e[36mRest:\e[32m$my[gp2][current]%  \e[36mTeleport:\e[32m$my[necromancer][teleports][current]  \e[36mGlamors:\e[32m$my[necromancer][glamors][current]$my[necromancer][glamors][active]  \e[36mCoins:\e[33m$[$my[coins]]\e[0m};
+	#list temp add {<dda>║  \e[36mPrime:\e[37m$iprime_string/2  \e[36mBfuse:\e[37m$bloodfuse_string  \e[36mMaim:\e[37m$maim_string  \e[36mDi/Noct:\e[37m$diurnum_string  \e[36mGH:\e[37m$harvest_string  \e[36mBA:\e[37m$bloodarc_string<088>};
+	#list temp add {<dda>╚═ \e[36mSouls:\e[37m$souls_string  \e[36mSoulbind:\e[37m$soulbind_string  \e[36mSkullfire:\e[37m$skullfire_string  \e[36mCU:\e[37m$conjure_undead_string  \e[36mUG:\e[37m$unholy_ground_string\e[0m<088>};
+
 
 	#var hpbar[prompt] $temp;
 }
