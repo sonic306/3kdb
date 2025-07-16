@@ -61,7 +61,7 @@
         };
 
         #if {$my[necromancer][bloodarc] > 0 && !$mob[bloodarc]} {
-            checkStrategy {bloodarc} {bloodarc $numbers_mobname};
+            checkStrategy {bloodarc} {bloodarc $enemy[name_numbers]};
         };
             
         #if {$my[necromancer][harvest] > 0} {
