@@ -2,7 +2,7 @@
 #class custom_corpse_manager open
 
 #var followermax 30
-#var coffinmax 40
+#var coffinmax 38
 
 #var minion[following] 1
 
