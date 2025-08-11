@@ -138,16 +138,43 @@
     #regex {$tmpWord} {gremlin} {#var rolm[gremlin] 1;#undelay rolm_gremlin};
 } {2};
 
-#action {You wield DragonBlade.} {#var rolm[type] Sword/Fire;update_rolm_string} {2};
-#action {You wield PsiMace.} {#var rolm[type] Mace/Mind;update_rolm_string} {2};
-#action {You wield AcidSlinger.} {#var rolm[type] Gun/Acid;update_rolm_string} {2};
-#action {You wield VenomClaw.} {#var rolm[type] Dagger/Poison;update_rolm_string} {2};
-#action {You wield PhotonSphere.} {#var rolm[type] Exotic/Radiation;update_rolm_string} {2};
-#action {You wield HolyScythe.} {#var rolm[type] Polearm/Edged;update_rolm_string} {2};
-#action {You wield Rod of Lordly Might.} {#var rolm[type] Mace/Blunt;update_rolm_string} {2};
-#action {You wield GlacialAxe.} {#var rolm[type] Axe/Ice;update_rolm_string} {2};
-#action {You wield ArcLance.} {#var rolm[type] Lance/Electric;update_rolm_string} {2};
-#action {You wield SolarFlail.} {#var rolm[type] Mace/Energy;update_rolm_string} {2};
+#NOP #action {You wield DragonBlade.} {#var rolm[type] Sword/Fire;update_rolm_string} {2};
+#NOP #action {You wield PsiMace.} {#var rolm[type] Mace/Mind;update_rolm_string} {2};
+#NOP #action {You wield AcidSlinger.} {#var rolm[type] Gun/Acid;update_rolm_string} {2};
+#NOP #action {You wield VenomClaw.} {#var rolm[type] Dagger/Poison;update_rolm_string} {2};
+#NOP #action {You wield PhotonSphere.} {#var rolm[type] Exotic/Radiation;update_rolm_string} {2};
+#NOP #action {You wield HolyScythe.} {#var rolm[type] Polearm/Edged;update_rolm_string} {2};
+#NOP #action {You wield Rod of Lordly Might.} {#var rolm[type] Mace/Blunt;update_rolm_string} {2};
+#NOP #action {You wield GlacialAxe.} {#var rolm[type] Axe/Ice;update_rolm_string} {2};
+#NOP #action {You wield ArcLance.} {#var rolm[type] Lance/Electric;update_rolm_string} {2};
+#NOP #action {You wield SolarFlail.} {#var rolm[type] Mace/Energy;update_rolm_string} {2};
+
+
+#NOP Edged-(50)-(  0%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║              Eternal: EWELL HEAL SHRED DUPE-C ENLARGE FRY PROT             ║
+#NOP   Crushing-(50)-(  0%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║                                                                            ║
+#NOP      Flame-(50)-(  0%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║                              Bot Status: ▶  ✔                              ║
+#NOP    Psionic-(50)-( 98%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║                      Path: 106/592 (17% in 51.85 mins)                     ║
+#NOP  Lightning-(50)-( 96%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║                       Kills: 32 XP: 3.11B (3.60B/hr)                       ║
+#NOP  Corrosion-(50)-(  0%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║                                                                            ║
+#NOP      Power-(50)-( 98%)->-*-*-*-*-*-*-*-*-*-*->                                                                                                                │║   Strategy: Psibleed Corrode Rabies Scythe Maim Illume Spirithowl Iprime   ║
+#NOP      Light-( 5)-(  0%)->-*    
+
+#NOP Match Rolm damage type
+#action {{You wield (.*).}} {
+    #SWITCH {"%2"} {
+     #CASE {"DragonBlade"} {#var rolm[type] Sword/Fire;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke flame}};
+     #CASE {"PsiMace"} {#var rolm[type] Mace/Mind;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke psionic}};
+     #CASE {"SolarFlail"} {#var rolm[type] Mace/Energy;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke power}};
+     #CASE {"AcidSlinger"} {#var rolm[type] Gun/Acid;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke corrosion}};
+     #CASE {"HolyScythe"} {#var rolm[type] Polearm/Edged;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke edged}};
+     #CASE {"Rod of Lordly Might"} {#var rolm[type] Mace/Blunt;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke crushing}};
+     #CASE {"ArcLance"} {#var rolm[type] Lance/Electric;update_rolm_string;#if {"$guild" == "necromancer"} {comtrance invoke lightning}};
+     #CASE {"PhotonSphere"} {#var rolm[type] Exotic/Radiation;update_rolm_string;};
+     #CASE {"GlacialAxe"} {#var rolm[type] Axe/Ice;update_rolm_string};
+     #CASE {"VenomClaw"} {#var rolm[type] Dagger/Poison;update_rolm_string};
+     #DEFAULT {#if {"$guild" == "necromancer"} {comtrance invoke power}};
+    };
+} {1};
 
 #NOP -- Update charges on use and set tickers in case the "glows brightly" pattern doesn't match;
 #NOP -- Tickers are padded with about 10 seconds;
