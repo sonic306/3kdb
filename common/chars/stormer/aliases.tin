@@ -1,0 +1,240 @@
+#class {player_aliases} {kill}
+#class {player_aliases} {open}
+
+#NOP -- Player specific aliases;
+
+#var ctran 0
+
+#alias pyre {
+	retrieve;
+	open chest;
+	#2 get kindling from chest;
+	qtrance unwrap biggest/funeral pyre>2;
+	close chest;
+	deliver;
+};
+
+#alias rchest {
+	retrieve;
+	open chest;
+	exa chest;
+};
+
+#alias dchest {
+	close chest;
+	deliver;
+};
+
+
+#alias dca {
+	n;
+	retrieve;
+	open chest;
+	get all from chest;
+	s;
+	donate all;
+	close chest;
+	deliver
+};
+
+#alias npup {
+	#VARIABLE {recently_reclaimed} {1};
+	#IF {$mask_on == 2} {
+		#IF {$my[hpbar][inv_corpses] > 2} {
+			#2 absorb;
+		};
+		#ELSEIF {"$freezer" == "on" && $corpses[freezer] > 0} {
+			#send !trace glyph;
+			#2 deslab;
+			#DELAY {3} {#4 absorb;};
+			#DELAY {5} {#send !trace glyph;}
+		};
+		#ELSEIF {$my[hpbar][coffin_corpses] > 0} {
+			#send !trace glyph;
+			#2 unwrap;
+			#DELAY {3} {#4 absorb;};
+			#DELAY {5} {#send !trace glyph;}
+		};
+		#ELSEIF {$my[hpbar][follower_corpses] > 0} {
+			#2 =drop corpse;
+			#DELAY {0.5} {#2 absorb;};
+		};
+	};
+	#ELSE {
+		#IF {$my[hpbar][inv_corpses] > 4} {
+			#2 absorb;
+		};
+		#ELSEIF {"$freezer" == "on" && $corpses[freezer] > 0} {
+			qtrance deslab/preserve remains/absorb>2
+		};
+		#ELSEIF {$my[hpbar][coffin_corpses] > 0} {
+			qtrance unwrap/absorb>2
+		};
+		#ELSEIF {$my[hpbar][follower_corpses] > 0} {
+			qtrance =drop corpse/absorb>2
+		};
+	};
+	#DELAY {4} {
+		_finish_reclaim;
+	};
+};
+
+#alias givecorpses {
+	#if {$mask_on != 0 && !$ctran} {
+		#var ctran 1;
+		mask all;
+		#send !trace glyph;
+		#IF {$my[hpbar][follower_corpses] >= 2 && $minion[following]} {
+			qtrance =drop corpse/get corpse>2
+		};
+		#ELSEIF {$corpses[freezer] > 0 && "$freezer" == "on"} {
+			deslab;
+			#delay {3} {qtrance preserve remains/get corpse>2}
+		};
+		#ELSEIF {$my[hpbar][coffin_corpses] > 0} {
+			unwrap;
+			#delay {3} {qtrance preserve remains/get corpse>2}
+		};
+		#delay {4} {mask on;#var ctran 0;}
+	};
+	#elseif {!$ctran && $mask_on == 0} {
+		#var ctran 1;
+		#IF {$my[hpbar][follower_corpses] >= 2 && $minion[following]} {
+			qtrance =drop corpse/get corpse>2
+		};
+		#ELSEIF {$corpses[freezer] > 2 && "$freezer" == "on"} {
+			qtrance deslab/preserve remains/get corpse>2
+		};
+		#ELSEIF {$my[hpbar][coffin_corpses] > 2} {
+			qtrance unwrap/preserve remains/get corpse>2
+		};
+		#var ctran 0;
+	};
+};
+
+#alias {customecorpsetrig} {
+	#var idle 0;
+	corpsemanager;
+};
+
+#alias {corpse_select_necro} {
+	#format tmpCorpses {%d} {%1};
+	#format tmpAbsorb {%d} {%1};
+	#var tmpMoreCorpses 1;
+	
+
+	#if $debug_corpse_necro {#echo {Necro Corpse Select - Input is $tmpAbsorb}};
+
+	#if {$corpses[inventory] > 0} {
+		#if {$corpses[inventory] >= $tmpCorpses} {
+			qtrance absorb>$tmpCorpses;
+			#var tmpMoreCorpses 0;
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Inventory: Using $tmpCorpses}};
+		} {
+			#math tmpCorpses {$tmpCorpses - $corpses[inventory]};
+			qtrance absorb>$corpses[inventory];
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Inventory 2: Using $corpses[inventory]}};
+		};
+	};
+
+	#if $tmpMoreCorpses {
+		#if {$corpses[coffin] > 0} {
+			#if {$corpses[coffin] >= $tmpCorpses} {
+				qtrance unwrap>$tmpCorpses;
+				#var tmpMoreCorpses 0;
+				#if $debug_corpse_necro {#echo {Necro Corpse Select - Coffin: Unwrapping $tmpCorpses}};
+			} {
+				#math tmpCorpses {$tmpCorpses - $corpses[coffin]};
+				qtrance unwrap>$corpses[coffin];
+				#if $debug_corpse_necro {#echo {Necro Corpse Select - Coffin 2: Unwrapping $corpses[coffin]}};
+			};
+		};
+	};
+
+	#if $tmpMoreCorpses {
+		#if {$corpses[freezer] > 0 && $corpses[freezer] >= $tmpCorpses} {
+			qtrance deslab>$tmpCorpses;
+			#var tmpMoreCorpses 0;
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Freezer: Deslabbing $tmpCorpses}};
+		} {
+			#math tmpCorpses {$tmpCorpses - $corpses[freezer]};
+			qtrance deslab>$corpses[freezer];
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Freezer 2: Deslabbing $corpses[freezer]}};
+		};
+	};
+
+	#if $tmpMoreCorpses {
+		#if {$corpses[cooler] > 0 && $corpses[cooler] >= $tmpCorpses} {
+			qtrance uncooler corpse>$tmpCorpses;
+			#var tmpMoreCorpses 0;
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Cooler: Dropping $tmpCorpses}};
+		} {
+			qtrance uncooler corpse>$corpses[cooler];
+			#math tmpCorpses {$tmpCorpses - $corpses[cooler]};
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Cooler 2: Dropping $corpses[cooler]}};
+		};
+	};
+	#action {eyes glow bright green upon the fallen} {
+		#math tmpAbsorb {$tmpAbsorb + 1};
+		#delay {corpseAbsorb} {
+			#if $debug_corpse_necro {#echo {Necro Corpse Select - Duped Absorbing $tmpAbsorb}};
+			qtrance absorb>$tmpAbsorb;
+			#unaction {eyes glow bright green upon the fallen};
+			#unvar tmpCorpses;
+			#unvar tmpMoreCorpses;
+			#unvar tmpAbsorb;
+		} {1};
+	} {1};
+
+	#delay {corpseAbsorb} {
+		#if $debug_corpse_necro {#echo {Necro Corpse Select - No Dupe Absorbing $tmpAbsorb}};
+		qtrance absorb>$tmpAbsorb;
+		#unaction {eyes glow bright green upon the fallen};
+		#unvar tmpCorpses;
+		#unvar tmpMoreCorpses;
+		#unvar tmpAbsorb;
+	} {4};
+
+	#delay corpse_burn_toggle {
+		#var corpse_burn 1;
+		i;
+	} {10};
+};
+
+#alias {gw} {
+    #switch {"%0"} {
+        #case {"juggernaut"} {reflex stop;gagsoff;gswap juggernaut;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap juggernaut}};
+        #case {"knight"} {reflex stop;gagsoff;gswap mage;#delay {6} {get all;keep all;wear all;wield rod;hold rock;hold tome;get coin;.gswap mage}};
+        #case {"elemental"} {reflex stop;gagsoff;gswap elemental;#delay {6} {get all;keep all;wear all;hold rock;hold tome;get coin;.gswap elemental}};
+        #case {"gentech"} {reflex stop;gagsoff;gswap gentech;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap gentech}};
+        #case {"fremen"} {reflex stop;gagsoff;gswap fremen;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap fremen}};
+		#case {"jedi"} {reflex stop;gagsoff;gswap jedi;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap jedi}};
+		#case {"priest"} {reflex stop;gagsoff;gswap priest;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap priest}};
+		#case {"necromancer"} {reflex stop;gagsoff;gswap necromancer;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap necromancer}};
+        #case {""} {#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}};
+    };
+};
+
+#alias {gagsoff} {
+	#SWITCH {"%0"} {
+	 #CASE {juggernaut} {gag-clear;};
+	 #CASE {knight} {gag-clear;};
+	 #CASE {elemental} {gag-clear;};
+	 #CASE {gentech} {gag-clear;};
+	 #CASE {fremen} {gag-clear;};
+	 #CASE {jedi} {gag-clear;};
+	 #CASE {priest} {gag-clear;};
+	 #CASE {necromancer} {gag-clear;};
+	 #DEFAULT {#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}}
+	};
+};
+
+#alias {gagson} {
+	gag+ hpbar;
+	gag+ generic;
+	gag+ combat_guild;
+	gag+ combat_items;
+	gag+ combat_area;
+};
+
+#class {player_aliases} {close}

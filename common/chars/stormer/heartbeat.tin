@@ -1,0 +1,39 @@
+#class {player_heartbeat} {kill}
+#class {player_heartbeat} {open}
+
+#NOP -- These actions are called every round (every 2 seconds);
+#NOP -- Make sure all actions are INSIDE the !$idle_flag {} section or the deadman will not apply to those actions;
+#NOP -- An example of how to use this to drink a potion when your health is below 500;
+#NOP --   #if {$my[hp][current] < 500} {drink potion};
+#NOP -- Conditions can be combined like so - to cast heal if you have a certain amount of spell points.
+#NOP --   #if {$my[hp][current] < 500 && $my[sp][current] > 1000} {cast heal};
+
+#var make_con 1;
+
+#alias {_player_heartbeat} {
+    #if !$idle_flag {
+        #NOP -- Actions that timing does not matter;
+        #if {$make_con && $my[necromancer][worth] < 125} {con 100;#var make_con 0;#delay 2 {#var make_con 1}};
+
+        #if {$corpses[total] > 1 && $my[gp1][percent] < .3 && $my[gp1][percent] > 0.01 } {
+            #delay {absorb} {mu 4} {0.5};
+        };
+        #NOP #if {$corpses[total] > 1 && $corpse_burn} {
+		#NOP 	#if {$my[gp1][percent] < .3 } {
+		#NOP 		#var corpse_burn 0;
+		#NOP 		corpse_select_necro @min{15;$corpses[total]};
+		#NOP 	};
+		#NOP } {
+		#NOP 	#var corpse_empty 1;
+		#NOP };
+    
+        #NOP -- Actions to only attempt once/round go in this section;
+        #if {$action_round < $mip[round]} {
+            #NOP   
+        };
+    #NOP -- All actions above this line;
+    } {#NOP};
+};
+
+
+#class {player_heartbeat} {close}

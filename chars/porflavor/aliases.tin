@@ -1,9 +1,0 @@
-#class {player_aliases} {kill}
-#class {player_aliases} {open}
-
-#alias {_player_deadmanActions} {
-    #if $bot[active] {.pause;#echo {paused from deadman}};
-};
-
-
-#class {player_aliases} {close}

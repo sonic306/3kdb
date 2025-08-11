@@ -1,0 +1,60 @@
+#class custom_corpse_manager kill
+#class custom_corpse_manager open
+
+#var followermax 30
+#var coffinmax 40
+
+#var minion[following] 1
+
+#alias {corpsemanager} {
+	#if  {$inventory[freezer] && $corpses[freezer] < 50} {
+		slab;
+	};
+	#elseif {$corpses[freezer] == 50 && $inventory[cooler] && $corpses[cooler] < 50} {
+		#if {"$guild" == "necromancer"} {qtrance get corpse/get all from corpse/cooler corpse;};
+		#else {get corpse;get all from corpse;cooler corpse;};
+	};
+	#else {
+		#if {"$guild" == "gentech"} {
+			#if {$gentech[corpses][current] < $gentech[corpses][max]} {
+				wrap;
+			};
+			#else {
+				reclaim;
+			};
+		};
+		#if {"$guild" == "necromancer"} {
+			#if {$corpses[coffin] < $coffinmax} {
+				wrap;
+			};
+			#elseif {$my[corpse][minion][current] < $followermax && $corpses[coffin] == $coffinmax} {
+				#if {$mask_status} {
+					mask active;
+					#DELAY {2} {qtrance preserve remains/=get preservation>2};
+					#DELAY {4} {mask on};
+				};
+				#else {qtrance preserve remains/=get preservation};
+			};
+			#elseif {$corpses[coffin] == $coffinmax && $my[corpse][minion][current] == $followermax} {
+				#if {$mask_status} {
+					mask active;
+					#DELAY {2} {qtrance preserve remains/get preservation>2};
+					#DELAY {4} {mask on};
+				};
+				#else {qtrance preserve remains/get preservation;};
+			};
+				
+		};
+		#if {"$guild" == "fremen"} {
+			#if {$corpses[coffin] < 38} {wrap};
+			#elseif {$corpses[coffin] >= 38 && $my[hpbar][water][current] < 3000} {reclaim};
+			#elseif {$corpses[coffin] >= 38 && $my[hpbar][water][current] > 3000} {fai};
+		}
+	}	
+};
+
+#action {{^Coffin\s+\[\s+\d+\/\s+(\d+)\|.*}} {
+	#var {coffinmax} {%2}
+};
+
+#class custom_corpse_manager close

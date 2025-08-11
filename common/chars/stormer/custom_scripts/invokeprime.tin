@@ -1,0 +1,268 @@
+#class {necro_ipp} {kill}
+#class {necro_ipp_exec} {kill}
+#class {necro_ipp} {open}
+
+#var ippdbg 0;
+#var repower_charges 2;
+#var ipp_charge {$repower_charges};
+#var force_ipp 0;
+#var notify_ipp 0;
+#var in_ipp 0;
+
+#unvar ipp_live;
+#list ipp_live create {};
+#list ipp_live add {You call forth a word of great power, invoking the prime nature of your magic  Crumbling away from the corpse, the soul of the creature is released in the form of a giant death's head that flies freely into the room, leaving behind it a great trail of mental energy!};
+#list ipp_live add {You call forth a word of great power, invoking the prime nature of your magic  Crumbling away from the corpse, the soul of the creature is released in the form of a giant death's head that flies freely into the room, leaving behind it a great trail of power waves!};
+#list ipp_live {simplify};
+
+#unvar line2_live;
+#list line2_live create {};
+#list line2_live add {Diving around -, the terrifying death's head growls deeply};
+#list line2_live add {Screaming in rage at -, the skull races around the room};
+#list line2_live add {Screaming through the room, the death's head growls at -};
+#list line2_live add {Seething with venomous anger, the death's head howls at -};
+#list line2_live add {Snarling at -, the skull gnashes its teeth in anger};
+#list line2_live add {The ghostly skull bobs and weaves around -, growling fiercely};
+#list line2_live add {The ghostly skull races around the room, circling - menacingly};
+#list line2_live add {The skull dives quickly towards - but narrowly misses};
+#list line2_live add {With a horrid grin of death, the ghostly skull leers at -};
+#list line2_live add {With pure hatred, the skull bares its fangs and hisses at -};
+#list line2_live {simplify};
+
+#function {safeguard_mobname} {
+	#if {$force_ipp == 1} {#var result 1;#return};
+	#else {
+		#regex {$enemy[name]} {{-}} {
+			#var result 0;
+			#showme {WARNING:  Mobname contains a dash.  Blocking.  set force_ipp to 1 to bypass};
+		} {
+			#var result 1;
+		};
+	};
+};
+
+#alias {_setup_ipp} {
+	#var in_ipp 0;
+	#class {necro_ipp_exec} {open};
+	#unvar ipp;
+	#var ipp {};
+	#var force_ipp 0;
+	#class {necro_ipp_exec} {close};
+};
+_setup_ipp;
+
+
+#nop -------------------------------------------;
+#nop // Phase 1 //;
+#nop -------------------------------------------;
+#action {{^\s*([You-]{3}) ([cal-]{4}) ([forth-]{5}) ([a-]{1}) ([word-]{4}) ([of-]{2}) ([great-]{5}) (.*)}} {
+	#format {ipp[phase1][rows][1]} {%s} {%1};
+} {1};
+#action {{^\s*([magic-]{5})\.(?>\s+)([Crumbling-]{9}) ([away-]{4}) (.*)}} {
+	#format {ipp[phase1][rows][2]} {%s} {%1};
+	#replace {ipp[phase1][rows][2]} {.} {};
+} {1};
+#action {{^\s*([released-]{8}) ([in-]{2}) ([the-]{3}) (.*)}} {
+	#format {ipp[phase1][rows][3]} {%s} {%1};
+} {1};
+#action {{^\s*([room-]{4},) ([leaving-]{7}) ([behind-]{6}) (.*)}} {
+	#format {ipp[phase1][rows][4]} {%s} {%1};	
+	#format {ipp[sentence]} {%s %s %s %s} {$ipp[phase1][rows][1]} {$ipp[phase1][rows][2]} {$ipp[phase1][rows][3]} {$ipp[phase1][rows][4]};
+	_run_ipp1;
+} {1};
+
+#alias {_run_ipp1} {
+	#class {necro_ipp_exec} {open};
+	#var ipp_regex $ipp[sentence];
+	#format ipp_regex {%l} {$ipp_regex};
+	#replace ipp_regex {-} {(.)};
+	#format ipp_live_values {%l} {$ipp_live};
+	#var retval {};
+	#foreach {$ipp_live_values} {live_string} {
+		#regex {$live_string} {{$ipp_regex}} {
+			#format retval {%s%s%s%s%s%s} {&2} {&3} {&4} {&5} {&6} {&7};
+			#break;
+		};
+	};
+	_sanitize_result;
+	#showme {RESULT:[$retval]};
+	#send {!invoke prime $retval};
+	#class {necro_ipp_exec} {close};
+};
+
+
+#nop -------------------------------------------;
+#nop // Phase 2 //;
+#nop -------------------------------------------;
+
+#action {{^\s*([Diving-]{6} [around-]{6} (.*), [the terrifying death's head growls deeply-]{41})\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([Screaming-]{9} [in-]{2} [rage-]{4} [at-]{2} (.*), [the skull races around the room-]{31})\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([Screaming-]{9} [through-]{7} [the room, the death's head growls at-]{36} (.*))\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([Seething-]{8} [with-]{4} [venomous anger, the death's head howls at-]{41} (.*))\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([Snarling-]{8} [at-]{2} (.*), [the skull gashes its teeth in anger-]{36})\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([The-]{3} [ghostly-]{7} [skull bobs and weaves around-]{28} (.*), [growling-]{8} [fiercely-]{8})\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([The-]{3} [ghostly-]{7} [skull races around the room, circling-]{37} (.*) [menacingly-]{10})\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([The-]{3} [skull-]{5} [dives quickly towards-]{21} (.*) [but narrowly misses-]{19})\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([With-]{4} [a-]{1} [horrid-]{6} [grin of death, the ghostly skull leers at-]{41} (.*))\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {{^\s*([With-]{4} [pure-]{4} [hatred, the skull bares its fangs and hisses at-]{47} (.*))\.}} {
+	_set_row2 {%2} {%3};
+} {1};
+#action {With iron will, you finally guide the deadly spell toward its target!} {
+	#math ipp_charge {$ipp_charge-1};
+	#class {necro_ipp_exec} {kill};
+	_ipp_reset;
+} {1};									
+
+#alias {_set_row2} {
+	#format {ipp[phrase2]} {%l} {%1};
+	#format {ipp[mobname]} {%l} {%2};
+	_run_ipp2;
+};
+
+#alias {_run_ipp2} {
+	#class {necro_ipp_exec} {open};
+	#var retval {};
+	#var ipp[sentence2] {$ipp[phrase2]};
+	#var live_mobname $enemy[name];
+	#var ipp_mobname $ipp[mobname];
+	#format {live_mobname} {%l} {$live_mobname};
+	#format {ipp_mobname} {%l} {$ipp_mobname};
+	#replace {ipp_mobname} {-} {.};
+	#var foundname 0;
+	#regex {$live_mobname} {{($ipp_mobname)}} {
+		#nop Try regexing ipp_mobname against live_mobname.  Works if ipp_mobname is modified or exact string match);
+		#var use_mobname &2;
+		#var foundname 1;
+	};
+	#if {$foundname == 0} {
+		#nop Try regexing the opposite way.  Works if live name is shorter than ipp but has no mods);
+		#regex {$ipp_mobname} {{($live_mobname)}} {
+			#var use_mobname &2;
+			#var foundname 1;
+		};
+	};
+	#if {$foundname != 1} {
+		#showme {ERROR:  Unable to capture mobname:[ipp:$ipp_mobname:live:$live_mobname]};
+		#return;
+	};
+	#else {
+		#list line2_live_exec create {};
+		#foreach {$line2_live} {live_string} {
+			#var tmp_live_string {$live_string};
+			#replace tmp_live_string {-} {$use_mobname};
+			#format tmp_live_string {%l} {$tmp_live_string};
+			#list line2_live_exec add {$tmp_live_string};
+		};
+		#foreach {$line2_live_exec} {live_string_exec} {
+			#local ipp_regex {$ipp[phrase2]};
+			#replace ipp_regex {-} {(.)};
+			#regex {$live_string_exec} {{$ipp_regex}} {		
+				#format retval {%s%s%s%s%s%s} {&2} {&3} {&4} {&5} {&6} {&7};
+				#break;
+			};
+		};
+		_sanitize_result;
+		#showme {RESULT:[$retval]};
+		#send {!invoke prime $retval};
+	};
+	#class {necro_ipp_exec} {close};
+};
+
+#nop -------------------------------------------;
+#nop // General //;
+#nop -------------------------------------------;
+
+#action {{You must wait until repower to invoke prime again master\.}} {#var ipp_charge 0;} {1};
+#action {{Necromantic energy flows into your phylactery}} {_repower_ipp;repower}
+
+#alias {ipp} {
+	#if {@safeguard_mobname{} == 1 && $in_ipp == 0}{
+        #var in_ipp 1;
+		#delay {ipp} {#var in_ipp 0} {20};
+		#send !invoke prime power;
+	};
+};
+
+#alias {ipp2} {
+	#if {@safeguard_mobname{} == 1 && $in_ipp == 0} {
+		#var in_ipp 1;
+		#delay {ipp} {#var in_ipp 0} {20};
+		#send !invoke prime psionic;
+	};
+};
+#alias {_sanitize_result} {
+	#replace retval {-} {};
+	#replace retval {.} {};
+	#replace retval { } {};
+	#replace retval {!} {};
+};
+
+#alias {_ipp_reset} {
+	#class {necro_ipp_exec} {kill};
+	_setup_ipp;
+};
+
+#alias {_repower_ipp} {
+	#var ipp_charge $repower_charges;
+	#if {$notify_ipp == 1} {update_chat {Invoke prime ready!}};
+};
+
+#alias {_test1} {
+	#var ipp[phase1][rows][1] {You call forth a word of great power, in-oking the prime nature of yo-r};
+	#var ipp[phase1][rows][2] {magic  Crumbling away from the corpse, the soul of the creature is};
+	#var ipp[phase1][rows][3] {rel-ased in the form of a giant deat-'s head that flies freely into the};
+	#var ipp[phase1][rows][4] {room, leaving behind it a great trail of power waves!};
+	#format {ipp[sentence]} {%s %s %s %s} {$ipp[phase1][rows][1]} {$ipp[phase1][rows][2]} {$ipp[phase1][rows][3]} {$ipp[phase1][rows][4]};
+	_run_ipp1;
+	#var ipp[phase1][rows][1] {You call forth a wor- of great power, invoking the prime nature of y-ur};
+	#var ipp[phase1][rows][2] {magic  Crumbling away from the corpse, the s-ul of the creature is};
+	#var ipp[phase1][rows][3] {released in the form of a giant death's head that flies freely into the};
+    #var ipp[phase1][rows][4] {room, leaving behind it a great trail of power waves!};
+	#format {ipp[sentence]} {%s %s %s %s} {$ipp[phase1][rows][1]} {$ipp[phase1][rows][2]} {$ipp[phase1][rows][3]} {$ipp[phase1][rows][4]};
+	_run_ipp1;
+	#var ipp[phase1][rows][1] {You call forth a -ord of great power, invoking the prime nature of your};
+	#var ipp[phase1][rows][2] {magic  Crumbling aw-y from the corpse, the soul of the creature is};
+    #var ipp[phase1][rows][3] {releas-d in the form of a giant deat-'s head that flies freely into the};
+	#var ipp[phase1][rows][4] {room, leaving behind it a great trail of power waves!};
+	#format {ipp[sentence]} {%s %s %s %s} {$ipp[phase1][rows][1]} {$ipp[phase1][rows][2]} {$ipp[phase1][rows][3]} {$ipp[phase1][rows][4]};
+	_run_ipp1;
+};
+
+#alias {_test2} {
+	#var {enemy[name]} {Jade Phoenix};
+	_set_row2 {Diving aroun- Jade Pho-nix, the terrifying de-th's head gro-ls deeply} {Jade Pho-nix};
+	#var {enemy[name]} {Winged Horse};
+	_set_row2 {Divi-g around Winged Horse, the terrify-ng death's -ead growls deeply} {Winged Horse};
+	#var {enemy[name]} {Ripper};
+	_set_row2 {Snarlin- at Ripper, th- skull gnash-s its teeth i- anger} {Ripper};
+	#var enemy[name] {Severely Burnt Zombie};
+	_set_row2 {Diving around Se-erely Burnt Zomb-e, the terr-fying death's head growls deeply} {Se-erely Burnt Zomb-e};
+	#var {enemy[name]} {A Ripper};
+	_set_row2 {Scr-aming through the room, the death's h-ad grow-s at Rip-er} {Rip-er};
+	#var {enemy[name]} {Cloud Eye};
+	#nop _set_row2 {Diving a-ound Clo-d Eye, the terr-fying death's head growl- deep-y} {Clo-d Eye};
+	_set_row2 {With a hor-id grin of d-ath, the gh-stly skull leers at Cloud Eye} {Cloud Eye};
+    #var {enemy[name]} {Chinese Checker};
+	_set_row2 {Sna-ling at Chines- Checker, the sk-ll gnashes its teeth in anger} {Chines- Checker};
+	
+};
+
+#class {necro_ipp} {close}
