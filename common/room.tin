@@ -47,6 +47,12 @@
     };
 } {2};
 
+#NOP -- Get the current scaler of the dungeon;
+#action {^Current scaled level of the dungeon you're in: %d} {
+    #format area_scaler {%d} {%1};
+} {2};
+
+
 
 #NOP -- Update if there is a player in the room not in friends list;
 #act {{^-P-_(.*)}} {
@@ -252,7 +258,7 @@
     };
 
     #NOP -- Auto ask/solve/return missions;
-    #regex {%1} {<?>} {mission ask};
+    #regex {%1} {<?>} {#if $toggles[mission] {mission ask}};
     #regex {%1} {<!>} {mission return};
     #regex {%1} {<!.>} {mission return;mission ask};
     

@@ -27,6 +27,10 @@
         #var mob[enrage] 0;
         #var cmbt[songs][lost][fight] 0;
     };
+
+    #if {"$guild" == "fremen"} {
+        #var mob[sand] 0;
+    };
     
     #if {"$guild" == "mage"} {
         #var mob[slow] 0;
@@ -111,6 +115,7 @@
     #var xwhitelist $whitelist;
     #var xchat[log][emotes] $chat[log][emotes];
     #var xdReportList $dReportList;
+    #var xtoggles $toggles;
 
     #NOP -- These variables are at a minimum used to draw somewhere;
     #var xsplit $split;
@@ -141,6 +146,7 @@
     #var whitelist $xwhitelist;
     #var chat[log][emotes] $xchat[log][emotes];
     #var dReportList $xdReportList;
+    #var toggles $xtoggles;
     
     #var split $split;
     #var hpbar $xhpbar;
@@ -162,6 +168,7 @@
     #if {"$my" == "$xmy"} {#var my {}};
     #if {"$whitelist" == "$xwhitelist"} {#var whitelist {}};
     #if {"$dReportList" == "$xdReportList"} {#read common/3kReport.tin};
+    #if {"$toggles" == "$xtoggles"} {#var toggles {}};
 };
 
 #NOP Export user status every 10 mins;

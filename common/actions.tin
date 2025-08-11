@@ -4,6 +4,14 @@
 #var my[hm][heal] 1;
 #var my[hm][heal_other] 1;
 
+#NOP -- Inventory;
+#action {^%*: Too heavy.$} {
+    #var inventory[encumberance] 100
+} {2};
+
+#action {^%*: Ok.$} {
+    #var inventory[encumberance] 0
+} {4};
 
 #NOP -- Hockey corpse defaults;
 #alias .hockeyCorpse {
@@ -18,7 +26,7 @@
         };
     };
     #if {"$guild" == "gentech"} {recharge;reclaim};
-    #if {"$guild" == "juggernaut"} {deener;truck deener;};
+    #if {"$guild" == "juggernaut"} {deener;truck deener;fdeener};
     #if {"$guild" == "mage"} {cast corpse blast};
     #if {"$guild" == "necromancer"} {
         preserve remains;
