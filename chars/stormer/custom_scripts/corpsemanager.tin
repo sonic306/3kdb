@@ -53,8 +53,9 @@
 	}	
 };
 
-#action {{^Coffin\s+\[\s+\d+\/\s+(\d+)\|.*}} {
-	#var {coffinmax} {%2}
+#action {{Coffin\s+\[\s+\d+\/\s+(\d+).*}} {
+	#show %2;
+	#var {coffinmax} {%2};
 };
 
 #class custom_corpse_manager close

@@ -9,6 +9,7 @@ chatlog
 trcc
 trcx
 
+
 # don't commit backups of the map
 common/map/backups
 
@@ -28,25 +29,7 @@ event_test.tin
 *.log
 tmp/
 
-chars/chad/
-chars/droptable/
-chars/ivy
-chars/karen
-chars/landshark
-chars/mako
-chars/mud
-chars/nameless
-chars/nameless-elemental
-chars/nine
-chars/nix
-chars/piney
-chars/roor
-chars/ryst
-chars/tarnished
-chars/void
-chars/zorbaine
-chars/*/private
-chars/*/vars.tin
+chars/
 
 notes/
 common/bot/bots/knight-tour-solver-6.py

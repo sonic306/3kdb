@@ -21,7 +21,15 @@
         #gag {^A mighty pulse of strength wells in your arms!$};
         #gag {^The gloves course a powerful strike through your arms!$};
 
-        #gag {The sticky cocoon absorbs part of the attack!};
+        #NOP -- Zelligars Headband;
+        #gag {%* resists the hypnotizing effect of the headband!};
+
+        #NOP -- Sticky Cocoon;
+        #gag {^The sticky cocoon absorbs part of the attack!$};
+        #gag {^The cocoon fuses with the attack and grows stronger!$};
+
+        #NOP -- Banu Cloak;
+        #gag {^Your cloak causes your form to blink out, avoiding the incoming attack.$};
 
         #NOP Erah Shield;
         #gag {%* bashes %* with %* shield, cutting %* and sending %* reeling backward.};
@@ -42,6 +50,7 @@
         #gag {^The shield hums with a purring resonance after your bash.$};
         #gag {^A spectral paw lashes out from your shield, mirroring your strike!$};
         #gag {^You hear a phantom *hiss* as your shield slams forward!$};
+        #gag {^You feel the grace of a stalking cat guiding your bash.$};
 
         #gag {You bash %* with your shield, cutting into %* while %* reels backward.};
         #action {You bash %* with your shield, cutting into %* while} {

@@ -299,6 +299,7 @@
 #NOP -- Coffin for Necromancers;
 #action {%*Coffin%s\[%s%d\/%s%d|%*%\|%s%dc]%*} {
 	#var inventory[coffin] 1;
+	#var coffinmax %6;
 	#if $corpse_check {
 		#if {%9 != $corpses[coffin]} {
 			#var corpses[coffin] %9;

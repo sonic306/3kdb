@@ -3,7 +3,11 @@
 
 #NOP -- Player specific aliases;
 
-#var ctran 0
+#var ctran 0;
+
+#alias {3kr} {
+    3kReport
+};
 
 #alias pyre {
 	retrieve;
@@ -215,26 +219,65 @@
     };
 };
 
-#alias {gagsoff} {
-	#SWITCH {"%0"} {
-	 #CASE {juggernaut} {gag-clear;};
-	 #CASE {knight} {gag-clear;};
-	 #CASE {elemental} {gag-clear;};
-	 #CASE {gentech} {gag-clear;};
-	 #CASE {fremen} {gag-clear;};
-	 #CASE {jedi} {gag-clear;};
-	 #CASE {priest} {gag-clear;};
-	 #CASE {necromancer} {gag-clear;};
-	 #DEFAULT {#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}}
-	};
-};
+#alias {gagsoff} {gag-clear;};
 
 #alias {gagson} {
 	gag+ hpbar;
-	gag+ generic;
+	gag+ combat_generic;
 	gag+ combat_guild;
 	gag+ combat_items;
 	gag+ combat_area;
 };
+
+#alias {stratoff} {
+	strategy-clear;
+};
+
+#alias {strat} {
+	#SWITCH {"%0"} {
+	 	#CASE {"necromancer"} {
+			strategy psibleed;
+			strategy corrode;
+			strategy rabies;
+			strategy scythe;
+			strategy maim;
+			strategy convokeR;
+			strategy illume;
+			strategy spirithowl;
+			strategy iprime;
+			strategy bloodarc;
+			strategy rolm;
+			strategy rolm1;
+		};
+		#DEFAULT {
+			{#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}};
+		};
+	};
+};
+
+#ALIAS {rrune} {
+	search shelves;
+	shapeshift raven;
+	reach for jar;
+	shapeshift;
+	#delay {1} {alter hybrid};
+	get phylactery;
+	read rune;
+};
+
+#alias arty {
+	skullfire;
+	rapture;
+	harvest;
+	unholy ground;
+	diurnum prime;
+};
+
+#alias {powerdown} {
+	unwield;
+	comtrance clear;
+	strategy-clear;
+	(toggle eradication;
+}
 
 #class {player_aliases} {close}

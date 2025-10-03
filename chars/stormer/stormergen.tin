@@ -6,7 +6,8 @@
 #var guild gentech;
 
 #read chars/$user/vars.tin;
-
+#read chars/$user/custom_scripts/corpsemanager.tin;
+#read chars/$user/custom_scripts/mask.tin;
 
 #NOP -- If discord hooks are setup set this to 1;
 #var discordPost 1;

@@ -50,6 +50,10 @@
         #case {"blue-helmet"} {open figurine;insert blue stone near head;insert blue capsule near head;close figurine;insert blue stone;insert blue capsule;keep helmet};
         #case {"blue-gloves"} {open figurine;insert blue stone near hands;insert blue capsule near hands;close figurine;insert blue stone;insert blue capsule;keep gloves};
         #case {"blue-boots"} {open figurine;insert blue stone near feet;insert blue capsule near feet;close figurine;insert blue stone;insert blue capsule;keep boots};
+        #case {"aqua-armour"} {open figurine;insert green capsule near chest;insert green stone near chest;close figurine;insert blue capsule;insert blue stone;keep armour};
+        #case {"aqua-helmet"} {open figurine;insert green capsule near head;insert green stone near head;close figurine;insert blue capsule;insert blue stone;keep helmet};
+        #case {"aqua-gloves"} {open figurine;insert green capsule near hands;insert green stone near hands;close figurine;insert blue capsule;insert blue stone;keep gloves};
+        #case {"aqua-boots"} {open figurine;insert green capsule near feet;insert green stone near feet;close figurine;insert blue capsule;insert blue stone;keep boots};
         #case {""}   {#echo {<efb>==========<088> <faa>NO GEAR PROVIDED<088> <efb>==========<088>}};
 	};
 };

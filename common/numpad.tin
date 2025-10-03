@@ -14,6 +14,16 @@
 #NOP #macro {\e0p} {d}
 #NOP #macro {\e0n} {u}
 
+#NOP #macro {\e[4~} {sw}
+#NOP #macro {\e[B} {s}
+#NOP #macro {\e[6~} {se}
+#NOP #macro {\e[D} {w}
+#NOP #macro {\eOE} {look}
+#NOP #macro {\e[C} {e}
+#NOP #macro {\e[1~} {nw}
+#NOP #macro {\e[A} {n}
+#NOP #macro {\e[5~} {ne}
+
 /* Alternate up/down using - for up and + for down */
 #macro {\eOS} {u}
 #macro {\eOl} {d}

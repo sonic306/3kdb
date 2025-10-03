@@ -234,6 +234,7 @@
 #list botlist add {{{file} {findtv} {alias} {findtv} {desc} {Chaos TV Finder} {start_vnum} {196} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {findhat} {alias} {findhat} {desc} {Witch's Hat Finder} {start_vnum} {196} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {findevent} {alias} {findevent} {desc} {Event Portal Finder} {start_vnum} {148} {loop} {0} {playercheck} {0}}};
+#list botlist add {{{file} {findhall} {alias} {findhall} {desc} {Hockey Hall of Fame} {start_vnum} {196} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {colors} {alias} {colors} {desc} {NOC 2.0 - All Mobs (except Resilient/Snare)} {start_vnum} {16530} {loop} {1} {playercheck} {1}}};
 #list botlist add {{{file} {colors_all} {alias} {colors-all} {desc} {NOC 2.0 - All Mobs} {start_vnum} {16530} {loop} {1} {playercheck} {1}}};
 #list botlist add {{{file} {colors_high} {alias} {colors-high} {desc} {NOC 2.0 - High Value Targets} {start_vnum} {16530} {loop} {1} {playercheck} {1}}};
