@@ -12,8 +12,19 @@
 #alias {los} {#send {lineofsight}};
 
 #NOP -- Generic toggle switch;
-#if {"${toggles[mission]}" == ""} {#var toggles[mission] 0};
-#if {"${toggles[3kreport]}" == ""} {#var toggles[3kreport] 0};
+#delay 6 {
+    #if {"${toggles[mission]}" == ""} {#var toggles[mission] 0};
+    #if {"${toggles[3kreport]}" == ""} {#var toggles[3kreport] 1};
+    #if {"${toggles[worlddrops]}" == ""} {#var toggles[worlddrops] 0};
+    #if {"${toggles[chatlog_says]}" == ""} {#var toggles[chatlog_says] 1};
+    #if {"${toggles[cult]}" == ""} {#var toggles[cult] 0};
+    #if {"${toggles[corpse_echo]}" == ""} {#var toggles[corpse_echo] 0};
+    #if {"${toggles[emote_follow]}" == ""} {#var toggles[emote_follow] 1};
+    #if {"${toggles[emote_heal]}" == ""} {#var toggles[emote_heal] 1};
+    #if {"${toggles[emote_eheal]}" == ""} {#var toggles[emote_eheal] 1};
+    #if {"${toggles[emote_rally]}" == ""} {#var toggles[emote_rally] 1};
+    #if {"${toggles[emote_corpse]}" == ""} {#var toggles[emote_corpse] 1};  
+};
 
 #alias {toggle} {
     #format toggle_var {%l} {%0};
@@ -36,7 +47,20 @@
 };
 
 #alias {toggle-list} {
-    #echo { WIP - this will show a list of available toggles};
+    #echo {<cfb>   ---++---  3kdb Current Toggle Status ---++---<088>};
+    #echo {<fff>       Usage: toggle <toggle alias> <088>};
+    #format tmpLine {       %-15s          %+10s} {<fdc>Toggle Alias<088>} {<fdc>Status<088>};
+    #echo {$tmpLine};
+    #foreach *toggles[] item {
+        #if {$toggles[$item]} {
+            #format tmpLine {        %-15s         %+8s} {$item} {on};
+            #echo {<dfc>$tmpLine<088>};
+        } {
+            #format tmpLine {        %-15s         %+9s} {$item} { off};
+            #echo {<fbb>$tmpLine<088>};
+        };
+    };
+    #echo {<cfb>   ---++---                             ---++---<088>};
 };
 
 #NOP -- calculator;
@@ -72,6 +96,26 @@
     #var bagsFull 0;
 };
 
+#NOP -- Use hmheal if possible, eternal heal otherwise;
+#NOP -- If you're a mage, check if immersion is running;
+#alias {useHeal} {
+     #if {!$my[eternal][heal] && $my[hm][heal]} {
+         #if {"$guild" == "mage"} {
+            #if {!$my[immersion][active]} {hmheal};
+         } {
+            hmheal
+         };
+          
+     };
+     #if {$my[eternal][heal]} {
+        #if {"$guild" == "mage"} {
+            #if {!$my[immersion][active]} {(heal $user;};
+         } {
+            (heal $user;
+         };
+     };
+};
+
 
 #NOP -- Override the alias for inventory to reset the variables and set alias to pick which corpse to use;
 #alias {i} {
@@ -79,6 +123,11 @@
         #send {i unkept};
     } {
         #if {"$guild" == "necromancer"} {
+            #NOP -- Gag these if you don't yet have chest;
+            #line oneshot #gag {^There is no reason to 'retrieve' here.};
+            #line oneshot #gag {^That is not here or it is uninteresting. (chest?)};
+            #line oneshot #gag {^There is no reason to 'deliver' here.};
+
             #NOP -- Track decanters for bloodfuse;
             #var my[necromancer][decanters][empty] 0;
             #var my[necromancer][decanters][full] 0;
@@ -136,7 +185,7 @@
     #class player_tickers kill;
 };
 
-#alias reload {
+#alias .reload {
     .kill_guild_classes;
     .kill_player_classes;
     #read chars/$user/vars.tin;
@@ -315,11 +364,15 @@
 #alias {stashlist} {
     #if {"%1" == ""} {
         #send stashlist;
-    };
-    #if {"%1" == "assemble"} {
-        #read modules/crafting/assemble.tin;
-        #send stashlist;
-        #delay 2 {#class {autoassemble} {kill}};
+    } {
+        #if {"%1" == "assemble"} {
+            #echo {<fba>Loading assemble module...<088>};
+            #read modules/crafting/assemble.tin;
+            #send stashlist;
+            #delay 2 {#class {autoassemble} {kill}};
+        } {
+            #send {stashlist %0};
+        };
     };
 };
 
