@@ -133,8 +133,7 @@
             #case {"BreedOOC"}        {#var {commcol} {<258>}};
             #case {"BS Announce"}        {#var {commcol} {<168>}};
             #case {"BS Tell"}        {#var {commcol} {<128>}};
-            #case {"Clan Cad"}        {#var {commcol} {<158>}};
-	    	#case {"Clan Spol"}	    {#var {commcol} {<158>}};
+			#case {"Clan %*"}        {#var {commcol} {<158>}};
             #case {"Com"}            {#var {commcol} {<128>}};
             #case {"Council"}        {#var {commcol} {<108>}};
             #case {"Cult Game"}	    {#var {commcol} {<ace>}};
@@ -163,8 +162,7 @@
             #case {"BreedOOC"}        	{#var {commcol} {<258>}};
             #case {"BS Announce"}       {#var {commcol} {<168>}};
             #case {"BS Tell"}        	{#var {commcol} {<128>}};
-            #case {"Clan Cad"}        	{#var {commcol} {<158>}};
-	    	#case {"Clan Spol"}	    	{#var {commcol} {<158>}};
+            #case {"Clan %*"}        	{#var {commcol} {<158>}};
             #case {"Com"}            	{#var {commcol} {<128>}};
             #case {"Council"}       	{#var {commcol} {<108>}};
             #case {"Cult Game"}	    	{#var {commcol} {<ace>}};
@@ -297,8 +295,7 @@
 			#case {"Whine"}		    	{#var discordChannel $webhook[url][guild];#var chatCategory guild};
 			#case {"Wolf"}		    	{#var discordChannel $webhook[url][guild];#var chatCategory guild};
 
-			#case {"Clan Cad"}      	{#var discordChannel $webhook[url][clan];#var chatCategory clan};  
-			#case {"Clan Spol"}	    	{#var discordChannel $webhook[url][clan];#var chatCategory clan};
+			#case {"Clan %*"}      	{#var discordChannel $webhook[url][clan];#var chatCategory clan};
 
 			#case {"High Mortal"}		{#var discordChannel $webhook[url][high_mortal];#var chatCategory high_mortal};
 			
