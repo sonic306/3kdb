@@ -116,7 +116,7 @@
 	};
 };
 
-#alias {customecorpsetrig} {
+#alias {customcorpsetrig} {
 	#var idle 0;
 	corpsemanager;
 };

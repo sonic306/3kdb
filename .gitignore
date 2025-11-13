@@ -29,7 +29,6 @@ event_test.tin
 *.log
 tmp/
 
-chars/
 
 notes/
 common/bot/bots/knight-tour-solver-6.py
