@@ -429,8 +429,8 @@
 #list corpseList add {{{name} {hoarder} {guild} {all} {action} {#loop 20 1 i {put all in bag $i}} {active} {0} {description} {Hoarder: Put all in bags (20 bags)}}};
 #list corpseList add {{{name} {spoon} {guild} {all} {action} {eat corpse} {active} {0} {description} {Spoon: Eat Corpse}}};
 #list corpseList add {{{name} {cocoon} {guild} {all} {action} {fuse 100} {active} {0} {description} {Cocoon: Fuse 100hps}}};
-#list corpseList add {{{name} {custom-corpse-trig} {guild} {all} {action} {customecorpsetrig} {active} {0} {description} {Custom kill-trig script}}};
 #list corpseList add {{{name} {cocoon500} {guild} {all} {action} {fuse 500} {active} {0} {description} {Cocoon: Fuse 500hps}}};
+#list corpseList add {{{name} {customtrig} {guild} {all} {action} {customcorpsetrig} {active} {0} {description} {Custom kill trig script}}};
 
 #NOP -- bard;
 #list corpseList add {{{name} {dirge} {guild} {bard} {action} {perform dirge}  {active} {0} {description} {Bard: Perform Dirge}}};
