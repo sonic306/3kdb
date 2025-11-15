@@ -4,12 +4,12 @@
 {
     {bottom} {-8}
     {left} {159}
-    {top} {26}
+    {top} {25}
 }
 #VARIABLE {xcaption_data}
 {
-    {1} {<088>💀 <ceb>58 <088>Corpses 💀\n C: 40 F: 18 \n <fff>Eternal: <bfa>EWELL<088> <bfa>HEAL<088> <faa>SHRED<088> <bfa>DUPE-C<088> <faa>ENLARGE<088> <faa>FRY<088> <faa>PROT<088><088>}
-    {2} {\n Bot Status:<ACA><fff> ▶ <088><DAA><aaa> ✔ <088>\n Path: 457/522 (87% in 2.83 Hrs)\n Kills: 107 XP: 6.52B (2.30B/hr)}
+    {1} {<088>💀 <ceb>178 <088>Corpses 💀\n C: 40 I: 58 F: 50 Fol: 30 \n <fff>Eternal: <bfa>EWELL<088> <bfa>HEAL<088> <faa>SHRED<088> <bfa>DUPE-C<088> <faa>ENLARGE<088> <faa>FRY<088> <faa>PROT<088><088>}
+    {2} {\n <ccc>Bot: <fff>OFF<088>}
     {3} {\n <bef>Strategy:<088> <afa>Psibleed<088> <afa>Corrode<088> <afa>Rabies<088> <afa>Scythe<088> <afa>Maim<088> <afa>ConvokeR<088> <afa>Illume<088> <afa>Spirithowl<088> <afa>Iprime<088> <afa>Bloodarc<088> <afa>Rolm<088> <afa>Rolm1<088>}
 }
 #VARIABLE {xchat}
@@ -52,7 +52,7 @@
         {name} {cocoon}
     }
 }
-#VARIABLE {xcurvnum} {25192}
+#VARIABLE {xcurvnum} {7}
 #VARIABLE {xdReportList}
 {
     {1} 
@@ -111,7 +111,7 @@
     }
     {7} 
     {
-        {active} {0}
+        {active} {1}
         {header_text} {Dmg Dlt}
         {key} {dmg_dealt}
         {lookup} {tmpDmg}
@@ -129,7 +129,7 @@
     }
     {9} 
     {
-        {active} {0}
+        {active} {1}
         {header_text} {Corpses}
         {key} {corpses}
         {lookup} {tmpCorpses}
@@ -138,7 +138,7 @@
     }
     {10} 
     {
-        {active} {0}
+        {active} {1}
         {header_text} {DS #}
         {key} {dsave_count}
         {lookup} {tmpPerMobDsaves}
@@ -147,7 +147,7 @@
     }
     {11} 
     {
-        {active} {0}
+        {active} {1}
         {header_text} {DS NP}
         {key} {dsave_nps}
         {lookup} {tmpPerMobDsaveNP}
@@ -157,9 +157,9 @@
 }
 #VARIABLE {xdraw_room}
 {
-    {bottom} {24}
+    {bottom} {23}
     {left} {161}
-    {top} {23}
+    {top} {22}
 }
 #VARIABLE {xgags}
 {
@@ -172,38 +172,38 @@
 }
 #VARIABLE {xhpbar}
 {
-    {bottom} {66}
+    {bottom} {64}
     {height} {5}
     {prompt} 
     {
-        {1} {<bfa>\e[32m╔═[HP:\e[0m\e[32m10164\e[0m/\e[32m10164\e[0m \e[96mSP:\e[0m\e[96m2969\e[0m/\e[96m2969\e[0m \e[33mNP:\e[0m\e[33m84220\e[0m/\e[33m227600\e[0m \e[35mE:\e[0m\e[35m    72%\e[0m\e[32m]\e[0m}
-        {2} {<bfa>║ <088> \e[32mHP:\e[0m\e[32m<008><AFA>   100%   <088>\e[0m  \e[96mSP:\e[0m\e[96m<008><AFA>   100%   <088>\e[0m  \e[33mNP:\e[0m\e[33m<008><EBA>   <070> 37%   <088>\e[0m  \e[35mE:\e[0m<008><BDA>    72%<070>   <088>\e[0m}
-        {3} {<bfa>║ <088> \e[36mWorth:\e[32m125%  \e[36mProtection:\e[32mON  \e[36mVeil:\e[32mON  \e[36mRest:\e[32m38%  \e[36mTeleport:\e[32m4  \e[36mGlamors:\e[32m5/38%  \e[36mCoins:\e[33m$[161599]\e[0m}
+        {1} {<bfa>\e[32m╔═[HP:\e[0m\e[32m10308\e[0m/\e[32m10308\e[0m \e[96mSP:\e[0m\e[96m4074\e[0m/\e[96m3014\e[0m \e[33mNP:\e[0m\e[33m185511\e[0m/\e[33m227600\e[0m \e[35mE:\e[0m\e[35m      %\e[0m\e[32m]\e[0m}
+        {2} {<bfa>║ <088> \e[32mHP:\e[0m\e[32m<008><AFA>   100%   <088>\e[0m  \e[96mSP:\e[0m\e[96m<006>   135%   <088>\e[0m  \e[33mNP:\e[0m\e[33m<008><BEA>    81% <070>  <088>\e[0m  \e[35mE:\e[0m          \e[0m}
+        {3} {<bfa>║ <088> \e[36mWorth:\e[32m125%  \e[36mProtection:\e[32mON  \e[36mVeil:\e[32mON  \e[36mRest:\e[32m79%  \e[36mTeleport:\e[32m3  \e[36mGlamors:\e[32m6  \e[36mCoins:\e[33m$[173985]\e[0m}
         {4} {<dda>║  \e[36mPrime:\e[37m<faa>-<088>/2  \e[36mBfuse:\e[37m<bfa>2<088> (<faa>-<088>/<faa>-<088>/<faa>-<088>)  \e[36mMaim:\e[37m<faa>-<088>  \e[36mDi/Noct:\e[37m<bfa>1<088>  \e[36mGH:\e[37m<bfa>1<088>  \e[36mBA:\e[37m<faa>-<088><088>}
         {5} {<dda>╚═ \e[36mSouls:\e[37m<bfa>10<088>  \e[36mSoulbind:\e[37m<bfa>1<088>  \e[36mSkullfire:\e[37m<bfa>1<088>  \e[36mCU:\e[37m<bfa>13<088>  \e[36mUG:\e[37m<bfa>1<088>\e[0m<088>}
     }
-    {right} {236}
-    {top} {62}
+    {right} {237}
+    {top} {60}
 }
 #VARIABLE {xlastBot}
 {
-    {curVnum} {25190}
-    {file} {sectionz}
-    {pause_room} {25190}
+    {curVnum} {2809}
+    {file} {aegis}
+    {pause_room} {2809}
 }
 #VARIABLE {xmap}
 {
-    {bottom} {24}
-    {height} {20}
+    {bottom} {23}
+    {height} {19}
     {left} {159}
     {top} {2}
-    {width} {77}
+    {width} {78}
     {widthperc} {.33}
 }
 #VARIABLE {xmkaActions} {}
 #VARIABLE {xmy}
 {
-    {coins} {161599}
+    {coins} {173985}
     {corpse} 
     {
         {coffin} 
@@ -216,7 +216,7 @@
         }
         {minion} 
         {
-            {current} {0}
+            {current} {30}
         }
     }
     {dead} {0}
@@ -232,19 +232,19 @@
     }
     {gp1} 
     {
-        {current} {84220}
-        {graph} {<008><EBA>   <070> 37%   <088>}
+        {current} {185616}
+        {graph} {<008><BEA>    81% <070>  <088>}
         {max} {227600}
         {name} {Grape Points}
-        {percent} {0.37}
+        {percent} {0.82}
     }
     {gp2} 
     {
-        {current} {38}
-        {graph} {<008><EBA>   <070> 38%   <088>}
+        {current} {79}
+        {graph} {<008><BDA>    79%<070>   <088>}
         {max} {100}
         {name} {}
-        {percent} {0.38}
+        {percent} {0.79}
     }
     {hm} 
     {
@@ -253,9 +253,9 @@
     }
     {hp} 
     {
-        {current} {10164}
+        {current} {10308}
         {graph} {<008><AFA>   100%   <088>}
-        {max} {10164}
+        {max} {10308}
         {percent} {1.00}
     }
     {necromancer} 
@@ -273,10 +273,10 @@
         {diurnum} {1}
         {glamors} 
         {
-            {active} {/38%}
-            {current} {5}
+            {active} {}
+            {current} {6}
             {furious} {0}
-            {illuming} {1}
+            {illuming} {0}
             {max} {13}
             {raging} {0}
         }
@@ -294,12 +294,12 @@
         {spirit-howl} {0}
         {teleports} 
         {
-            {current} {4}
+            {current} {3}
             {max} {4}
         }
         {undead} 
         {
-            {hp} {211}
+            {hp} {188}
         }
         {unholy_ground} {1}
         {veil} {ON}
@@ -308,30 +308,30 @@
     {prot} {ON}
     {sp} 
     {
-        {current} {2969}
+        {current} {4094}
         {fuse} 
         {
             {current} {236}
             {max} {236}
         }
-        {graph} {<008><AFA>   100%   <088>}
-        {max} {2969}
-        {percent} {1.00}
+        {graph} {<006>   135%   <088>}
+        {max} {3014}
+        {percent} {1.36}
     }
-    {undead} {211}
-    {xp} {3643695218176}
+    {undead} {188}
+    {xp} {3725833994752}
 }
 #VARIABLE {xrolm}
 {
     {aegis} {1}
     {anchor} {1}
-    {anchor_point} {7318}
+    {anchor_point} {2857}
     {angel} {1}
-    {arachne} {1}
+    {arachne} {0}
     {armillary} {0}
     {aurora} {1}
     {cairn} {1}
-    {charges} {95}
+    {charges} {58}
     {comet} {1}
     {crown} {1}
     {diamond} {1}
@@ -345,19 +345,19 @@
     {heart} {1}
     {infinity} {0}
     {lasso} {0}
-    {last_reset} {1762964447}
+    {last_reset} {1763137368}
     {lightning} {1}
     {orrery} {1}
     {owl} {0}
     {raven} {0}
     {reaper} {1}
-    {reset_duration} {1733581797.9}
+    {reset_duration} {1733668154.2}
     {scales} {1}
     {scroll} {1}
     {skull} {0}
     {spark} {1}
-    {star} {0}
-    {t1_reset} {1762958943}
+    {star} {1}
+    {t1_reset} {1763050895}
     {type} {Mace/Mind}
     {viper} {1}
     {winch} {1}
@@ -367,7 +367,7 @@
 {
     {bottom} {6}
     {left} {0}
-    {right} {78}
+    {right} {79}
     {top} {17}
 }
 #VARIABLE {xstrategyActive}
@@ -457,7 +457,7 @@
 #VARIABLE {xticker}
 {
     {bottom} {17}
-    {right} {-78}
+    {right} {-79}
     {top} {13}
 }
 #VARIABLE {xtoggles}
@@ -474,9 +474,6 @@
     {mission} {0}
     {worlddrops} {0}
 }
-#VARIABLE {xwhitelist}
-{
-    {1} {Stormer}
-}
+#VARIABLE {xwhitelist} {}
 
 #CLASS {global} CLOSE
