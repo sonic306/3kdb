@@ -186,8 +186,8 @@
     #NOP -- Load Guilds;
     #read common/guilds/$guild/index.tin;
     #read common/guilds/eternal/eternal.tin;
-
-    #NOP -- Load Character specific;
+    
+    #NOP -- Load general files;
     #read chars/$user/actions.tin;
     #read chars/$user/aliases.tin;
     #read chars/$user/config.tin;
@@ -195,6 +195,15 @@
     #read chars/$user/miphp.tin;
     #read chars/$user/private.tin;
     #read chars/$user/tickers.tin;
+
+    #NOP -- Load Character specific;
+    #read chars/$user/guilds/$guild/actions.tin;
+    #read chars/$user/guilds/$guild/aliases.tin;
+    #read chars/$user/guilds/$guild/config.tin;
+    #read chars/$user/guilds/$guild/heartbeat.tin;
+    #read chars/$user/guilds/$guild/miphp.tin;
+    #NOP #read chars/$user/guilds/$guild/private.tin;
+    #read chars/$user/guilds/$guild/tickers.tin;
 
     #NOP -- Load Profession;
     _load_profession;

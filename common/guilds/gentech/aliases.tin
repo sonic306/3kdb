@@ -5,10 +5,13 @@
 #var timeslide_available 0;
 #var timeslide_able 0;
 
+#NOP genset hpbar HP:$hp$ SP:$sp$ PU:$pu$ C:$coff$ CPC:$cpc$ E:$enemy$$nl$G:$gexp$/$g2n$($g2n-pct$%) RC:$rc$ Bias:$bias$ TS:$tslide$($reset-pct$%)$nl$EField[$efield$ min] EDNA[$edna$] Synth[$synthorg$] EFF:$gen-eff$|$tech-eff$ HG: $hypergen$($hypergent$)
+
 #NOP -- Gentech hpbar setup;
 #alias {setup_3kdb_hpbar} {
-	#NOP -- This sets the ionbeam/etc. message
-	genbrief level full;
+	#send {genset hpbar HP:\$hp\$ SP:\$sp\$ PU:\$pu\$ C:\$coff\$ CPC:\$cpc\$ E:\$enemy\$\$nl\$G:\$gexp\$/\$g2n\$(\$g2n-pct\$\%) RC:\$rc\$ Bias:\$bias\$ TS:\$tslide\$(\$reset-pct\$\%)\$nl\$EField[\$efield\$ min] EDNA[\$edna\$] Synth[\$synthorg\$] EFF:\$gen-eff\$|\$tech-eff\$ HG: \$hypergen\$(\$hypergent\$)};
+	genbrief me full;
+	genbrief others normal;
 };
 
 

@@ -41,6 +41,10 @@
 		#case {"mj"} {#send {eternal reset dungeon Mahjongg party};};
 		#case {"sz"} {#send {eternal reset dungeon Section Z party};};
 		#case {"aegis"} {#send {eternal reset dungeon Aegis Global party};};
+		#case {"cz"} {#send {eternal reset dungeon Celestial Zodiacs party};};
+		#case {"blair"} {#send {eternal reset dungeon Banshee's Lair party};};
+		#case {"hotel"} {#send {eternal reset dungeon Hotel Transylvania party};};
+		#case {"zelligar"} {#send {eternal reset dungeon Zelligar's Castle party};};
 		#case {""}   {#echo {<efb>========== <faa>NO DUNGEON PROVIDED <efb>==========<088>}};
 		#default 	 {#send {eternal reset dungeon %0 party};};
 	};

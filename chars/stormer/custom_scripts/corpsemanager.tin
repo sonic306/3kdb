@@ -16,7 +16,7 @@
 	};
 	#else {
 		#if {"$guild" == "gentech"} {
-			#if {$gentech[corpses][current] < $gentech[corpses][max]} {
+			#if {$corpses[coffin] < $coffinmax} {
 				wrap;
 			};
 			#else {

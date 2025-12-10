@@ -135,7 +135,10 @@
 	#if {$recently_reclaimed} {
 		#echo {<ecf>You must wait before reclaiming again.<088>}
 	} {
-		#if {$corpses[inventory] + $corpses[coffin] + $corpses[freezer] + $corpses[cooler] + $my[corpse][minion][current] > 0} {
+		#if {$corpses[inventory] + $corpses[coffin] + $corpses[freezer] + $corpses[cooler]} {
+			#if {$guild == "necromancer"} {
+				 $corpses[inventory] + $corpses[coffin] + $corpses[freezer] + $corpses[cooler] + $my[corpse][minion][current] > 0
+			};
 			#if {@alias_exists{on_mask_activating}} {on_mask_activating};
 			_select_corpse %1
 		}

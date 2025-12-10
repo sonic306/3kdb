@@ -4,35 +4,10 @@
 #NOP --- Player specific actions;
 #action {^-M-_A Colossal Inductor} {(immortality} {1};
 
-#action {It is too dark} {create light;glance} {2};
-
 #action {You unwield Rod of Lordly Might.} {wield rod} {1};
-
-#NOP Minion following tracking
-#action {Your valithyn finds its way around the magical barrier} {#var minion[following] 1} {1};
-#action {Some magic blocks your valithyn from following you here} {#var minion[following] 0} {1};
-#action {A valithyn drifts in on a ghostly vapor.} {#var minion[inroom] 1} {1};
-
-#NOP Anti Guyahi Mechanic
-#action {Guyahi chants a few words and suddenly} {dispell queen};
 
 #nop Cocoon upkeep
 #action {The armour loosens its grip around you} {fuse 1000};
 #action {Parts of the cocoon shatters and falls to the ground!} {fuse 1000};
-
-
-#NOP Match Rolm damage type
-#NOP #action {{You wield (.*).}} {
-#NOP     #SWITCH {"%2"} {
-#NOP      #CASE {"DragonBlade"} {comtrance invoke flame};
-#NOP      #CASE {"PsiMace"} {comtrance invoke psionic};
-#NOP      #CASE {"SolarFlail"} {comtrance invoke power};
-#NOP      #CASE {"PhotonSphere"} {comtrance invoke corrosion};
-#NOP      #CASE {"HolyScythe"} {comtrance invoke edged};
-#NOP      #CASE {"Rod of Lordly Might"} {comtrance invoke crushing};
-#NOP      #CASE {"VoltSpear"} {comtrance invoke lightning};
-#NOP      #DEFAULT {comtrance invoke power};
-#NOP     };
-#NOP };
 
 #class {player_actions} {close}

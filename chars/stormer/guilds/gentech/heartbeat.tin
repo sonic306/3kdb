@@ -1,0 +1,38 @@
+#class {player_heartbeat} {kill}
+#class {player_heartbeat} {open}
+
+#NOP -- These actions are called every round (every 2 seconds);
+#NOP -- Make sure all actions are INSIDE the !$idle_flag {} section or the deadman will not apply to those actions;
+#NOP -- An example of how to use this to drink a potion when your health is below 500;
+#NOP --   #if {$gentech[hp][current] < 500} {drink potion};
+#NOP -- Conditions can be combined like so - to cast heal if you have a certain amount of spell points.
+#NOP --   #if {$gentech[hp][current] < 500 && $gentech[sp][current] > 1000} {cast heal};
+
+#alias {_player_heartbeat} {
+    #if !$idle_flag {
+        #NOP -- Actions that timing does not matter;
+        #if {!$recently_reclaimed && $gentech[gp1][current] <= $gentech[gp1][max] * 0.5 && $gentech[gp2][current] <= 2000 && $gentech[gp2][current] > 0 && $corpses[total] > 0} {
+            #if {$mask_module} {
+                #delay {reclaim} {mu} {0.5}
+            };
+        };
+        #elseif {$gentech[gp1][current] <= $gentech[gp1][max] * 0.5 && $gentech[gp2][current] >= 2000} {
+            recharge;
+        };
+
+        #if {$gentech[hp][current] <= $gentech[hp][max] * .95} {
+            #delay {surge} {#send !surge} {0.1}
+        };
+
+        #NOP -- Actions to only attempt once/round go in this section;
+        #if {$action_round < $mip[round]} {
+            #NOP
+        };
+
+    
+    #NOP -- All actions above this line;
+    } {#NOP};
+};
+
+
+#class {player_heartbeat} {close}

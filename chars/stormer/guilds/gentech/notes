@@ -1,0 +1,30 @@
+#NOP -- Take notes on your guild, items, anything!;
+
+	#NOP #list temp clear;
+	#NOP #list temp add {H:$my[hp][graph] S:$my[sp][graph] PU:$my[gp1][graph] SU:$my[gp2][graph] G: $gentech[gxp][graph] E:$enemy[graph]};
+	#NOP #list temp add {HP:$hp/$hp_max SP:$sp/$sp_max PU:$gp1/$gp1_max($gp2) GL:$gentech[gxp][last] RL:$gentech[rc][last]};
+	#NOP #list temp add {G:$gentech[gxp][num]/$my[g2n]($gentech[gxp][per]%) RC:$gentech[rc][num] Bias:( $gentech[bias][atk]% | $gentech[bias][def]% ) TS:$gentech[ts][current]/$gentech[ts][max]($gentech[reset]%)};
+	#NOP #list temp add {EField[$gentech[efield][num] $gentech[efield][unit]] EDNA[$gentech[edna][num] $gentech[edna][unit]] Synth[$gentech[synthorg]] EFF:$gentech[geneff]|$gentech[techeff] HG: $gentech[hg][num]($gentech[hg][time] $gentech[hg][unit])};
+	#NOP #list temp add {I-Beam .: $attack_ionbeam :. DDB .: $attack_ddb :.  Synth .: $attack_synthorg :.};
+
+
+	#NOP #math	{gxp[last]}		{$gentech[gxp][last] + $gentech[rc][last]};
+	#NOP #math	{gxp[rnds]}		{$gentech[gxp][tnlamt] / $gentech[gxp][last]};
+	#NOP #if	{$gxp[rnds] < 30}	{
+	#NOP 	#var gxp[time]		{<128>${gxp[rnds]}<228>s<088>}
+	#NOP }; #elseif {$gxp[rnds] < 1800}	{
+	#NOP 	#math {gxp[min]}	{$gxp[rnds] / 30};
+	#NOP 	#math {gxp[sec]}	{$gxp[rnds] % 30};
+	#NOP 	#var  {gxp[time]}	{<128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
+	#NOP }; #elseif {$gxp[rnds] < 43200}	{
+	#NOP 	#math {gxp[hr]}		{$gxp[rnds] / 1800};
+	#NOP 	#math {gxp[min]}	{$gxp[rnds] % 1800 / 30};
+	#NOP 	#math {gxp[sec]}	{$gxp[rnds] % 1800 % 30};
+	#NOP 	#var  {gxp[time]}	{<128>${gxp[hr]}<228>h <128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
+	#NOP }; #else {
+	#NOP 	#math {gxp[day]}	{$gxp[rnds] / 43200};
+	#NOP 	#math {gxp[hr]}		{$gxp[rnds] % 43200 / 1800};
+	#NOP 	#math {gxp[min]}	{$gxp[rnds] % 43200 % 1800 / 30};
+	#NOP 	#math {gxp[sec]}	{$gxp[rnds] % 43200 % 1800 % 30};
+	#NOP 	#var  {gxp[time]}	{<128>${gxp[day]}<228>d <128>${gxp[hr]}<228>h <128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
+	#NOP };

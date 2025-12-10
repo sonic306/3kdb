@@ -122,7 +122,10 @@
 	#if {$corpses[smuggle] < 0} {#var corpses[smuggle] 0;};
 	#if {$corpses[freezer]  < 0} {#var corpses[freezer] 0;};
 	#if {$corpses[cooler] < 0} {#var corpses[cooler] 0;};
-	#math corpses[total] {$corpses[coffin] + $corpses[inventory] + $corpses[smuggle] + $corpses[freezer] + $corpses[cooler] + $corpses[servant] + $corpses[golem] + $my[corpse][minion][current]};
+	#math corpses[total] {$corpses[coffin] + $corpses[inventory] + $corpses[freezer] + $corpses[cooler] + $corpses[servant] + $corpses[golem]};
+	#if {"$guild" == "necromancer"} {
+		#math corpses[total] {$corpses[total] + $my[corpse][minion][current]};
+	};	
 	#delay 0.1 {
 		#var corpse_string <088>💀 <ceb>$corpses[total] <088>Corpses 💀\n;
 	    #if {$corpses[coffin] > 0} {#var corpse_string $corpse_string C: $corpses[coffin];};

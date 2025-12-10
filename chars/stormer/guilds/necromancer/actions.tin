@@ -1,0 +1,16 @@
+#class {player_actions_necromancer} {kill}
+#class {player_actions_necromancer} {open}
+
+#NOP --- Player specific actions;
+#NOP Minion following tracking
+#action {Your valithyn finds its way around the magical barrier} {#var minion[following] 1} {1};
+#action {Some magic blocks your valithyn from following you here} {#var minion[following] 0} {1};
+#action {A valithyn drifts in on a ghostly vapor.} {#var minion[inroom] 1} {1};
+
+#action {It is too dark} {create light;glance} {2};
+
+#NOP Anti Guyahi Mechanic
+#action {Guyahi chants a few words and suddenly} {dispell queen};
+
+
+#class {player_actions_necromancer} {close}

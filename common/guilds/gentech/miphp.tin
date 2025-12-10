@@ -4,20 +4,43 @@
 #var guild_miphp 1;
 
 #alias {_guild_miphp} {
+
+	#math	{gxp[last]}		{$gentech[gxp][last] + $gentech[rc][last]};
+	#math	{gxp[rnds]}		{$gentech[gxp][tnlamt] / $gentech[gxp][last]};
+	#if	{$gxp[rnds] < 30}	{
+		#var gxp[time]		{<128>${gxp[rnds]}<228>s<088>}
+	}; #elseif {$gxp[rnds] < 1800}	{
+		#math {gxp[min]}	{$gxp[rnds] / 30};
+		#math {gxp[sec]}	{$gxp[rnds] % 30};
+		#var  {gxp[time]}	{<128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
+	}; #elseif {$gxp[rnds] < 43200}	{
+		#math {gxp[hr]}		{$gxp[rnds] / 1800};
+		#math {gxp[min]}	{$gxp[rnds] % 1800 / 30};
+		#math {gxp[sec]}	{$gxp[rnds] % 1800 % 30};
+		#var  {gxp[time]}	{<128>${gxp[hr]}<228>h <128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
+	}; #else {
+		#math {gxp[day]}	{$gxp[rnds] / 43200};
+		#math {gxp[hr]}		{$gxp[rnds] % 43200 / 1800};
+		#math {gxp[min]}	{$gxp[rnds] % 43200 % 1800 / 30};
+		#math {gxp[sec]}	{$gxp[rnds] % 43200 % 1800 % 30};
+		#var  {gxp[time]}	{<128>${gxp[day]}<228>d <128>${gxp[hr]}<228>h <128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
+	};	
+
 	#format {attack_ionbeam}	{%p}	{$my[attacks][ionbeam]};
 	#format {attack_ddb}		{%p}	{$my[attacks][ddb]};
 	#format {attack_synthorg}	{%p}	{$my[attacks][synthorg]};
-	#format {my[g2n]} {%g} {$my[g2n]};
-
+	#format {tot_last}			{%+3s}  {$gxp[last]};
+	#format {gxp_time}			{%-15s} {$gxp[time]};
+	#format {my[g2n]}			{%g} {$my[g2n]};
+	
 	#list temp clear;
-	#list temp add {HP: $my[hp][graph] SP: $my[sp][graph] PU: $my[gp1][graph] SPU: $my[gp2][graph] CPC:$my[cpc][graph]  E:$enemy[graph]};
-	#list temp add {HP:$hp/$hp_max SP:$sp/$sp_max PU:$gp1/$gp1_max SPU:$gp2/$gp2_max CPC:$my[cpc][current]/$my[cpc][max]  E:$ehealth};
+	#list temp add {HP:$gentech[hp][current]/$gentech[hp][max] SP:$gentech[sp][current]/$gentech[sp][max] PU:$gentech[gp1][current]/$gentech[gp1][max]($gentech[gp2][current]) GL:$gentech[gxp][last] RL:$gentech[rc][last] TL:${tot_last} ${gxp_time}};
+	#list temp add {H:$my[hp][graph] S:$my[sp][graph] PU:$my[gp1][graph] SU:$my[gp2][graph] G: $gentech[gxp][graph] E:$enemy[graph]};	
+	#list temp add {G:$gentech[gxp][num]/$gentech[gxp][tnlamt]($gentech[gxp][per]%) RC:$gentech[rc][num] Bias:( $gentech[bias][atk]% | $gentech[bias][def]% ) TS:$gentech[ts][current]/$gentech[ts][max]($gentech[reset]%)};
+	#list temp add {EField[$gentech[efield][num] $gentech[efield][unit]] EDNA[$gentech[edna][num] $gentech[edna][unit]] Synth[$gentech[synthorg]] EFF:$gentech[geneff]|$gentech[techeff] HG: $gentech[hg][num]($gentech[hg][time] $gentech[hg][unit]) $my[g2n]};
 	#list temp add {I-Beam .: $attack_ionbeam :. DDB .: $attack_ddb :.  Synth .: $attack_synthorg :.};
-	#list temp add {TS: $my[timeslide][personal]/$my[timeslide][emergency] ($my[timeslide][reset]%)  G2N: $my[g2n]};
 
 	#var hpbar[prompt] $temp;
 };
-
-
 
 #class guild_miphp close;

@@ -1,0 +1,25 @@
+#class {player_aliases_gentech} {kill}
+#class {player_aliases_gentech} {open}
+
+#NOP -- Player specific aliases;
+#alias k {
+    gt-repair;
+    kill %0;
+};
+
+#alias {confa} {
+    #if {"%1" != ""} {
+        biaslock;
+        conform attack bias %1;
+    };
+};
+
+#alias {confd} {
+    #if {"%1" != ""} {
+        biaslock;
+        conform defense bias %1;
+    };
+};
+
+
+#class {player_aliases_gentech} {close}
