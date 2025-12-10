@@ -1,8 +1,24 @@
 #class {guild_actions} {kill}
 #class {guild_actions} {open}
 
+#var make_con 1;
+#var my[necromancer][invoke-prime] 0;
+#var my[necromancer][spirit-howl] 0;
+#var my[necromancer][maim] 0;
+#var my[necromancer][diurnum] 0;
+#var my[necromancer][nocturnum] 0;
+#var my[necromancer][bloodfuse] 0;
+#var my[necromancer][harvest] 0;
+#var my[necromancer][altered] 0;
+#var my[necromancer][bloodarc] 0;
+#var my[necromancer][conjure_undead] 0;
+#var my[necromancer][soulbind] 0;
+#var my[necromancer][souls] 0;
+#var my[necromancer][skullfire] 0;
+#var my[necromancer][unholy_ground] 0;
+
 #list dgraft clear;
-#var my[necromancer][repowers] 0;
+#var my[necromancer][repower][total] 0;
 #var spark_corpse 0;
 
 #NOP --------------------------------------- NECROMANCER SPECIFIC ACTIONS ------------------------------------------;
@@ -103,7 +119,7 @@
         #var my[necromancer][souls] 0;
         #var my[necromancer][skullfire] 0;
         #var my[necromancer][unholy_ground] 0;
-        #math my[necromancer][repowers] {$my[necromancer][repowers] + 1};
+        #math my[necromancer][repower][total] {$my[necromancer][repower][total] + 1};
         #send {!repower};
     };
 } {2};
@@ -270,9 +286,41 @@
 #act {A waning crescent moon hangs in the dark sky.} {#var my[necromancer][moon]};
 
 #NOP --------------------------------------- NECROMANCER SUPPORT ACTIONS  ------------------------------------------;
-#ACTION {^%w gives you a low-five!} {#if !$idle_flag {#format {lower} {%l} {%1};daemon graft $lower;#list dgraft add $lower}} {6};
-#ACTION {^%w goes 'Breakin the law! Breakin the law!' at you.} {#if !$idle_flag {qtrance preserve remains>50;qtrance preserve remains>50}} {6};
-#ACTION {You see a shadowy form escape from %w and disappear!} {#SHOWME DAEMON GRAFT LEFT %1} {2};
+#ACTION {^%w gives you a low-five!} {
+    #if !$idle_flag {
+        #format {lower} {%l} {%1};
+        daemon graft $lower;
+        #if {&dgraft[] > 0} {
+            #var tmpIndex 0;
+            #list dgraft find {$lower} {tmpIndex};
+            #if {"$tmpIndex" == "0"} {#list dgraft add $lower};
+        } {
+            #list dgraft add $lower;
+        };
+    };
+} {6};
+
+#ACTION {^%w goes 'Breakin the law! Breakin the law!' at you.} {
+    #if !$idle_flag {
+        qtrance preserve remains>50;
+        qtrance preserve remains>50;
+    };
+} {6};
+
+#ACTION {You see a shadowy form escape from %w and disappear!} {
+    #if !$idle_flag {
+        #format {lower} {%l} {%1};
+        #if {&dgraft[] > 0} {
+            #var tmpIndex 0;
+            #list dgraft find {$lower} {tmpIndex};
+            #if {"$tmpIndex" == "0"} {#NOP} {daemon graft $lower;};
+        };
+    };
+} {2};
+
+#action {^Your vampiric bond with %* has been broken.$} {
+    #echo {RAPTURE LEFT %1};
+} {2};
 
 
 #NOP -- Teleport helpers;
@@ -291,7 +339,10 @@
 #action {You reach into your animal soul and fly into a fury!} {
     #math my[necromancer][glamors][current] {$my[necromancer][glamors][current] - 1}
 } {2};
-
+#NOP -- Blaze;
+#action {^You call the fires of hell into your soul!$} {
+    #math my[necromancer][glamors][current] {$my[necromancer][glamors][current] - 1}
+} {2};
 
 #NOP ---- NECRO HEALING CAPTURES;
 

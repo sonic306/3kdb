@@ -183,10 +183,11 @@
 
 #var checkBunker 1;
 #act {^-i-A squat bunker.$} {
+    #if {"$bot[foundmob]" == "1"} {#return};
     #if {"$checkBunker" == "1"} {
         #map get roomvnum bunkerVnum;
 
-        #if {$kayos[bunker][1] == $bunkerVnum || $kayos[bunker][2] == $bunkerVnum || $kayos[bunker][3] == $bunkerVnum} {
+        #if {"$kayos[bunker][1]" == "$bunkerVnum" || "$kayos[bunker][2]" == "$bunkerVnum" || "$kayos[bunker][3]" == "$bunkerVnum"} {
             #echo {Bunker already recorded: $bunkerVnum};
         } {
             #switch &kayos[bunker][] {
@@ -211,7 +212,9 @@
 } {1};
 
 #act {^-i-A scorch-marked landing pad.$} {
-    #map get roomvnum kayos[ship];
+    #if $checkBunker {
+        #map get roomvnum kayos[ship];
+    };
 } {1};
 
 #act {^-i-An intricate digital key%*$} {get key;} {1};
