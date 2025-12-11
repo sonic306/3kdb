@@ -11,6 +11,8 @@
 
 #alias {customcorpsetrig} {
 	corpsemanager;
+	dstats;
+	dreset
 };
 
 #alias {gw} {
