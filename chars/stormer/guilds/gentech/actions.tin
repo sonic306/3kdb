@@ -9,6 +9,7 @@
 #act {Your cloning was a success!} {=call;=afollow on;=akill on};
 #act {^Timescan %*[Likelihood of Flux: &1\%]$} {#var reset_time %1;#math time {reset_time * 40}say Time until reset: $time};
 #act {%s[[ Energy Field Collapse Imminent. ]]%s} {efield;efield};
+#act {Bias Conformation Toggled Off} {biaslock};
 
 
 #var corpse_delay 0;

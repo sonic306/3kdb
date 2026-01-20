@@ -59,8 +59,10 @@
 			corpsetrig+ cocoon500;
 			corpsetrig+ reinforce;
 		};
+	 	#DEFAULT {
+			#ECHO {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>};
+		};
 	};
-	 	{#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}};
 };
 
 #alias {strat} {
