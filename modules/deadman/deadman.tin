@@ -32,7 +32,7 @@
         #var idle_flag 0;
         #var idle 0;
         #format xdeadmanIdleTimeout {%d} {$xdeadmanIdleTimeout}; 
-        #if {"$xdeadmanIdleTimeout" == "0"} {#var deadmanIdleTimeout 900};
+        #if {"$xdeadmanIdleTimeout" == "0"} {#var deadmanIdleTimeout 3600};
         #var deadManTimeLeft $deadmanIdleTimeout;
         #delay {deadmanSwitch} {deadmanActions} {$deadmanIdleTimeout};
 
