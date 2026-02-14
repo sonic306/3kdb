@@ -59,6 +59,13 @@
 			corpsetrig+ cocoon500;
 			corpsetrig+ reinforce;
 		};
+		#CASE {"fremen"} {
+			corpsetrig+ customonkill;
+			corpsetrig+ delay;
+			corpsetrig+ divvy;
+			corpsetrig+ cocoon500;
+			corpsetrig+ poison1;
+		};
 	 	#DEFAULT {
 			#ECHO {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>};
 		};
@@ -82,8 +89,14 @@
 			strategy call;
 
 		};
+		#case {"fremen"} {
+			strategy agony;
+			strategy stun;
+			strategy voicehold;
+			strategy voicefeeble;
+			strategy suspend;
+		};
 		#case {"rolm"} {
-			strategy rolm;
 			strategy rolm1;
 		};
 		#case {"clear"} {
@@ -108,6 +121,19 @@
 		};
 	};
 };
+
+#alias {dman} {
+	#SWITCH {"%0"} {
+		#CASE {"on"} {
+			#read modules/deadman/deadman.tin;
+			_init_deadman;
+		};
+		#CASE {"off"} {
+			#class {deadman} kill;
+			#echo {\n<efd>   ===============  <fac>DEADMAN KILLED <efd>=============== \n};
+		};
+	};
+}
 
 #alias {pton} {follow %1; cassist %1; #var pleader %1;};
 #alias {ptoff} {#format {pleader} {%l} {$pleader}; unfollow $pleader; cassist -$pleader; #unvar pleader};

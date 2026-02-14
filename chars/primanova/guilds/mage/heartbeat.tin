@@ -1,5 +1,5 @@
-#class {guild_player_heartbeat} {kill}
-#class {guild_player_heartbeat} {open}
+#class {player_heartbeat} {kill}
+#class {player_heartbeat} {open}
 
 #NOP -- These actions are called every round (every 2 seconds);
 #NOP -- Make sure all actions are INSIDE the !$idle_flag {} section or the deadman will not apply to those actions;
@@ -11,9 +11,7 @@
 #alias {_player_heartbeat} {
     #if !$idle_flag {
         #NOP -- Actions that timing does not matter;
-        #if {$my[gp1][current] < 1000} {
-            #delay {reclaim} {mu} {0.1};
-        };
+
 
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
@@ -26,4 +24,4 @@
 };
 
 
-#class {guild_player_heartbeat} {close}
+#class {player_heartbeat} {close}

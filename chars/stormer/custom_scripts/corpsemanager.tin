@@ -47,8 +47,8 @@
 		};
 		#if {"$guild" == "fremen"} {
 			#if {$corpses[coffin] < 38} {wrap};
-			#elseif {$corpses[coffin] >= 38 && $my[hpbar][water][current] < 3000} {reclaim};
-			#elseif {$corpses[coffin] >= 38 && $my[hpbar][water][current] > 3000} {fai};
+			#elseif {$corpses[coffin] >= 38 && $my[gp1][current] < 3000} {reclaim};
+			#elseif {$corpses[coffin] >= 38 && $my[gp1][current] > 3000} {fai};
 		}
 	}	
 };

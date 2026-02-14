@@ -93,12 +93,15 @@
         checkStrategy {spirithowl} {spirithowl;#var my[necromancer][spirit-howl] 0};
     };
 
-    #if {$my[necromancer][glamors][current] >= 1 && $my[gp1][current] < 150000 && !$my[necromancer][glamors][illuming]} {
+    #if {$my[necromancer][glamors][current] >= 1 && $my[gp1][current] < 200000 && !$my[necromancer][glamors][illuming]} {
         checkStrategy {illume} {illume};
     };
     
     #if {$my[necromancer][glamors][current] >= 1 && $my[gp1][current] < 50000 && !$my[necromancer][glamors][blazing]} {
         checkStrategy {blaze} {blaze};
+    };
+    #if {!$my[necromancer][convoke]} {
+        checkStrategy {convokeR} {convoke ravens};
     };
 };
 

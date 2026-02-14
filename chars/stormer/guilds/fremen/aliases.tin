@@ -1,6 +1,15 @@
-#class {player_aliases} {kill}
-#class {player_aliases} {open}
-
+#class {guild_player_aliases} {kill}
+#class {guild_player_aliases} {open}
 #NOP -- Player specific aliases;
 
-#class {player_aliases} {close}
+#NOP Baraka Settings
+#NOP none, none+, low, low+, some, some+, minor, minor+, half, half+, major, major+, most, most+, high, high+ and all.
+
+#NOP Modes
+#alias {baseline} {mode litany:all pain:some weirding:all reflexes:blinding prana:all bindu:none; #SHOWME {Mode => Litany: All, Pain: Some, Weirding: All, Reflexes: Blinding, Prana: All, Bindu: None}}
+#alias {fullcombat} {mode assault:all pain:all; #SHOWME {Mode => Assault: All, Pain: All}};
+
+#HIGHLIGHT {Mode => Litany: All, Pain: Some, Weirding: All, Reflexes: Blinding, Prana: All, Bindu: None} {light azure};
+#HIGHLIGHT {Mode => Assault: All, Pain: All} {light azure};
+
+#class {guild_player_aliases} {close}

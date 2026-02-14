@@ -1,7 +1,7 @@
-#class {player_actions} {kill}
-#class {player_actions} {open}
+#class {guild_player_actions} {kill}
+#class {guild_player_actions} {open}
 
 #NOP --- Player specific actions;
 
 
-#class {player_actions} {close}
+#class {guild_player_actions} {close}

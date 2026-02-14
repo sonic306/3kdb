@@ -1,0 +1,245 @@
+#CLASS {global} OPEN
+
+#VARIABLE {xcaption}
+{
+    {bottom} {-6}
+    {left} {159}
+    {top} {25}
+}
+#VARIABLE {xcaption_data}
+{
+    {1} {<088>💀 <ceb>0 <088>Corpses 💀\n}
+    {2} {\n <ccc>Bot: <fff>OFF<088>}
+    {3} {\n <bef>Strategy:<088>}
+}
+#VARIABLE {xchat}
+{
+    {log} 
+    {
+        {emotes} {$xchat[log][emotes]}
+    }
+}
+#VARIABLE {xcorpseActions} {$xcorpseActions}
+#VARIABLE {xcurvnum} {1}
+#VARIABLE {xdReportList}
+{
+    {1} 
+    {
+        {active} {1}
+        {header_text} {Killer}
+        {key} {killer}
+        {lookup} {tmpKiller}
+        {totals} {}
+        {width} {15}
+    }
+    {2} 
+    {
+        {active} {1}
+        {header_text} {Rounds}
+        {key} {rounds}
+        {lookup} {tmpRounds}
+        {totals} {tmpTotalRnds}
+        {width} {6}
+    }
+    {3} 
+    {
+        {active} {1}
+        {header_text} {Class}
+        {key} {class}
+        {lookup} {tmpClass}
+        {totals} {tmpTotalClass}
+        {width} {6}
+    }
+    {4} 
+    {
+        {active} {0}
+        {header_text} {XP}
+        {key} {xp}
+        {lookup} {tmpXP}
+        {totals} {tmpTotalXp}
+        {width} {6}
+    }
+    {5} 
+    {
+        {active} {0}
+        {header_text} {% of XP}
+        {key} {xp_ratio}
+        {lookup} {tmpRatio}
+        {totals} {tmpTotalRatio}
+        {width} {7}
+    }
+    {6} 
+    {
+        {active} {1}
+        {header_text} {Coins}
+        {key} {coins}
+        {lookup} {tmpCoins}
+        {totals} {tmpTotalCoins}
+        {width} {6}
+    }
+    {7} 
+    {
+        {active} {0}
+        {header_text} {Dmg Dlt}
+        {key} {dmg_dealt}
+        {lookup} {tmpDmg}
+        {totals} {tmpTotalDmg}
+        {width} {10}
+    }
+    {8} 
+    {
+        {active} {0}
+        {header_text} {Dmg Rcd}
+        {key} {dmg_received}
+        {lookup} {tmpDmgReceived}
+        {totals} {tmpTotalDmgRec}
+        {width} {15}
+    }
+    {9} 
+    {
+        {active} {0}
+        {header_text} {Corpses}
+        {key} {corpses}
+        {lookup} {tmpCorpses}
+        {totals} {tmpTotalCorpses}
+        {width} {6}
+    }
+    {10} 
+    {
+        {active} {0}
+        {header_text} {GXP Earned}
+        {key} {gxp_earned}
+        {lookup} {tmpGxp}
+        {totals} {tmpTotalGxp}
+        {width} {11}
+    }
+    {11} 
+    {
+        {active} {0}
+        {header_text} {GXP Per Rnd}
+        {key} {gxp_per_rnd}
+        {lookup} {tmpGxpPerRnd}
+        {totals} {tmpAvgGxpPerRnd}
+        {width} {11}
+    }
+    {12} 
+    {
+        {active} {0}
+        {header_text} {Melee}
+        {key} {mob_attacks_melee}
+        {lookup} {tmpMobAttacksMelee}
+        {totals} {tmpTotalMobAttacksMelee}
+        {width} {11}
+    }
+    {13} 
+    {
+        {active} {0}
+        {header_text} {Specials}
+        {key} {mob_attacks_special}
+        {lookup} {tmpMobAttacksSpecial}
+        {totals} {tmpTotalMobAttacksSpecial}
+        {width} {11}
+    }
+}
+#VARIABLE {xdraw_room}
+{
+    {bottom} {23}
+    {left} {161}
+    {top} {22}
+}
+#VARIABLE {xgags} {}
+#VARIABLE {xhpbar}
+{
+    {bottom} {64}
+    {height} {3}
+    {prompt} 
+    {
+        {1} {HP:1874/1874  SP:1130/ 226  PWR: 822/ 822  HT:   0/ 100  E:      %}
+        {2} {HP:<008><AFA>   100%   <088> SP:<006>   500%   <088> PWR:<008><AFA>   100%   <088> HT:<070>     0%   <088> E:          }
+        {3} {<829>ND:<099> <839>Yes<099><829>[<099><839>39%<099><829>]<099> <829>PE<099><829>[<099><839>IPP<099><829>|<099><839>GE<099><829>|<099><839>TRS<099><829>|<099><839>PE<099><829>]<099> <829>SI: [<099><839>53.2172%<099><829>]<099>}
+    }
+    {right} {237}
+    {top} {62}
+}
+#VARIABLE {xlastBot} {}
+#VARIABLE {xmap}
+{
+    {bottom} {23}
+    {height} {19}
+    {left} {159}
+    {top} {2}
+    {width} {78}
+    {widthperc} {.33}
+}
+#VARIABLE {xmkaActions} {}
+#VARIABLE {xmy}
+{
+    {dead} {0}
+    {gp1} 
+    {
+        {change} {0}
+        {current} {822}
+        {graph} {<008><AFA>   100%   <088>}
+        {max} {822}
+        {percent} {0.00}
+    }
+    {gp2} 
+    {
+        {change} {0}
+        {current} {0}
+        {graph} {<070>     0%   <088>}
+        {max} {100}
+        {percent} {0.00}
+    }
+    {hp} 
+    {
+        {change} {0}
+        {current} {1874}
+        {graph} {<008><AFA>   100%   <088>}
+        {max} {1874}
+        {percent} {0.00}
+    }
+    {sp} 
+    {
+        {change} {0}
+        {current} {1130}
+        {graph} {<006>   500%   <088>}
+        {max} {226}
+        {percent} {0.00}
+    }
+}
+#VARIABLE {xrolm} {}
+#VARIABLE {xspiceBeers} {$xspiceBeers}
+#VARIABLE {xsplit}
+{
+    {bottom} {4}
+    {left} {0}
+    {right} {79}
+    {top} {17}
+}
+#VARIABLE {xstrategyActive} {$xstrategyActive}
+#VARIABLE {xtheme} {}
+#VARIABLE {xticker}
+{
+    {bottom} {17}
+    {right} {-79}
+    {top} {13}
+}
+#VARIABLE {xtoggles}
+{
+    {3kreport} {1}
+    {chatlog_says} {1}
+    {corpse_echo} {0}
+    {cult} {0}
+    {emote_corpse} {1}
+    {emote_dungeon_clear} {1}
+    {emote_eheal} {1}
+    {emote_follow} {1}
+    {emote_heal} {1}
+    {emote_rally} {1}
+    {mission} {0}
+    {worlddrops} {0}
+}
+#VARIABLE {xwhitelist} {}
+
+#CLASS {global} CLOSE

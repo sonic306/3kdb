@@ -13,7 +13,7 @@
 
 #NOP -- This alias is called immediately before engaging a mob;
 #alias {.pre_fight_check} {
-    #var my[necromancer][convoke] 0;
+     #nop
 };
 
 
