@@ -150,7 +150,7 @@
 		#if {$my[corpse][minion][current] > 0} {#var my[corpse][minion][current] @min{$my[corpse][minion][current];30};#var corpse_string $corpse_string Fol: $my[corpse][minion][current];};
 		#if {$corpses[servant] > 0} {#var corpse_string $corpse_string Srv: $corpses[servant];};
 		#if {$corpses[golem] > 0} {#var corpse_string $corpse_string Gol: $corpses[golem];};
-		#if {"$draw[caption][active]" == "on"} {draw_caption_corpses};
+		#if {"$draw[caption][active]" == "on"} {_caption_data_corpses};
 	};
 };
 
