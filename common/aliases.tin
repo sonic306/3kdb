@@ -11,6 +11,22 @@
 #alias {cwho1} {#send {!cwho -O}};
 #alias {los} {#send {lineofsight}};
 
+#alias {bstart} {
+    jump;
+    party;
+    repower;
+    go morgue;
+    #delay {4} {
+        acquire;
+        #if {"$guild" == "necromancer"} {
+            buy 1;
+            n;
+            follower;
+            chest;
+        };
+    };
+};
+
 #NOP -- Generic toggle switch;
 #delay 6 {
     #if {"${toggles[mission]}" == ""} {#var toggles[mission] 0};
