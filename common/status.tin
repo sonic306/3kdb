@@ -121,6 +121,8 @@
     #var xgags $gags;
     #var xmy $my;
     #var xwhitelist $whitelist;
+    #NOP -- Chat blacklist (list) for MIP chat window;
+    #list xblacklist copy blacklist;
     #var xchat[log][emotes] $chat[log][emotes];
     #var xdReportList $dReportList;
     #var xtoggles $toggles;
@@ -157,7 +159,11 @@
     #var dReportList $xdReportList;
     #var toggles $xtoggles;
     #var deadmanIdleTimeout $xdeadmanIdleTimeout;
-    
+
+    #NOP -- Restore chat blacklist from saved xblacklist so it persists across ld;
+    #list blacklist clear;
+    #if {&xblacklist[] > 0} {#loop 1 &xblacklist[] _blidx {#list blacklist add {$xblacklist[$_blidx]}}};
+
     #var split $split;
     #var hpbar $xhpbar;
     #var caption $xcaption;
@@ -237,6 +243,21 @@
 };
 
 #if {"$guild" == "knight" || "$guild" == "fremen"} {
+    #alias .gxp_t30_add {
+        #if {&my[gxp][t30][] > 30} {
+            #math my[gxp][t30_total] {$my[gxp][t30_total] - $my[gxp][t30][1]};
+            #list my[gxp][t30] delete 1;
+            #list my[gxp][t30] add $my[gxp][last_round];
+            #math my[gxp][t30_total] {$my[gxp][t30_total] + $my[gxp][last_round]};
+        } {
+            #list my[gxp][t30] add $my[gxp][last_round];
+            #math my[gxp][t30_total] {$my[gxp][t30_total] + $my[gxp][last_round]};
+        };
+        #math my[gxp][t30_average] {$my[gxp][t30_total] / &my[gxp][t30][]};
+        #math my[gxp][t30_per_hr] {$my[gxp][t30_average] * 30 * 60};
+        #format my[gxp][str_t30_per_hr] {%M} {$my[gxp][t30_per_hr]};
+    };
+
     #alias .gxp_time {
         #format {my[gxp][report-time]} {%T} {};
         #math my[gxp][delta-time] {$my[gxp][report-time] - $my[gxp][start-time]};

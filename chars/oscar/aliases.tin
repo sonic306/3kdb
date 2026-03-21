@@ -1,0 +1,76 @@
+#class {player_aliases} {kill}
+#class {player_aliases} {open}
+
+
+#NOP -- Default corpse_trig;
+#alias corpsetrig1 {
+     corpsetrig-clear;
+     corpsetrig+ spelltap;
+     corpsetrig+ slab;
+     corpsetrig+ wrap;
+     corpsetrig+ cBlast;
+     corpsetrig+ getAll;
+     corpsetrig+ crafting;
+     corpsetrig+ cocoon;
+     corpsetrig+ spellbook;
+};
+
+#alias {_player_deadmanActions} {
+    #NOP;
+};
+
+#alias {setup_defense} {
+     #delay 2 {cast mantle};
+     #delay 4 {prots_ss};
+     #delay 6 {prots_MG};
+     #delay 8 {prots_ms};
+     #delay 10 {prots_armor};
+     #delay 12 {prots_ps};
+     #delay 14 {prots_pfe};
+     #delay 16 {cast mindblank};
+     #delay 18 {clear_gc;setup_gc};
+};
+
+
+#alias {setup_gc} {
+     #ticker {gc_mantle} {#if {$my[sp][current] > 2500} {cast greater contingency as mantle#$mage[contingencies][mantle]#cast mantle;#unticker gc_mantle}} {2};
+     #ticker {gc_prismatic} {#if {$my[sp][current] > 2500} {cast greater contingency as prismatic sphere#$mage[contingencies][sphere]#cast prismatic sphere;#unticker gc_prismatic}} {2};
+     #ticker {gc_major} {#if {$my[sp][current] > 2500} {cast greater contingency as major globe#cast major globe;#unticker gc_major}} {2};
+     #ticker {gc_stoneskin} {#if {$my[sp][current] > 2500} {cast greater contingency as stoneskin#cast stoneskin;#unticker gc_stoneskin}} {2};
+     #ticker {gc_shield} {#if {$my[sp][current] > 2500} {cast greater contingency as shield#cast magnificent shield;#unticker gc_shield}} {2};
+     #ticker {gc_armor} {#if {$my[sp][current] > 2500} {cast greater contingency as armor#cast armor;#unticker gc_armor}} {2};
+     #ticker {gc_prot_evil} {#if {$my[sp][current] > 2500} {cast greater contingency as prot_evil#cast protection from evil;#unticker gc_prot_evil}} {2};
+};
+
+#alias {clear_c} {
+     #10 {cast remove contingency as 1};
+};
+
+#alias {clear_gc} {
+     #10 {cast remove greater contingency as 1};
+}
+
+#alias {check_beads} {
+     #math hp_overmax_max {$my[hp][max] * 5};
+     #math hp_overmax_shortfall {$hp_overmax_max - $my[hp][current]};
+     #math grasps_needed {$hp_overmax_shortfall / 33};
+
+     #math sp_threshold {$my[sp][max] * .20};
+     #math sp_extra {$my[sp][current] - $sp_threshold};
+     #math grasps_possible {$sp_extra / 100};
+
+     #if {$grasps_needed < $grasps_possible} {
+          #var grasp_beads $grasps_needed;
+     } {
+          #var grasp_beads $grasps_possible;
+     };
+     
+     #if {$grasp_beads > 0} {
+          #$grasp_beads {grasp beads};
+     };
+};
+
+#alias pmo {cast polymorph other on %0;};
+
+
+#class {player_aliases} {close}
