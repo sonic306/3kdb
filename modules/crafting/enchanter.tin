@@ -127,6 +127,7 @@
                         #var missingMaterial 1;
                         #list missing_jewels add $last_unstash;
                     };
+		#delay {clear_action_312471} {#unaction {No objects found.}} {2};
 
                     #NOP Unstash each required jewel and track exact name;
                     #foreach $gem[jewels] jewel {
@@ -202,6 +203,7 @@
                                 #echo {<fba>+++++++++++++++++++++++++++++++++++++++++<088>};
                                 #unvar tmpMoulding;
                             };
+		#delay {clear_action_0a3e71} {#unaction {You have created something new!}} {2};
                         } {5};
                     } {5};
                 };

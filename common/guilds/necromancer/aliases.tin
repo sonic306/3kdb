@@ -25,6 +25,7 @@
     #format tmpPort {%d} {%2};
     #if {"$my[necromancer][portsets][$tmpPort][vnum]" != ""} {
         #line oneshot #action {The illusions clear from your mind and you find yourself there.} {#map goto $my[necromancer][portsets][$tmpPort][vnum]};
+		#delay {clear_action_6e271f} {#unaction {The illusions clear from your mind and you find yourself there.}} {2};
     };
     #send {teleport %2};
 };
@@ -73,6 +74,7 @@
     #var tempContainer %1;
     #format tempNP {%d} {%2};
     #line oneshot #action {As you look through the mask, the eyes flash briefly with a dim, blue light.} {qtNP${tempContainer} $tempNP;#delay 6 {#send {!remove mask};#send {!wear velvet hat};}} {1};
+		#delay {clear_action_a43948} {#unaction {As you look through the mask, the eyes flash briefly with a dim, blue light.}} {2};
 };
 
 #alias qtNPc {
@@ -198,6 +200,7 @@
         #if $spider_web {buy $spider_web spider web;};
         #if $goldenrod {buy $goldenrod goldenrod;};
     };
+		#delay {clear_action_242e55} {#unaction {%sginseng:%d%sblack pearls:%d%sspider web:%d%sgoldenrod:%d}} {2};
     #line oneshot #action {%smandrake:%d%spine needles:%d%snightshade:%d%sbloodmoss:%d} {
         #math mandrake {999 - %%2};
         #math pine_needles {999 - %%4};
@@ -207,6 +210,7 @@
         #if $pine_needles {buy $pine_needles pine needles;};
         #if $nightshade {buy $nightshade nightshade;};
     };
+		#delay {clear_action_79479e} {#unaction {%smandrake:%d%spine needles:%d%snightshade:%d%sbloodmoss:%d}} {2};
 };
 
 #ALIAS {power}

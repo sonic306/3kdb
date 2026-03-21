@@ -161,6 +161,7 @@ touch demon rune;
             };
             kill amalgamation;
         } {1};
+		#delay {clear_action_99314b} {#unaction {As the chest opens, panic washes over you!}} {2};
     };
 } {1};
 
@@ -186,6 +187,7 @@ touch demon rune;
             };
             kill amalgamation;
         } {1};
+		#delay {clear_action_99314b} {#unaction {As the chest opens, panic washes over you!}} {2};
     };
 } {1};
 

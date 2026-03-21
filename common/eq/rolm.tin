@@ -184,6 +184,7 @@
         #delay rolm_owl {#var rolm[owl] 1;#var rolm[owl_active] 0} 3610;
         #var rolm[owl_active] 1;
     } {1};
+		#delay {clear_action_afdfc8} {#unaction {The owl rune flashes briefly on the artifact.}} {2};
 };
 #action {You touch the Raven rune on the artifact and hear a soft *click*} {
     #var rolm[raven] 0;
@@ -191,6 +192,7 @@
         #math rolm[charges] {$rolm[charges] - 1};
         #delay rolm_raven {#var rolm[raven] 1} 310;
     } {1};
+		#delay {clear_action_a7626d} {#unaction {The diamond rune flashes briefly on the artifact.}} {2};
 } {2};
 #action {You touch the Cairn rune on the artifact and hear a soft *click*} {
     #var rolm[cairn] 0;
@@ -198,6 +200,7 @@
         #math rolm[charges] {$rolm[charges] - 1};
         #delay rolm_cairn {#var rolm[cairn] 1} 300;
     } {1};
+		#delay {clear_action_a7626d} {#unaction {The diamond rune flashes briefly on the artifact.}} {2};
     #format cairn_start {%T}
 } {2};
 #action {You touch the Gremlin rune on the artifact and hear a soft *click*} {
@@ -207,6 +210,7 @@
         #math rolm[charges] {$rolm[charges] - 1};
         #delay rolm_gremlin {#var rolm[gremlin] 1} 1280;
     } {1};
+		#delay {clear_action_a7626d} {#unaction {The diamond rune flashes briefly on the artifact.}} {2};
 } {2};
 
 #NOP Charge math;

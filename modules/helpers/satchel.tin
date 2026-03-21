@@ -33,6 +33,7 @@
         #var craft[satchel] $temp_satchel;
         #unaction {%*|%s%d |%s%d |%s%d |%s%d |%s%d |%s%d |%s%d |%s%d |};
     };
+		#delay {clear_action_b70760} {#unaction {You have %d/%d items in your satchel.}} {2};
 };
 
 #alias unstash_2 {

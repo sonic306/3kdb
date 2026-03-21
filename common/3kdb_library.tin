@@ -36,7 +36,7 @@
     #list library3kdb sort;
     format_3kdblibrary {Alias} {Description};
     #foreach $library3kdb[%*] index {
-        #regexp {"%1"} {"$index[type]"} {
+        #if {"%1" == "$index[type]"} {
             #var tempflag 1;
             format_3kdblibrary {$index[name]} {$index[desc]};
         };
@@ -71,7 +71,7 @@
     #list library3kdb sort;
     format_3kdblibrary {Alias};
     #foreach $library3kdb[%*] index {
-        #regexp {"%1"} {"$index[type]"} {
+        #if {"%1" == "$index[type]"} {
             #var tempflag 1;
             format_3kdblibrary1 {     $index[name]};
         };

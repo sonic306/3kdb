@@ -17,6 +17,7 @@
     pstatsColPrint {<110>Damage Taken<070>:} {<130>${pstatsDamageTaken}} {<130>Combat Rounds<070>:} {<120>$pstatsCRounds};
     #Line gag;
 	};
+		#delay {clear_action_e2d052} {#unaction {^Combat Rounds:%*}} {2};
 	#line oneshot #action {^Pstat Time : %*} {
 		#var pstatTotalRounds @timeToRounds{%%1};
 		#math pstatCombatPercent {$pstatCombatRounds / $pstatTotalRounds * 100.00};
@@ -25,6 +26,7 @@
 		#showme <dfb>You have been in combat ${pstatCombatRounds} out of ${pstatTotalRounds} possible rounds (${pstatCombatPercent}%)<088>;
     #Line gag;
 	};
+		#delay {clear_action_d8d433} {#unaction {^Pstat Time : %*}} {2};
 };
 
 

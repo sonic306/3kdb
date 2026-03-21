@@ -484,7 +484,7 @@
 		#REGEX {$mip[gline][2]} { %*: %d} {
 			#var song_match 0;
 			#foreach $bardSongs[%*] {song} {
-				#regexp {"$song[name]"} {"&1"} {
+				#regex {"$song[name]"} {"&1"} {
 					#var song_match 1;
 					#var my[song][title] &1;
 					#var my[song][rounds] &2;

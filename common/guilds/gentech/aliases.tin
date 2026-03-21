@@ -50,6 +50,7 @@
 		#format time_to_reset {%.5s} {$time_to_reset};
 		say $time_to_reset minutes until reset (assuming a 40 minute timer);
 	};
+		#delay {clear_action_ec90ec} {#unaction {Timescan %* [Likelihood of Flux: %d.%d%]}} {2};
 };
 
 #NOP ---  Alias to check if you can timeslide

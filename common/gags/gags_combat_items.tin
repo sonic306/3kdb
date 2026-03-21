@@ -71,6 +71,7 @@
         #action {^The aura around %* amplifies%*} {
             #line gag;
             #line oneshot #action {%*attack.$} {#line gag;};
+		#delay {clear_action_2c7f78} {#unaction {%*attack.$}} {2};
         };
         
         

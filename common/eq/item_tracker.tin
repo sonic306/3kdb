@@ -120,6 +120,7 @@
 #NOP -- CMC;
 #action {A flicker in the containment field surrounding the CMC's plasma tank} {
     #line oneshot #action {results in a plasma leak within your suit, causing you great pain.} {#line gag} {1};
+		#delay {clear_action_a64624} {#unaction {results in a plasma leak within your suit, causing you great pain.}} {2};
     .trackItem cmc leak;
 } {2};
 

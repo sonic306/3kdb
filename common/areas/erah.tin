@@ -89,7 +89,7 @@
             read runes
         };
         #elseif {"$guild" == "necromancer"} {
-            shapeshift;
+            shapeshift raven;
             #nop get phylactery;
             get jar;
             read runes
@@ -100,7 +100,8 @@
                 #nop get phylactery;
                 get jar;
                 read runes
-            }
+            };
+		#delay {clear_action_1b6898} {#unaction {You float gently to the ground.}} {2};
         };
         #elseif {"$guild" == "juggernaut"} {
             jumpjet;
@@ -108,7 +109,8 @@
                 #nop get phylactery;
                 get jar;
                 read runes
-            }
+            };
+		#delay {clear_action_6deec2} {#unaction {Your jumpjets shut down and you land on the ground.}} {2};
         };
         #else {
             #echo {<ffa>Current guild needs to be added to the alias: <fff>$guild <ffa>- You need to land<088>};

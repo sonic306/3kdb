@@ -169,6 +169,7 @@
 	#line oneshot #action {^Combat Rounds:%*} {
 		#format cstatCombatRounds {%d} %%1;
 	};
+		#delay {clear_action_e2d052} {#unaction {^Combat Rounds:%*}} {2};
 	#line oneshot #action {^Total Time Spent online : %*} {
 		#var cstatTotalRounds @timeToRounds{%%1};
 		#math cstatCombatPercent {$cstatCombatRounds / $cstatTotalRounds * 100.00};
@@ -176,6 +177,7 @@
 		#format cstatTotalRounds {%g} $cstatTotalRounds;
 		#echo <dfb>You have been in combat ${cstatCombatRounds} out of ${cstatTotalRounds} possible rounds (${cstatCombatPercent}%)<088>;
 	};
+		#delay {clear_action_fb2ec2} {#unaction {^Total Time Spent online : %*}} {2};
 };
 
 
@@ -185,7 +187,7 @@
 	#var found_power 0;
 	#format temp {%p} {%1};
 	#foreach $eternalList index {
-		#regexp {"%1"} {"$eternalList[$index][power]"} {
+		#if {"%1" == "$eternalList[$index][power]"} {
 			#var found_power 1;
 			#list eternalList delete $index;
 			#list eternalList add {{{key} {$temp} {power} {%1} {level} {%2} {nrg} {%3} {max_cd} {%4} {cur_cd} {%5}}};
@@ -224,12 +226,12 @@
 
 #alias update_eternal_delay {
 	#var temp %2;
-	#regexp {$temp} {RDY} {#var my[eternal][%1] 1} {
+	#regex {$temp} {RDY} {#var my[eternal][%1] 1} {
 		#var my[eternal][%1] 0;
 		#if {%3 > 0} {
-			#regexp {$temp} {s} {#replace temp {s} {};#undelay {%1};#delay {%1} {#var my[eternal][%1] 1} {$temp};};
-			#regexp {$temp} {m} {#replace temp {m} {};#math temp {$temp * 60};#undelay {%1};#delay {%1} {#var my[eternal][%1] 1} {$temp};};
-			#regexp {$temp} {h} {#replace temp {h} {};#math temp {$temp * 60 * 60};#undelay {%1};#delay {%1} {#var my[eternal][%1] 1} {$temp};};
+			#regex {$temp} {s} {#replace temp {s} {};#undelay {%1};#delay {%1} {#var my[eternal][%1] 1} {$temp};};
+			#regex {$temp} {m} {#replace temp {m} {};#math temp {$temp * 60};#undelay {%1};#delay {%1} {#var my[eternal][%1] 1} {$temp};};
+			#regex {$temp} {h} {#replace temp {h} {};#math temp {$temp * 60 * 60};#undelay {%1};#delay {%1} {#var my[eternal][%1] 1} {$temp};};
 		};
 	};
 };

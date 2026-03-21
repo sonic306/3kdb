@@ -1,6 +1,9 @@
 #NOP -- This file is the "driver".  Change the filename from playername to your character's name;
 #NOP -- and replace the variable below with your playername and guild;
 
+#read chars/stormer/custom_scripts/corpsemanager.tin;
+#NOP #read chars/stormer/custom_scripts/mask.tin;
+
 #NOP -- Set Player specific variables;
 #var user primanova;
 #var guild mage;

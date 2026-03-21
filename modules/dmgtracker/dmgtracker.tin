@@ -30,42 +30,9 @@
 
     #if {$cmbt[category][%1][dmg] < 1000} {
         #math cmbt[histogram][999] {$cmbt[histogram][999] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 999 && $cmbt[category][%1][dmg] <= 2000} {
-        #math cmbt[histogram][2000] {$cmbt[histogram][2000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 1999 && $cmbt[category][%1][dmg] <= 3000} {
-        #math cmbt[histogram][3000] {$cmbt[histogram][3000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 2999 && $cmbt[category][%1][dmg] <= 4000} {
-        #math cmbt[histogram][4000] {$cmbt[histogram][4000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 3999 && $cmbt[category][%1][dmg] <= 5000} {
-        #math cmbt[histogram][5000] {$cmbt[histogram][5000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 4999 && $cmbt[category][%1][dmg] <= 6000} {
-        #math cmbt[histogram][6000] {$cmbt[histogram][6000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 5999 && $cmbt[category][%1][dmg] <= 7000} {
-        #math cmbt[histogram][7000] {$cmbt[histogram][7000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 6999 && $cmbt[category][%1][dmg] <= 8000} {
-        #math cmbt[histogram][8000] {$cmbt[histogram][8000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 7999 && $cmbt[category][%1][dmg] <= 9000} {
-        #math cmbt[histogram][9000] {$cmbt[histogram][9000] + 1};
-    };
-
-    #if {$cmbt[category][%1][dmg] > 8999 && $cmbt[category][%1][dmg] <= 10000} {
-        #math cmbt[histogram][10000] {$cmbt[histogram][10000] + 1};
+    } #elseif {$cmbt[category][%1][dmg] <= 10000} {
+        #math _hist_bin { (($cmbt[category][%1][dmg] - 1) / 1000) * 1000 + 1000 };
+        #math cmbt[histogram][$_hist_bin] {$cmbt[histogram][$_hist_bin] + 1};
     };
     
     #if {"${cmbt[category][%1][high]}" === ""} {#var cmbt[category][%1][high] 0};

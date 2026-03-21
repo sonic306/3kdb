@@ -49,11 +49,17 @@
     reset_trackers;
     #NOP -- Gag the few things this checks if it's not there for spam;
     #line oneshot #gag {^That is not here or it is uninteresting. (cooler?)};
+		#delay {clear_gag_9ce7ed} {#ungag {^That is not here or it is uninteresting. (cooler?)}} {2};
     #line oneshot #gag {^You find nothing of interest.};
+		#delay {clear_gag_3d3e6a} {#ungag {^You find nothing of interest.}} {2};
     #line oneshot #gag {^Perform touch at whom?};
+		#delay {clear_gag_3f3381} {#ungag {^Perform touch at whom?}} {2};
     #line oneshot #gag {^There is no reason to '(powers' here.};
+		#delay {clear_gag_9366ff} {#ungag {^There is no reason to '(powers' here.}} {2};
     #line oneshot #gag {^There is no reason to 'spellDmg-clear' here.};
+		#delay {clear_gag_0edea9} {#ungag {^There is no reason to 'spellDmg-clear' here.}} {2};
     #line oneshot #gag {^There is no reason to 'summonDmg-clear' here.};
+		#delay {clear_gag_f860c1} {#ungag {^There is no reason to 'summonDmg-clear' here.}} {2};
 };
 
 #alias {reset_trackers} {
@@ -110,7 +116,9 @@
 	#send {prompt >$nl$};
     #send {aset world_drop_pref -!!!-};
     #line oneshot #action {^You will no longer see the HP bar on the main screen.$} {forcehp};
+		#delay {clear_action_a7a82c} {#unaction {^You will no longer see the HP bar on the main screen.$}} {2};
     #line oneshot #action {^Notify off for all.$} {notify on};
+		#delay {clear_action_4aa6ce} {#unaction {^Notify off for all.$}} {2};
     mka-on;
     mka-clear;
 	#echo {Setup successful!};
@@ -147,6 +155,7 @@
         #class tmp kill;
         #if {&players > 0} {#echo {<ffd>3kdb -- Successfully updated players list with &players[] players added.}};
     };
+		#delay {clear_action_6d0601} {#unaction {This list is sorted by level, type: who2 <xp/age>}} {2};
 };
 
 #NOP -- Add players to online tracking;

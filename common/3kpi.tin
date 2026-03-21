@@ -213,6 +213,7 @@
         };
         #CLASS {tmpCapture} {kill};
     };
+		#delay {clear_action_7c82ae} {#unaction {^>$}} {2};
 };
 
 #alias .callCaptureMob {

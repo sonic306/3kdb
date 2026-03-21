@@ -7,12 +7,9 @@
 #NOP --   #if {$my[hp][current] < 500} {drink potion};
 #NOP -- Conditions can be combined like so - to cast heal if you have a certain amount of spell points.
 #NOP --   #if {$my[hp][current] < 500 && $my[sp][current] > 1000} {cast heal};
-
 #alias {_player_heartbeat} {
     #if !$idle_flag {
         #NOP -- Actions that timing does not matter;
-
-
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
             #NOP

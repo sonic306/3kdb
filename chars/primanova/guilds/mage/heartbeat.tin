@@ -1,5 +1,5 @@
-#class {player_heartbeat} {kill}
-#class {player_heartbeat} {open}
+#class {player_heartbeat_mage} {kill}
+#class {player_heartbeat_mage} {open}
 
 #NOP -- These actions are called every round (every 2 seconds);
 #NOP -- Make sure all actions are INSIDE the !$idle_flag {} section or the deadman will not apply to those actions;
@@ -8,20 +8,37 @@
 #NOP -- Conditions can be combined like so - to cast heal if you have a certain amount of spell points.
 #NOP --   #if {$my[hp][current] < 500 && $my[sp][current] > 1000} {cast heal};
 
+#var active_mon 1;
+#var mons_on 1;
+
 #alias {_player_heartbeat} {
     #if !$idle_flag {
         #NOP -- Actions that timing does not matter;
-
-
+        #NOP #if {$my[gp2][current] >= 80 && $active_mon && $mons_on} {
+        #NOP     shoo;
+        #NOP     #var active_mon 0;
+        #NOP };
+        #NOP #if {$my[gp2][current] <= 20 && !$active_mon && $mons_on} {
+        #NOP     mons 3;
+        #NOP     #DELAY {2} {summon_str;};
+        #NOP     #var active_mon 1;
+        #NOP };
+        #if {$my[gp1][current] >= 75} {
+            #if {$corpses[coffin] > 0} {
+                unwrap;
+                cast corpse blast;
+            };
+            #ELSE {#if {!$bot[paused]} {.pause}};
+        };
+        #if {$my[gp1][current] <= 10 && $bot[paused]} {..};
+            
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
             #NOP
         };
-
-    
     #NOP -- All actions above this line;
     } {#NOP};
 };
 
 
-#class {player_heartbeat} {close}
+#class {player_heartbeat_mage} {close}

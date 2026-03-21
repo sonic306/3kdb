@@ -44,7 +44,9 @@
         #if {"$dsave[mob][name]" == ""} {#var dsave[mob][name] $enemy[name]};
         #if {$dsave[max][np] < %%1} {#var dsave[max][np] %%1};
     } {1};
+		#delay {clear_action_f82c77} {#unaction {My favor will cost you %d points of necromancy...}} {2};
     #line oneshot #action {From afar, Death favors you.} {#if $gags[combat_guild] {#line gag}} {1};
+		#delay {clear_action_289540} {#unaction {From afar, Death favors you.}} {2};
     #if $dsave_round {
         #var dsave_round 0;
         #delay 1 {

@@ -158,6 +158,7 @@
 				fish
 			};
 		} {2};
+		#delay {clear_action_0e29bc} {#unaction {^Your fishing rod bends violently and cracks in two!}} {2};
 	
 		#line oneshot #action {^You hear a loud snap as your line breaks!} {
 			#if {!$idle_flag} {
@@ -166,6 +167,7 @@
 				fish
 			}
 		} {2};
+		#delay {clear_action_cf373a} {#unaction {^You hear a loud snap as your line breaks!}} {2};
 
 		#line oneshot #action {^With a loud 'thwang', your line snaps. Perhaps you should pay more} {
 			#if {!$idle_flag} {
@@ -174,6 +176,7 @@
 				fish
 			}
 		} {2};
+		#delay {clear_action_93cbc7} {#unaction {^With a loud 'thwang', your line snaps. Perhaps you should pay more}} {2};
 
 		#if {$fish[req] + 40 > $fish[end] && $fish[catch] > 15} {
 			#send !catch

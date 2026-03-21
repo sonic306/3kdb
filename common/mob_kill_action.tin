@@ -284,6 +284,8 @@
             #delay 3 {support defend $defendType};
             #delay 5 {support assault};
         };
+		#delay {clear_action_8dd63c} {#unaction {
+        Primary Damage type : [%w]}} {2};
     } {active} {0} {description} {Jugger: Support Defend Mob Dmg Type}};
 };
 

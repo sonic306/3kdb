@@ -235,24 +235,35 @@
         #action {%* snarls like a wild beast, %* brow beaded%*} {
             #line gag;
             #line oneshot #action {%*which ravages %* body.$} {#line gag;};
+		#delay {clear_action_a4eaa4} {#unaction {%*which ravages %* body.$}} {2};
         };
 
         #action {%* charges %* and clamps down on %*, piercing} {
             #line gag;
             #line oneshot #action {%*crunching bone in %* jaws%*} {#line gag;};
+		#delay {clear_action_497215} {#unaction {%*crunching bone in %* jaws%*}} {2};
             #line oneshot #action {%*the wound and allow %*} {#line gag;};
+		#delay {clear_action_d8ea0e} {#unaction {%*the wound and allow %*}} {2};
             #line oneshot #action {%*dreaded infection of rabies!$} {#line gag;};
+		#delay {clear_action_b5b681} {#unaction {%*dreaded infection of rabies!$}} {2};
         } {1};
 
         #action {Thunder rolls across the land as %*} {
             #line gag;
             #line oneshot #action {%*In a flash of brilliance,%*} {#line gag;};
+		#delay {clear_action_20d3eb} {#unaction {%*In a flash of brilliance,%*}} {2};
             #line oneshot #action {%*forming into a radiant scythe of%*} {#line gag;};
+		#delay {clear_action_9c58d9} {#unaction {%*forming into a radiant scythe of%*}} {2};
             #line oneshot #action {%*with an unholy scream of rage$} {#line gag;};
+		#delay {clear_action_99ea33} {#unaction {%*with an unholy scream of rage$}} {2};
             #line oneshot #action {%*The celestial blade$} {#line gag;};
+		#delay {clear_action_519920} {#unaction {%*The celestial blade$}} {2};
             #line oneshot #action {%*forth part of the$} {#line gag;};
+		#delay {clear_action_06cb8d} {#unaction {%*forth part of the$}} {2};
             #line oneshot #action {%*as the scythe then sparkles$} {#line gag;};
+		#delay {clear_action_b0f7b7} {#unaction {%*as the scythe then sparkles$}} {2};
             #line oneshot #action {%*nothingess.$} {#line gag;};
+		#delay {clear_action_c6dcc8} {#unaction {%*nothingess.$}} {2};
         } {1};
 
         #action {^The razor-sharp beaks of the winged creatures %*!} {
@@ -288,8 +299,11 @@
         #NOP -- Maim;
         #action {You swallow the reagents and howl at the night moon above.} {
             #line oneshot #action {Rearing back, you lunge at your enemy, viciously shredding apart the} {#line gag};
+		#delay {clear_action_278160} {#unaction {Rearing back, you lunge at your enemy, viciously shredding apart the}} {2};
             #line oneshot #action {legs of your quarry!  Tendons and ligaments snap horribly at the} {#line gag};
+		#delay {clear_action_ff2dba} {#unaction {legs of your quarry!  Tendons and ligaments snap horribly at the}} {2};
             #line oneshot #action {feral assault!} {#line gag};
+		#delay {clear_action_ded6d1} {#unaction {feral assault!}} {2};
         } {2};
 
         #NOP -- Shapeshift;
@@ -312,6 +326,7 @@
         #action {A bright blue light engulfs your body as you use psionic energy to repair} {
             #line gag;
             #line oneshot #action {damage to your cells.} {#line gag};
+		#delay {clear_action_dd1582} {#unaction {damage to your cells.}} {2};
         } {2};
         #gag {^You are a blur of motion and attack again!$};
         #gag {^You become a blur of motion allowing you to attack more often.$};
@@ -320,6 +335,7 @@
         #action {Your psionic energy is replenished as you painfully drain your body of} {
             #line gag;
             #line oneshot #action {life.} {#line gag};
+		#delay {clear_action_79ab8a} {#unaction {life.}} {2};
         } {2};
 
         #nop combat presience;

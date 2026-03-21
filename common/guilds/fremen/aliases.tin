@@ -51,6 +51,7 @@
                 } {1};
                 #delay 4 {.calcLJDonate $tmpTotal;#unaction {eyes glow bright green upon the fallen}};
             } {1};
+		#delay {clear_action_243267} {#unaction {The Wisdom Board containing %*}} {2};
         #var go_donate_water 1;
     };
 };
@@ -77,9 +78,11 @@
                     #var go_donate_water 0;
                     #if {$sewer_winch} {
                         #line oneshot #action {Dead End (s)} {#delay 4 {-sewers}};
+		#delay {clear_action_3f1fdb} {#unaction {Dead End (s)}} {2};
                         go bank;deposit all;touch winch rune
                     } {#map run $donate_go_back};
                 } {1};
+		#delay {clear_action_7989eb} {#unaction {A rocky plateau (w,board spacecraft)}} {2};
             };
         };
     };
@@ -117,6 +120,7 @@
         };
         #class {fremen_skills} {kill};
     };
+		#delay {clear_action_0588d8} {#unaction {^Available gxp to spend:  %*       Total gxp spent:  %*}} {2};
 };
 
 #alias {fskills-cheap} {

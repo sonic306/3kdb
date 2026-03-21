@@ -54,6 +54,7 @@
             #var deathReport[mob_killer] %%1;
             _killerCheckIgnore;
         };
+        #delay {clear_kb_action} {#unaction {^%* dealt the killing blow to %*.}} {0.2};
 
         #if !$fakeKill {
             #if {$corpsetrigKB} {

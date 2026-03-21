@@ -1,6 +1,20 @@
-#class {player_aliases} {kill}
-#class {player_aliases} {open}
+#class {player_aliases_mage} {kill}
+#class {player_aliases_mage} {open}
 
 #NOP -- Player specific aliases;
+#alias {gagson} {
+	gag+ hpbar;
+	gag+ combat_generic;
+	gag+ combat_guild;
+	gag+ combat_items;
+	gag+ combat_area;
+};
 
-#class {player_aliases} {close}
+#alias {setonkill} {
+	corpsetrig+ customonkill;
+	corpsetrig+ delay;
+	corpsetrig+ divvy;
+	corpsetrig+ spellbook;
+};
+
+#class {player_aliases_mage} {close}

@@ -64,7 +64,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
      #showme {};
      #if {&file[]}
      {
-          #regexp {$file[1]} {%d-%d-%d %d:%d:%d}
+          #regex {$file[1]} {%d-%d-%d %d:%d:%d}
           {
                #var date {&1-&2-&3_&4:&5:&6};#system mv tintin-beta.tar.gz archive/${date}_tintin-beta.tar.gz;#showme {};#showme {<ffa>Archiving <afa>tintin-beta.tar.gz<ffa> dated <afa>$date}
           }
@@ -75,7 +75,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
      };
      #if {&exec[]}
      {
-          #regexp {$exec[1]} {%d-%d-%d %d:%d:%d}
+          #regex {$exec[1]} {%d-%d-%d %d:%d:%d}
           {
                #var date {&1-&2-&3_&4:&5:&6};#system mv tt/src/tt++ archive/bin/${date}_tt++;#showme {<ffa>Archiving <afa>tt++ executable   <ffa> dated <afa>$date};
           }
@@ -95,7 +95,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
      #script {file} {ls -l --time-style=full-iso tintin-beta.tar.gz};
      #if {&file[]}
      {
-          #regexp {$file[1]} {%d-%d-%d %d:%d:%d}
+          #regex {$file[1]} {%d-%d-%d %d:%d:%d}
           {
                #var date {&1-&2-&3_&4:&5:&6};#system cp tintin-beta.tar.gz archive/${date}_tintin-beta.tar.gz;#showme {};#showme {<ffa>Retrieved <afa>tintin-beta.tar.gz<ffa> dated <afa>$date}
           };
@@ -147,7 +147,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
      #variable history {};
      #foreach {$exec[-20..-1]} {binary}
      {
-          #regexp {$binary} {%d-%d-%d_%d:%d:%d_tt++}
+          #regex {$binary} {%d-%d-%d_%d:%d:%d_tt++}
           {
                #var date {&1-&2-&3 &4:&5:&6};#math count $count + 1;#list history insert 1 {&0};#echo {<afa>%+3s<ffa> - <afa>tt++<ffa> - <afa>%s} {$count} {$date}
           }
@@ -172,7 +172,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
           #math count 0;
           #foreach {$exec[-20..-1]} {binary}
           {
-               #regexp {$binary} {%d-%d-%d_%d:%d:%d_tt++}
+               #regex {$binary} {%d-%d-%d_%d:%d:%d_tt++}
                {
                     #var date {&1-&2-&3 &4:&5:&6};#math count $count + 1;#list history insert 1 {&0};#echo {<afa>%+3s<ffa> - <afa>tt++<ffa> - <afa>%s} {$count} {$date}
                }
@@ -186,7 +186,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
           };
           #else
           {
-               #regexp {$exec[1]} {%d-%d-%d %d:%d:%d}
+               #regex {$exec[1]} {%d-%d-%d %d:%d:%d}
                {
                     #var date {&1-&2-&3 &4:&5:&6};#echo {<afa>%+3s<ffa> - <afa>tt++<ffa> - <afa>%s} {} {$date}
                }
@@ -205,7 +205,7 @@ source code}{<ffa><afa> install<ffa>: install downloaded source code}{<ffa><afa>
                };
                #foreach {$exec[-1..-20]} {binary}
                {
-                    #regexp {$binary} {%d-%d-%d_%d:%d:%d_tt++}
+                    #regex {$binary} {%d-%d-%d_%d:%d:%d_tt++}
                     {
                          #var date {&1-&2-&3 &4:&5:&6};#math count $count - 1;#list history insert 1 {&0};
                     }

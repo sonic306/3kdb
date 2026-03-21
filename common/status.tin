@@ -3,12 +3,15 @@
 
 #alias _status_boot {
     #line oneshot #action {^ |  Current Reboot : #%d} {#var session[boot] %%1};
+		#delay {clear_action_0a0474} {#unaction {^ |  Current Reboot : #%d}} {2};
     #line oneshot #action {^ |  Current Uptime : %* (%*)} {
         #format session[uptime] {%p} {%%1};
     };
+		#delay {clear_action_3e45d3} {#unaction {^ |  Current Uptime : %* (%*)}} {2};
     #line oneshot #action {^ |  Next Reboot in : %* |} {
         #format session[reboot] {%p} {%%1}
     };
+		#delay {clear_action_3736ea} {#unaction {^ |  Next Reboot in : %* |}} {2};
     uptime;
 };
 
@@ -102,6 +105,7 @@
         #list tempStat clear;
         #list tempStat add {{{str} {%%1} {dex} {%%3} {wis} {%%5} {int} {%%7} {con} {%%9} {cha} {%%11}}};
     };
+		#delay {clear_action_fde805} {#unaction {Str: %d%sDex: %d%sWis: %d%sInt: %d%sCon: %d%s Cha: %d}} {2};
 };
 
 #alias _variable_export {

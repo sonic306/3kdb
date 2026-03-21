@@ -119,6 +119,7 @@
         };
         #if {"$mapping" == "on"} {.map_create_exits};
     } {1};
+		#delay {clear_action_7c82ae} {#unaction {^>$}} {2};
 } {2};
 
 #action {^-D-_%*\n%a-D-_$} {
@@ -150,7 +151,7 @@
     #if {$bot[active] && !$bot[paused] && $bot[walk]} {
         #if {$collector[items]} {
             #foreach $item_grab_list[%*] item {
-                #regexp {"$item_long"} {$item[long]} {
+                #regex {"$item_long"} {$item[long]} {
                     #$item_number get $item[target];
                     #if {"$guild" == "bard"} {
                         identify $item[target];
@@ -348,7 +349,7 @@
             #if $bot[active] {
                 #foreach $bot[mobs][%*] botmob {
                     #if !$bot[foundmob] {
-                        #regexp {$mob[long]} {%i$botmob[long]} {
+                        #regex {$mob[long]} {%i$botmob[long]} {
                             #if $debug[bot] {#echo {<cfa>DEBUG BOT: MOB FOUND $mob[long] MATCHED $botmob[long]}};
                             #if $debug[bot] {#echo {<cfa>DEBUG BOT: SETTING TARGET TO $botmob[target]}};
                             #var bot[foundmob] 1;

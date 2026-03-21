@@ -106,6 +106,7 @@
         put all in bag $tmpBag
     };
     #line oneshot #action {You put %* in %*.} {#var bagsFull 0};
+		#delay {clear_action_062005} {#unaction {You put %* in %*.}} {2};
     #delay 4 {#if {$collector[items] && $bagsFull} {autocollect}};
 };
 
@@ -147,8 +148,11 @@
         #if {"$guild" == "necromancer"} {
             #NOP -- Gag these if you don't yet have chest;
             #line oneshot #gag {^There is no reason to 'retrieve' here.};
+		#delay {clear_gag_c78e31} {#ungag {^There is no reason to 'retrieve' here.}} {2};
             #line oneshot #gag {^That is not here or it is uninteresting. (chest?)};
+		#delay {clear_gag_d2400c} {#ungag {^That is not here or it is uninteresting. (chest?)}} {2};
             #line oneshot #gag {^There is no reason to 'deliver' here.};
+		#delay {clear_gag_2a1c1e} {#ungag {^There is no reason to 'deliver' here.}} {2};
 
             #NOP -- Track decanters for bloodfuse;
             #var my[necromancer][decanters][empty] 0;
@@ -238,7 +242,7 @@
     #var action_found 0;
     #var actions_stacked 1;
     #foreach $actionStack[%*] action {
-        #regexp {"$tmp[name]"} {"$action[name]"} {
+        #if {"$tmp[name]" == "$action[name]"} {
             #var action_found 1;
         };
     };
@@ -279,6 +283,7 @@
         put all in box;
         go morgue;
     } {1};
+		#delay {clear_action_dee296} {#unaction {Byron's Treetop Gambling Emporium (d)}} {2};
 
     #line oneshot #action {Pinnacle Morgue (n)} {
         donate all;
@@ -288,6 +293,7 @@
             #var bot[paused] 0;
         };
     } {1};
+		#delay {clear_action_d98ceb} {#unaction {Pinnacle Morgue (n)}} {2};
 };
 
 
@@ -300,11 +306,13 @@
         qtrance {unkeep flask/put flask in box>50};
         go necro_box;
     } {1};
+		#delay {clear_action_778fad} {#unaction {The Manager's Office (s,sw)}} {2};
 
     #line oneshot #action {Theela the Necromancer (moral).} {
         #10 donate all;
         go necro_corpse;
     } {1};
+		#delay {clear_action_93e578} {#unaction {Theela the Necromancer (moral).}} {2};
 
     #line oneshot #action {Duncan, Keeper of the Dead.} {
         unwrap all;
@@ -326,6 +334,7 @@
         #delay 10 {#map run $donate_go_back};
         #delay 20 {#var bot[paused] 0;};
     } {1};
+		#delay {clear_action_e23748} {#unaction {Duncan, Keeper of the Dead.}} {2};
 };
 
 #alias {sell_catacombs} {
@@ -341,6 +350,7 @@
     #line oneshot #action {%* says: You do not have a %*.$} {
         #list items filter {} {%%2};
     };
+		#delay {clear_action_d8dec0} {#unaction {%* says: You do not have a %*.$}} {2};
     #16 sell chainmail;
     go shop4;
     #16 sell chainmail;
@@ -497,11 +507,17 @@
         
         #NOP -- Gag spam;
         #line oneshot #gag {^That is not here or it is uninteresting. (cooler?)};
+		#delay {clear_gag_9ce7ed} {#ungag {^That is not here or it is uninteresting. (cooler?)}} {2};
         #line oneshot #gag {^You find nothing of interest.};
+		#delay {clear_gag_3d3e6a} {#ungag {^You find nothing of interest.}} {2};
         #line oneshot #gag {^Perform touch at whom?};
+		#delay {clear_gag_3f3381} {#ungag {^Perform touch at whom?}} {2};
         #line oneshot #gag {^There is no reason to '(powers' here.};
+		#delay {clear_gag_9366ff} {#ungag {^There is no reason to '(powers' here.}} {2};
         #line oneshot #gag {^There is no reason to 'spellDmg-clear' here.};
+		#delay {clear_gag_0edea9} {#ungag {^There is no reason to 'spellDmg-clear' here.}} {2};
         #line oneshot #gag {^There is no reason to 'summonDmg-clear' here.};
+		#delay {clear_gag_f860c1} {#ungag {^There is no reason to 'summonDmg-clear' here.}} {2};
     };
     
     #NOP -- Initialize screen after everything is loaded;

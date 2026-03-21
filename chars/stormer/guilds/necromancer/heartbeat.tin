@@ -14,8 +14,13 @@
     #if !$idle_flag {
         #if {$make_con && $my[necromancer][worth] < 125} {con 50;#var make_con 0;#delay 2 {#var make_con 1}};
 
-        #if {$corpses[total] > 1 && $my[gp1][percent] < .3 && $my[gp1][percent] > 0.01 } {
-            #delay {absorb} {mu 10} {0.5};
+        #if {$corpses[total] > 1 && $my[gp1][percent] <= .3 && $my[gp1][percent] > 0.01 } {
+            #if {!$mask_status} {
+				#delay {absorb} {mu 18} {0.5};
+			};
+			#else {
+				#delay {absorb} {mu 9} {0.5};
+			};
         };
     
         #NOP -- Actions to only attempt once/round go in this section;

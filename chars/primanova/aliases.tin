@@ -2,5 +2,53 @@
 #class {player_aliases} {open}
 
 #NOP -- Player specific aliases;
+#alias {setup_gc} {
+    cast greater contingency as major globe#cast major globe;
+    cast greater contingency as stoneskin#cast stoneskin;
+    cast greater contingency as shield#cast magnificent shield;
+    cast greater contingency as armor#cast armor;
+};
+
+#alias {setup_gc2} {
+    cast greater contingency as mantle#100#cast mantle;
+    cast greater contingency as prismatic sphere#100#cast prismatic sphere;
+};
+
+#alias {setup_c1} {
+    cast contingency as armor#cast armor;
+    cast contingency as shield#cast shield;
+};
+
+#alias {clear_c} {
+    #5 {cast remove contingency as 1};
+};
+
+#alias {clear_gc} {
+    #5 {cast remove greater contingency as 1};
+};
+
+#alias {magestrat} {
+    strategy-clear;
+    strategy slow;
+    strategy super_er;
+    strategy golem_defend;
+    strategy summon_mf;
+    strategy super_sub;
+    #NOP strategy rolm;
+    #NOP strategy no_ash;
+};
+
+#alias {mons} {
+    #4 cast monster summoning %0;
+    #var active_mon 1;
+}
+
+#alias {3kr} {
+    3kReport
+};
+
+#alias {customcorpsetrig} {
+	corpsemanager;
+};
 
 #class {player_aliases} {close}

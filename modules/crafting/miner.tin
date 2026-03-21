@@ -102,14 +102,17 @@
 	#action {^You have found nothing.} {_step_room} {1};
 	#action {^You are not skilled enough to mine this.} {_step_room} {1};
 	#action {^You should try to mine this instead.} {mine} {1};
-	#action {^You cannot spelunk while you're being attacked!} {#line oneshot #action {dealt the killing blow} {corpse_trig;spelunk} {1};};
-	#action {^You cannot mine while you're being attacked!} {#line oneshot #action {dealt the killing blow} {corpse_trig;mine} {1};};
+	#action {^You cannot spelunk while you're being attacked!} {#line oneshot #action {dealt the killing blow} {corpse_trig;spelunk} {1};
+		#delay {clear_action_925c72} {#unaction {dealt the killing blow}} {2};};
+	#action {^You cannot mine while you're being attacked!} {#line oneshot #action {dealt the killing blow} {corpse_trig;mine} {1};
+		#delay {clear_action_925c72} {#unaction {dealt the killing blow}} {2};};
 	#action {^You have disturbed %*} {
 		#undelay minewalk;
 		#line oneshot #action {dealt the killing blow} {
 			corpse_trig;
 			spelunk;
 		} {1};
+		#delay {clear_action_925c72} {#unaction {dealt the killing blow}} {2};
 	} {1};
 
 	#alias {_check_mine} {spelunk};

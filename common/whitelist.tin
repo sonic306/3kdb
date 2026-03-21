@@ -72,6 +72,7 @@
             };
         };
     };
+		#delay {clear_action_86a800} {#unaction {Total XP gain since party creation :}} {2};
 };
 
 #alias whitelist-room {

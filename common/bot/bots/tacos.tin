@@ -28,12 +28,14 @@
             #if !$incombat {e}
         } {4};
     } {1};
+		#delay {clear_action_5697c1} {#unaction {>x< DEATH TACO FLOOR >x< (e,w)}} {2};
     #line oneshot #action {>x< DEATH TACO FLOOR >x< (w)} {
         #map goto 6518;
         #ticker taco_go_back {
             #if !$incombat {climb up;#delay 2 {go $temp_go_back}};
         } {4};
     } {1};
+		#delay {clear_action_d8fb14} {#unaction {>x< DEATH TACO FLOOR >x< (w)}} {2};
     #class taco_ports close;
 };
 

@@ -178,6 +178,7 @@
             #format my[xp] {%d} {%%1};
             #unaction {^You have %* total xp.$};
         } {2};
+		#delay {clear_action_0212a8} {#unaction {^You have %* total xp.$}} {2};
         xp;
         #if {"$draw[status][active]" == "on"} {#delay 2 {_caption_data_bot}};
     } {
@@ -205,6 +206,7 @@
             };
             #unaction {^You have %* total xp.$};
         };
+		#delay {clear_action_0212a8} {#unaction {^You have %* total xp.$}} {2};
         xp;
         #if {"$draw[status][active]" == "on"} {#delay 2 {_caption_data_bot}};
     };
@@ -212,6 +214,7 @@
     #line oneshot #action {^At this rate you will level in %*} {
         #line gag;
     } {2};
+		#delay {clear_action_1bc65a} {#unaction {^At this rate you will level in %*}} {2};
 };
 
 #alias update_coins {

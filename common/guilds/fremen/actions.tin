@@ -131,13 +131,16 @@
         #format my[literjons][max] {%d} {%%1};
         #format my[literjons][carrying] {%d} {%%2};
     } {1};
+		#delay {clear_action_e70a2e} {#unaction {Max:%* Contains:%*}} {2};
     #line oneshot #action {Filled:%* Drying:%*} {
         #format my[literjons][filled] {%d} {%%1};
         #format my[literjons][drying] {%d} {%%2};
     } {1};
+		#delay {clear_action_d02412} {#unaction {Filled:%* Drying:%*}} {2};
     #line oneshot #action {Empty:%*} {
         #format my[literjons][empty] {%d} {%%1};
     } {1};
+		#delay {clear_action_98280a} {#unaction {Empty:%*}} {2};
 } {2};
 
 

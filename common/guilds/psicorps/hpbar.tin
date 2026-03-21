@@ -35,6 +35,7 @@
         #var powers_string <ebc>NONE<088>;
         #var my[powers] {}; 
     };
+		#delay {clear_action_6a6b91} {#unaction {^POW: $}} {2};
     
     #line oneshot #action {^POW: [[ %* ]]$} {
         #NOP -- Unaction the last power check _use_power in heartbeat.tin so we're only notified on a new round;
@@ -51,6 +52,7 @@
             _hpbar_handle_powers {$powers};
         };
     };
+		#delay {clear_action_3547ec} {#unaction {^POW: [[ %* ]]$}} {2};
 } {2};
 
 #alias {_hpbar_handle_powers} {

@@ -17,7 +17,7 @@
     #list speedruns index name;
     #list speedruns sort;
     #foreach $speedruns[%*] index {
-        #regexp {"%1"} {"$index[type]"} {
+        #if {"%1" == "$index[type]"} {
             #var tempflag 1;
             format_speedrun {     $index[name]} {$index[desc]};
         }

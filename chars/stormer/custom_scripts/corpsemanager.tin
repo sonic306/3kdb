@@ -43,14 +43,17 @@
 				};
 				#else {qtrance preserve remains/get preservation;};
 			};
-				
 		};
 		#if {"$guild" == "fremen"} {
-			#if {$corpses[coffin] < 38} {wrap};
+			#if {$corpses[coffin] < $coffinmax} {wrap};
 			#elseif {$corpses[coffin] >= 38 && $my[gp1][current] < 3000} {reclaim};
 			#elseif {$corpses[coffin] >= 38 && $my[gp1][current] > 3000} {fai};
-		}
-	}	
+		};
+		#if {"$guild" == "mage"} {
+			#if {$corpses[coffin] < 10} {wrap;};
+			#ELSEIF {$corpses[coffin] == 10} {cast spelltap;cast corpse explosion;};
+		};
+	};
 };
 
 #action {{Coffin\s+\[\s+\d+\/\s+(\d+).*}} {

@@ -241,7 +241,9 @@
 #action {  --> %*\n%a-hp-} {
     #if $gags[hpbar] {
 		#line oneshot #gag {  --> %*};
+		#delay {clear_gag_89145d} {#ungag {  --> %*}} {2};
 		#line oneshot #gag { %*-hp-};
+		#delay {clear_gag_5eec0e} {#ungag { %*-hp-}} {2};
 	};
     #list summonList clear;
     #format summon1 {%p} {%1};

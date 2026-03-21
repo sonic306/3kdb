@@ -20,7 +20,8 @@
 			#if {$bot[paused]} {#line oneshot #action {-i-General Storage box %*.} {
 				fold reality;
 				#delay 4 {#var bot[paused] 0}
-			} {1}};
+			} {1}
+		#delay {clear_action_208c9b} {#unaction {-i-General Storage box %*.}} {2};};
 			#var psi_donate 0;
 		};
 	};

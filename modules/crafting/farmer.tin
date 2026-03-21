@@ -5448,12 +5448,14 @@
         #line oneshot #action {The ferryman says: Well, we're here!  Good luck with your travels.} {
             go farm_land13
         }
+		#delay {clear_action_bc84ef} {#unaction {The ferryman says: Well, we're here!  Good luck with your travels.}} {2};
     };
     #else {
         n;w;w;s;w;w;w;portal;w;w;w;w;w;w;w;s;s;s;s;s;s;s;s;e;charter serinth;
         #line oneshot #action {The ferryman says: Well, we're here!  Good luck with your travels.} {
             se;se;se;e;s;s;s;s;s;w;s;s;s;s;e;se;se;s;grasp rake
         }
+		#delay {clear_action_bc84ef} {#unaction {The ferryman says: Well, we're here!  Good luck with your travels.}} {2};
     }
 };
 
@@ -5463,12 +5465,14 @@
         #line oneshot #action {The ferryman says: Well, here you are.  I hope that you had a good time} {
             go farming
         }
+		#delay {clear_action_f0c971} {#unaction {The ferryman says: Well, here you are.  I hope that you had a good time}} {2};
     };
     #else {
         wash hands;n;nw;nw;n;w;n;n;n;n;n;e;n;n;n;w;nw;nw;nw;board ferry;
         #line oneshot #action {The ferryman says: Well, here you are.  I hope that you had a good time} {
             w;n;n;n;n;n;n;n;n;e;e;e;e;e;e;e;portal;e;e;e;n;e;n;n;n;nw;n;ne;nw
         }
+		#delay {clear_action_f0c971} {#unaction {The ferryman says: Well, here you are.  I hope that you had a good time}} {2};
     }
 };
 
@@ -5479,12 +5483,14 @@
         #line oneshot #action {forms of life, but beyond the tracks, nothing else appears.} {
             go farm_land14
         }
+		#delay {clear_action_492f01} {#unaction {forms of life, but beyond the tracks, nothing else appears.}} {2};
     };
     #else {
         se;sw;s;se;s;e;n;e;n;shuttle;board fantasy;portal;e;e;e;e;e;e;e;e;e;e;e;e;e;e;e;leave;e;ne;ne;e;e;ne;ne;ne;e;ne;ne;n;
         #line oneshot #action {world which has long since been extinct, destroyed, forgotten.} {
             portal;#delay {6} {se;sw;s;e;se;se;s;grasp rake}
         }
+		#delay {clear_action_2687fd} {#unaction {world which has long since been extinct, destroyed, forgotten.}} {2};
     }
 };
 
@@ -5494,12 +5500,14 @@
         #line oneshot #action {world which has long since been extinct, destroyed, forgotten.} {
             go farming
         }
+		#delay {clear_action_2687fd} {#unaction {world which has long since been extinct, destroyed, forgotten.}} {2};
     };
     #else {
         wash hands;n;nw;nw;w;n;ne;nw;portal;
         #line oneshot #action {forms of life, but beyond the tracks, nothing else appears.} {
             portal;#delay {6} {s;s;s;portal;e;e;e;n;e;n;n;n;nw;n;ne;nw}
         }
+		#delay {clear_action_492f01} {#unaction {forms of life, but beyond the tracks, nothing else appears.}} {2};
     }
 };
 
