@@ -95,7 +95,7 @@
 } {2};
 #action {In ecstasy, your body contorts into a sleek, beastly form.} {#var my[necromancer][altered] 1} {2};
 #action {You are already altered into %* form %w.}{#var my[necromancer][altered] 1} {2};
-#action {You return to your normal were form.}{#var my[necromancer][altered] 1} {2};
+#action {You return to your normal were form.}{#var my[necromancer][altered] 0} {2};
 #action {You alter into the embodimental spirit of the %*!} {#var my[necromancer][altered] 1} {2};
 #action {^You call forth the great change within your body.} {#var my[necromancer][altered] 1} {2};
 #action {You alter back to your normal, human form.}{#var my[necromancer][altered] 0} {2};
@@ -259,7 +259,7 @@
 
 #action {^You drink the glowing blood, then hurl the decanter to the ground.} {
     #math my[necromancer][decanters][powered] {$my[necromancer][decanters][powered] - 1};
-    @max{#math my[necromancer][bloodfuse] {$my[necromancer][bloodfuse] - 1};0};
+    #if {$my[necromancer][bloodfuse] > 0} {#math my[necromancer][bloodfuse] {$my[necromancer][bloodfuse] - 1}};
 } {2};
 
 

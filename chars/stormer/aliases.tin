@@ -18,7 +18,7 @@
 #alias {gw} {
     #switch {"%0"} {
         #case {"juggernaut"} {reflex stop;gagsoff;gswap juggernaut;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap juggernaut}};
-        #case {"knight"} {reflex stop;gagsoff;gswap mage;#delay {6} {get all;keep all;wear all;wield rod;hold rock;hold tome;get coin;.gswap mage}};
+        #case {"knight"} {reflex stop;gagsoff;gswap knight;#delay {6} {get all;keep all;wear all;wield rod;hold rock;hold tome;get coin;.gswap knight}};
         #case {"elemental"} {reflex stop;gagsoff;gswap elemental;#delay {6} {get all;keep all;wear all;hold rock;hold tome;get coin;.gswap elemental}};
         #case {"gentech"} {reflex stop;gagsoff;gswap gentech;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap gentech}};
         #case {"fremen"} {reflex stop;gagsoff;gswap fremen;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap fremen}};
