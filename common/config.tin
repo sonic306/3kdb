@@ -121,6 +121,10 @@
 		#delay {clear_action_4aa6ce} {#unaction {^Notify off for all.$}} {2};
     mka-on;
     mka-clear;
+
+    #NOP -- Read some files that need to be read in once for some reason;
+    #read common/themes.tin;
+    #read common/3kReport.tin;
 	#echo {Setup successful!};
 };
 
