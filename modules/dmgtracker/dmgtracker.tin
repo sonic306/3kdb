@@ -313,9 +313,9 @@ dreset;
         #local _fmt {};
         #format _fmt {%g} {$_rcvTotal};
         #if {$_rcvHits == 1} {
-            #echo {<f55>[RCV]:<088> <fcc>$_rcvMob<088> hit you for <faa>$_fmt<088> damage!};
+            #echo {<faa>[RCV]:<088> <fcc>$_rcvMob<088> hit you for <faa>$_fmt<088> damage!};
         } {
-            #echo {<f55>[RCV]:<088> <fcc>$_rcvMob<088> hit you <fff>$_rcvHits<088> times for <faa>$_fmt<088> total damage!};
+            #echo {<faa>[RCV]:<088> <fcc>$_rcvMob<088> hit you <fff>$_rcvHits<088> times for <faa>$_fmt<088> damage!};
         };
         #var _rcvMob {};
         #var _rcvHits 0;
