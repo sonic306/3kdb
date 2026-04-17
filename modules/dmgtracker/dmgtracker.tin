@@ -303,9 +303,26 @@ dreset;
 #action {^%* hits you for %d damage!$} {
     #local dmgAmount {};
     #format dmgAmount {%d} {%2};
-    #format dmgDisplay {%g} {$dmgAmount};
     #line gag;
-    #echo {%1 hits you for $dmgDisplay damage!};
+    #if {"${incomingDmg[%1][hits]}" == ""} {
+        #var incomingDmg[%1][hits] 0;
+        #var incomingDmg[%1][total] 0;
+    };
+    #math incomingDmg[%1][hits] {$incomingDmg[%1][hits] + 1};
+    #math incomingDmg[%1][total] {$incomingDmg[%1][total] + $dmgAmount};
+    #delay {incomingDmgFlush} {
+        #foreach *incomingDmg[] _dmgMob {
+            #local _hits {$incomingDmg[$_dmgMob][hits]};
+            #local _dmgFmt {};
+            #format _dmgFmt {%g} {$incomingDmg[$_dmgMob][total]};
+            #if {$_hits == 1} {
+                #echo {<f55>[RCV]:<088> <fcc>$_dmgMob<088> hit you for <faa>$_dmgFmt<088> damage!};
+            } {
+                #echo {<f55>[RCV]:<088> <fcc>$_dmgMob<088> hit you <fff>$_hits<088> times for <faa>$_dmgFmt<088> total damage!};
+            };
+        };
+        #var incomingDmg {};
+    } {0.2};
 } {2};
 
 #NOP -- If you've just conjured undeads with necromancer, ignore those;
