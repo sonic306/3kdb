@@ -1,7 +1,6 @@
 #class {deadman} {open}
 
-#format deadmanIdleTimeout {%d} {$deadmanIdleTimeout};
-#if {"$deadmanIdleTimeout" == "0"} {#var deadmanIdleTimeout 28800};
+#var deadmanIdleTimeout 28800;
 
 #nop -- Double-enter confirmation for custom deadman+ actions (same pattern as corpsetrig+);
 #var deadmanCustomActionConfirmToggle 1;
