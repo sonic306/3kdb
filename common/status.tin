@@ -165,10 +165,10 @@
     #var deadmanIdleTimeout $xdeadmanIdleTimeout;
     #format {_dm_import_int} {%d} {$deadmanIdleTimeout};
     #if {"$deadmanIdleTimeout" == "" || "$deadmanIdleTimeout" == "xdeadmanIdleTimeout"} {
-        #var deadmanIdleTimeout 900;
+        #var deadmanIdleTimeout 28800;
         #var deadman_armed 1;
     } {
-        #if {$_dm_import_int <= 0} {#var deadmanIdleTimeout 900};
+        #if {$_dm_import_int <= 0} {#var deadmanIdleTimeout 28800};
     };
     #var deadmanTimeoutActions $xdeadmanTimeoutActions;
 
