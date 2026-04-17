@@ -41,6 +41,8 @@
 				#math my[hp][change] {$_mip_num - $my[hp][current]};
 				#VAR {my[hp][current]} {$_mip_num};
 				#math my[hp][percent] {1.00 * $my[hp][current] / $my[hp][max]};
+				#if {$my[hp][change] < 0} {#math _rcvHpLost {$_rcvHpLost - $my[hp][change]}};
+				#if {$my[hp][change] > 0} {#math _rcvHeal {$_rcvHeal + $my[hp][change]}};
 			};
 		};
 		#NOP B = Hit Points maximum;

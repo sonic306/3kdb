@@ -303,6 +303,8 @@ dreset;
 #var _rcvMob {};
 #var _rcvHits 0;
 #var _rcvTotal 0;
+#var _rcvHpLost 0;
+#var _rcvHeal 0;
 
 #action {%* hits you for %d damage!} {
     #line gag;
@@ -310,16 +312,34 @@ dreset;
     #math _rcvHits {$_rcvHits + 1};
     #math _rcvTotal {$_rcvTotal + %2};
     #delay {incomingDmgFlush} {
-        #local _fmt {};
-        #format _fmt {%g} {$_rcvTotal};
-        #if {$_rcvHits == 1} {
-            #echo {<faa>[RCV]:<088> <ffa>$_rcvMob<088> <fff>hit you for<088> <faa>$_fmt<088> <fff>damage!<088>};
+        #local _dmgFmt {};
+        #local _lostFmt {};
+        #local _healFmt {};
+        #local _suffix {};
+        #format _dmgFmt {%g} {$_rcvTotal};
+        #format _lostFmt {%g} {$_rcvHpLost};
+        #format _healFmt {%g} {$_rcvHeal};
+        #if {$_rcvHpLost > 0 && $_rcvHeal > 0} {
+            #format _suffix {} {<fff>{ <faa>-$_lostFmt<fff> / <afa>+$_healFmt<fff> }<088>};
         } {
-            #echo {<faa>[RCV]:<088> <ffa>$_rcvMob<088> <fff>hit you<088> <fff>$_rcvHits<088> <fff>times for<088> <faa>$_fmt<088> <fff>damage!<088>};
+            #if {$_rcvHpLost > 0} {
+                #format _suffix {} {<fff>{ <faa>-$_lostFmt<fff> }<088>};
+            } {
+                #if {$_rcvHeal > 0} {
+                    #format _suffix {} {<fff>{ <afa>+$_healFmt<fff> }<088>};
+                };
+            };
+        };
+        #if {$_rcvHits == 1} {
+            #echo {<faa>[RCV]:<088> <ffa>$_rcvMob<088> <fff>hit you for<088> <faa>$_dmgFmt<088> <fff>damage<088> $_suffix};
+        } {
+            #echo {<faa>[RCV]:<088> <ffa>$_rcvMob<088> <fff>hit you<088> <fff>$_rcvHits<088> <fff>times for<088> <faa>$_dmgFmt<088> <fff>damage<088> $_suffix};
         };
         #var _rcvMob {};
         #var _rcvHits 0;
         #var _rcvTotal 0;
+        #var _rcvHpLost 0;
+        #var _rcvHeal 0;
     } {0.2};
 } {2};
 
