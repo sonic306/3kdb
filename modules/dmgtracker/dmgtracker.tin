@@ -300,27 +300,26 @@ dreset;
     } {.3};
 };
 
-#var _rcvMob {};
-#var _rcvHits 0;
-#var _rcvTotal 0;
+#var _rcvData {};
+#list _rcvMobs clear;
 #var _rcvHpLost 0;
 #var _rcvHeal 0;
 
 #action {%* hits you for %d damage!} {
     #line gag;
-    #if {"$_rcvMob" == "" || "$_rcvMob" == "%1"} {
-        #var _rcvMob {%1};
+    #list _rcvMobs find {%1} {_rcvMobIdx};
+    #if {!$_rcvMobIdx} {
+        #list _rcvMobs add {%1};
+        #var _rcvData[%1][hits] {1};
+        #var _rcvData[%1][total] {%2};
     } {
-        #var _rcvMob {Multiple enemies};
+        #math _rcvData[%1][hits] {$_rcvData[%1][hits] + 1};
+        #math _rcvData[%1][total] {$_rcvData[%1][total] + %2};
     };
-    #math _rcvHits {$_rcvHits + 1};
-    #math _rcvTotal {$_rcvTotal + %2};
     #delay {incomingDmgFlush} {
-        #local _dmgFmt {};
         #local _lostFmt {};
         #local _healFmt {};
-        #local _suffix {};
-        #format _dmgFmt {%g} {$_rcvTotal};
+        #var _suffix {};
         #format _lostFmt {%g} {$_rcvHpLost};
         #format _healFmt {%g} {$_rcvHeal};
         #if {$_rcvHpLost > 0 && $_rcvHeal > 0} {
@@ -334,14 +333,24 @@ dreset;
                 };
             };
         };
-        #if {$_rcvHits == 1} {
-            #echo {<faa>[RCV]:<088> <ffa>$_rcvMob<088> <fff>hit you for<088> <faa>$_dmgFmt<088> <fff>damage<088> $_suffix};
-        } {
-            #echo {<faa>[RCV]:<088> <ffa>$_rcvMob<088> <fff>hit you<088> <fff>$_rcvHits<088> <fff>times for<088> <faa>$_dmgFmt<088> <fff>damage<088> $_suffix};
+        #var _totalMobs {&_rcvMobs[]};
+        #loop 1 $_totalMobs _rcvLoopIdx {
+            #var _rcvCurMob {$_rcvMobs[$_rcvLoopIdx]};
+            #local _dmgFmt {};
+            #format _dmgFmt {%g} {$_rcvData[$_rcvCurMob][total]};
+            #if {$_rcvLoopIdx == $_totalMobs} {
+                #var _lineSuffix {$_suffix};
+            } {
+                #var _lineSuffix {};
+            };
+            #if {$_rcvData[$_rcvCurMob][hits] == 1} {
+                #echo {<faa>[RCV]:<088> <ffa>$_rcvCurMob<088> <fff>hit you for<088> <faa>$_dmgFmt<088> <fff>damage<088> $_lineSuffix};
+            } {
+                #echo {<faa>[RCV]:<088> <ffa>$_rcvCurMob<088> <fff>hit you<088> <fff>$_rcvData[$_rcvCurMob][hits]<088> <fff>times for<088> <faa>$_dmgFmt<088> <fff>damage<088> $_lineSuffix};
+            };
         };
-        #var _rcvMob {};
-        #var _rcvHits 0;
-        #var _rcvTotal 0;
+        #var _rcvData {};
+        #list _rcvMobs clear;
         #var _rcvHpLost 0;
         #var _rcvHeal 0;
     } {0.2};
