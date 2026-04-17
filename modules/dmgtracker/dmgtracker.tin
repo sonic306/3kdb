@@ -320,13 +320,13 @@ dreset;
         #format _lostFmt {%g} {$_rcvHpLost};
         #format _healFmt {%g} {$_rcvHeal};
         #if {$_rcvHpLost > 0 && $_rcvHeal > 0} {
-            #format _suffix {} {<fff>{ <faa>-$_lostFmt<fff> / <afa>+$_healFmt<fff> }<088>};
+            #var _suffix {<fff>{ <faa>-$_lostFmt<fff> / <afa>+$_healFmt<fff> }<088>};
         } {
             #if {$_rcvHpLost > 0} {
-                #format _suffix {} {<fff>{ <faa>-$_lostFmt<fff> }<088>};
+                #var _suffix {<fff>{ <faa>-$_lostFmt<fff> }<088>};
             } {
                 #if {$_rcvHeal > 0} {
-                    #format _suffix {} {<fff>{ <afa>+$_healFmt<fff> }<088>};
+                    #var _suffix {<fff>{ <afa>+$_healFmt<fff> }<088>};
                 };
             };
         };
