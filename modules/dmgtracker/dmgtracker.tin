@@ -300,32 +300,26 @@ dreset;
     } {.3};
 };
 
-#action {^%* hits you for %d damage!$} {
-    #local dmgAmount {};
-    #local _mobKey {};
-    #format dmgAmount {%d} {%2};
-    #format _mobKey {%r} {%1}{ }{_};
+#var _rcvMob {};
+#var _rcvHits 0;
+#var _rcvTotal 0;
+
+#action {%* hits you for %d damage!} {
     #line gag;
-    #if {"${incomingDmg[$_mobKey][hits]}" == ""} {
-        #var incomingDmg[$_mobKey][hits] 0;
-        #var incomingDmg[$_mobKey][total] 0;
-        #var incomingDmg[$_mobKey][name] {%1};
-    };
-    #math incomingDmg[$_mobKey][hits] {$incomingDmg[$_mobKey][hits] + 1};
-    #math incomingDmg[$_mobKey][total] {$incomingDmg[$_mobKey][total] + $dmgAmount};
+    #var _rcvMob {%1};
+    #math _rcvHits {$_rcvHits + 1};
+    #math _rcvTotal {$_rcvTotal + %2};
     #delay {incomingDmgFlush} {
-        #foreach *incomingDmg[] _dmgKey {
-            #local _hits {$incomingDmg[$_dmgKey][hits]};
-            #local _name {$incomingDmg[$_dmgKey][name]};
-            #local _dmgFmt {};
-            #format _dmgFmt {%g} {$incomingDmg[$_dmgKey][total]};
-            #if {$_hits == 1} {
-                #echo {<f55>[RCV]:<088> <fcc>$_name<088> hit you for <faa>$_dmgFmt<088> damage!};
-            } {
-                #echo {<f55>[RCV]:<088> <fcc>$_name<088> hit you <fff>$_hits<088> times for <faa>$_dmgFmt<088> total damage!};
-            };
+        #local _fmt {};
+        #format _fmt {%g} {$_rcvTotal};
+        #if {$_rcvHits == 1} {
+            #echo {<f55>[RCV]:<088> <fcc>$_rcvMob<088> hit you for <faa>$_fmt<088> damage!};
+        } {
+            #echo {<f55>[RCV]:<088> <fcc>$_rcvMob<088> hit you <fff>$_rcvHits<088> times for <faa>$_fmt<088> total damage!};
         };
-        #var incomingDmg {};
+        #var _rcvMob {};
+        #var _rcvHits 0;
+        #var _rcvTotal 0;
     } {0.2};
 } {2};
 
