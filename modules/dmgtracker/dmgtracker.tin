@@ -308,7 +308,11 @@ dreset;
 
 #action {%* hits you for %d damage!} {
     #line gag;
-    #var _rcvMob {%1};
+    #if {"$_rcvMob" == "" || "$_rcvMob" == "%1"} {
+        #var _rcvMob {%1};
+    } {
+        #var _rcvMob {Multiple enemies};
+    };
     #math _rcvHits {$_rcvHits + 1};
     #math _rcvTotal {$_rcvTotal + %2};
     #delay {incomingDmgFlush} {
