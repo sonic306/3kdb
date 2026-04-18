@@ -347,6 +347,7 @@
 #NOP -------------------------- Misc Steppers ----------------------------------;
 
 #list botlist add {{{file} {findtv} {alias} {findtv} {desc} {Chaos TV Finder} {start_vnum} {196} {loop} {0} {playercheck} {0}}};
+#list botlist add {{{file} {findhall} {alias} {findhall} {desc} {Chaos Puck Finder} {start_vnum} {196} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {findhat} {alias} {findhat} {desc} {Witch's Hat Finder} {start_vnum} {196} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {findevent} {alias} {findevent} {desc} {Event Portal Finder} {start_vnum} {148} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {turkeys_full} {alias} {turkeys} {desc} {Turkey Farm: bok bok} {start_vnum} {27717} {playercheck} {1} {loop} {1}}};
