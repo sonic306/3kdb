@@ -1,3 +1,4 @@
+#class 3kdb_helpers kill;
 #class 3kdb_helpers open;
 
 #act {~\e[%*;%+m[PARTY]%* %w: 3kdb necro help} {
