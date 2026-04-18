@@ -1,6 +1,6 @@
 #class 3kdb_helpers open;
 
-#act {%*;%+m[PARTY]%* %w: 3kdb necro help} {
+#act {~\e[%*;%+m[PARTY]%* %w: 3kdb necro help} {
     #if {!$idle_flag} {
         #delay .2 {
             ptell ---------------------------------------------------;
