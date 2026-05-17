@@ -90,6 +90,7 @@
     #var mob[class] 0;
     #var mob[gremlin] 0;
     #var mob[shred] 0;
+    #var mob[eternal_erad] 0;
 
     #var enemy[last_round] 1;
     #var enemy[round_change] 0;
@@ -212,7 +213,7 @@
 
 
 #NOP -- Guild GXP Trackers;
-#if {"$guild" == "mage" || "$guild" == "monk"} {
+#if {"$guild" == "mage" || "$guild" == "monk" || "$guild" == "elemental"} {
     #NOP -- 30 round rolling gxp average;
     #alias .gxp_t30_add {
         #if {&my[gxp][t30][] > 30} {

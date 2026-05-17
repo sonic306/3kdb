@@ -1,4 +1,5 @@
-#class {mipchatlog} {open}
+#class {mipchatlog} {kill};
+#class {mipchatlog} {open};
 
 #NOP -- Discord Message Sending;
 #NOP -- Update the below with the webhook URL for each particular discord channel;
@@ -119,7 +120,7 @@
 	#NOP Gentech Notify Line;
 		#REGEX {%0} {gnotify~Notify~%*~[Gen-Nofity]: } {#var mipgag 1};
 
-	#IF {$mipgag == 0} {.mipProcessCAA %0}
+	#IF {$mipgag == 0} {.mipProcessCAA %0};
 };
 
 #alias {.handleCommLine} {
@@ -192,21 +193,21 @@
 		#case {"Cyborg Syndicate"}  {#var {commcol} {<128>};#var tmpCommGuild 1};
 
 		#NOP -- Elemental;
-		#case {"EL-75"} 			{#var {commcol} {<178>};#var tmpCommGuild 1};
+		#case {"EL-75"} 			{#var {commcol} {<118>};#var tmpCommGuild 1};
 		#case {"Main"} 				{#var {commcol} {<118>};#var tmpCommGuild 1};
-		#case {"Megamental"} 		{#var {commcol} {<178>};#var tmpCommGuild 1};
-		#case {"Mental Adept"}		{#var {commcol} {<178>};#var tmpCommGuild 1};
-		#case {"Mental Master"} 	{#var {commcol} {<178>};#var tmpCommGuild 1};
-		#case {"S100"} 				{#var {commcol} {<178>};#var tmpCommGuild 1};
-		#case {"Spirit"} 			{#var {commcol} {<178>};#var tmpCommGuild 1};
-		#case {"Time"}            	{#var {commcol} {<168>};#var tmpCommGuild 1};
+		#case {"Megamental"} 		{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Mental Adept"}		{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Mental Master"} 	{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"S100"} 				{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Spirit"} 			{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Time"}            	{#var {commcol} {<118>};#var tmpCommGuild 1};
 
 		#NOP -- Eternal;
 		#case {"Eternal Main"}      {#var {commcol} {<158>};#var tmpCommGuild 1};
 
 		#NOP Fremen;
 		#case {"Fremen Tp"}    		{#var {commcol} {<128>};#var tmpCommGuild 1};
-		#case {"Fremen Guild"}    	{#NOP -- block so guild skill training etc doesnt spam;};
+		#case {"Fremen Guild"}    	{}; #NOP -- block so guild skill training etc doesnt spam;
 		#case {"Fremen Ntp"}    	{#var {commcol} {<128>};#var tmpCommGuild 1};
 		#case {"Fremen Rtp"}    	{#var {commcol} {<128>};#var tmpCommGuild 1};
 
@@ -217,7 +218,7 @@
 		#case {"Ggent"}          	{#var {commcol} {<168>};#var tmpCommGuild 1};
 		#case {"Gamma"}          	{#var {commcol} {<168>};#var tmpCommGuild 1};
 		#case {"Offense"}          	{#var {commcol} {<168>};#var tmpCommGuild 1};
-		#case {"Notify"}          	{#NOP -- block so echelon etc doesnt spam;};
+		#case {"Notify"}          	{}; #NOP -- block so echelon etc doesnt spam;
 		#case {"Sci"}          		{#var {commcol} {<168>};#var tmpCommGuild 1};
 
 
@@ -256,14 +257,14 @@
 
 
 		#NOP -- Monk;
-		#case {"Monk"}            	{#var {commcol} {<238>};#var tmpCommGuild 1};
+		#case {"Monk"}            	{#var {commcol} {<118>};#var tmpCommGuild 1};
 
 		#NOP -- Necromancer;
-		#case {"Lich"}            	{#var {commcol} {<158>};#var tmpCommGuild 1};
-		#case {"Gnecr"}            	{#var {commcol} {<158>};#var tmpCommGuild 1};
-		#case {"Necro"}            	{#var {commcol} {<158>};#var tmpCommGuild 1};
-		#case {"Sphere-%*"}      	{#var {commcol} {<158>};#var tmpCommGuild 1};
-		#case {"Were"}            	{#var {commcol} {<158>};#var tmpCommGuild 1};
+		#case {"Lich"}            	{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Gnecr"}            	{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Necro"}            	{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Sphere-%*"}      	{#var {commcol} {<118>};#var tmpCommGuild 1};
+		#case {"Were"}            	{#var {commcol} {<118>};#var tmpCommGuild 1};
 
 		#NOP -- Priest;
 		#case {"Bitch"}        		{#var {commcol} {<168>};#var tmpCommGuild 1};
@@ -271,8 +272,8 @@
 		#case {"Gprie"}      	    {#var {commcol} {<158>};#var tmpCommGuild 1};
 		#case {"Light Path"}      	{#var {commcol} {<158>};#var tmpCommGuild 1};
 		#case {"Priest"}      	    {#var {commcol} {<158>};#var tmpCommGuild 1};
-		#case {"Priest Announce"}   {#NOP -- block this line from logging;};
-		#case {"Priest Broadcast"}  {#NOP -- block this line from logging;};
+		#case {"Priest Announce"}   {}; #NOP -- block this line from logging;
+		#case {"Priest Broadcast"}  {}; #NOP -- block this line from logging;
 		
 		#NOP -- Psicorps;
 		#case {"Psi Main"}        	{#var {commcol} {<168>};#var tmpCommGuild 1};
@@ -344,7 +345,7 @@
 				update_chat {$mip[comm][cdata]};
 			};
 		};
-	}
+	};
 };
 
 #NOP ***** 2 Way Communication (Tell/Emote) *****;
@@ -371,7 +372,7 @@
 		#if {$discordPost && !$mipgag} {postDiscord ${discordText}};
 		#if {"$chatCategory" != "general"} {postChatCategory};
 	} {update_chat <178>$mip[comm][source]<088>: $mip[comm][data]};
-	#delay 10 {#unvar chat[act_tell][from]}
+	#delay 10 {#unvar chat[act_tell][from]};
 } {2};
 
 #NOP -- Breed projection;
@@ -397,7 +398,94 @@
 		#if {$discordPost && !$mipgag} {postDiscord ${discordText}};
 		#if {"$chatCategory" != "general"} {postChatCategory};
 	} {update_chat <178>$mip[comm][source]<088>: $mip[comm][data]};
-	#delay 10 {#unvar chat[act_tell][from]}
+	#delay 10 {#unvar chat[act_tell][from]};
+} {2};
+
+
+#NOP -- Capture says;
+#var captureSays 1;
+
+#NOP -- Turn off capturing for sayhist;
+#alias sayhist {
+	#send {!sayhist};
+	#var captureSays 0;
+	#delay 2 {#var captureSays 1};
+};
+
+
+#alias _testSayPattern {
+	#var logSay 1;
+	#regex $tmpText {%*, %* always} {#var logSay 0};
+	#regex $tmpText {all, you are now in group %*} {#var logSay 0};
+	#regex $tmpText {%*, ibc} {#var logSay 0};
+	#regex $tmpText {Brigga Bragga! Hizzie wizzie snizzie lizzie! CHOWDA CHOWDA CHOWDA!!!!} {#var logSay 0};
+	#regex $tmpText {Wizza Wazza! Da bibble for rizzle Wikkie Wakky Yakko Wakko and Dot!} {#var logSay 0};
+	#regex $tmpText {Very well... Let me get you over to a trainer} {#var logSay 0};
+};
+
+#action {~\e[0m\e[36;1mYou say:\e[0m %*\e[0m} {
+	#unvar tmpTextHolder;
+	#unvar tmpText;
+	#unvar tmpText1;
+	#unvar tmpText2;
+	#if $captureSays {
+		#if $toggles[chatlog_says] {
+			#format tmpText1 {%p} {%1};
+			#action {         %*} {
+				#format tmpTextHolder {%p} {%%1};
+				#cat tmpText2 { $tmpTextHolder};
+			} {1};
+			#replace tmpText1 {\n} { };
+			#delay .1 {
+				#if {"${tmpText2}" !== ""} {
+					#var tmpText {$tmpText1 $tmpText2};
+				} {
+					#var tmpText $tmpText1;
+				};
+				#format tmpText {%p} {$tmpText};
+				#replace tmpText {  } { };
+				_testSayPattern;
+				#var tmpText @sanitizePayload{$tmpText};		
+				#if $logSay {update_chat <178>$user_cap says<088>: $tmpText};
+				#unaction {         %*};
+			};
+		};
+	};
+} {2};
+         
+#action {~\e[0m\e[36;1m%w says:\e[0m %*\e[0m} {
+	#unvar tmpTextHolder;
+	#unvar tmpText;
+	#unvar tmpText1;
+	#unvar tmpText2;
+	#if $captureSays {
+		#if $toggles[chatlog_says] {
+			#var tmpItem 0;
+			#var tmpPlayer %1;
+			#list players find {%i$tmpPlayer} tmpItem;
+			#if {$tmpItem} {
+				#format tmpText1 {%p} {%2};
+				#action {         %*} {
+					#format tmpTextHolder {%p} {%%1};
+					#cat tmpText2 { $tmpTextHolder};
+				} {1};
+				#replace tmpText1 {\n} { };
+				#delay .1 {
+					#if {"${tmpText2}" !== ""} {
+						#var tmpText {$tmpText1 $tmpText2};
+					} {
+						#var tmpText $tmpText1;
+					};
+					#format tmpText {%p} {$tmpText};
+					#replace tmpText {  } { };
+					_testSayPattern;
+					#var tmpText @sanitizePayload{$tmpText};		
+					#if $logSay {update_chat <178>$tmpPlayer says<088>: $tmpText};
+					#unaction {         %*};
+				};
+			};
+		};
+	};
 } {2};
 
 
@@ -413,7 +501,7 @@
 			} {
 				#var chat[log][emotes] 1;
 				#echo {<cfa> ========== CHATLOG IS NOW LOGGING EMOTES ========== };
-			}
+			};
 		};
 	};
 };
@@ -744,18 +832,18 @@
 			#math chat[page] {$chat[page] - 1};
 			#math chat[offset] {$chat[page] * $chat[rows] - $chat[rows]};
 			draw_chat;
-		}
+		};
 	}; #elseif {"$chat[scroll]" == "line"} {
 		#if {$chat[offset] > 0} {
 			#math chat[offset] {$chat[offset] - 1};
 			draw_chat;
-		}
-	}
+		};
+	};
 };
 #ALIAS {chatend} {
 	#var chat[page] 1;
 	#var chat[offset] 0;
-	draw_chat
+	draw_chat;
 };
 
-#class {mipchatlog} {close}
+#class {mipchatlog} {close};
