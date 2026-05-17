@@ -199,18 +199,4 @@
 	diurnum prime;
 };
 
-#alias {powerdown} {
-	unwield;
-	comtrance clear;
-	strategy-clear;
-	(toggle eradication;
-};
-
-#alias {poweron} {
-	comtrance invoke psionic;
-	strat necromancer;
-	(toggle eradication;
-};
-
-
 #class {player_aliases_necromancer} {close}

@@ -135,6 +135,19 @@
 	};
 }
 
+#alias {powerdown} {
+	comtrance clear;
+	strategy-clear;
+	(toggle eradication;
+};
+
+#alias {poweron} {
+	#IF {$guild == "necromancer"} {comtrance invoke psionic;};
+	strat $guild;
+	(toggle eradication;
+};
+
+
 #alias {pton} {follow %1; cassist %1; #var pleader %1;};
 #alias {ptoff} {#format {pleader} {%l} {$pleader}; unfollow $pleader; cassist -$pleader; #unvar pleader};
 
