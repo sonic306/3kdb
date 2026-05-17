@@ -4,61 +4,119 @@
 #var followermax 30
 #var coffinmax 38
 
-#var minion[following] 1
+#NOP mask on duplicates corpses — grab 2; mask off grabs 1. Not used for slab/wrap/cooler storage.;
+#alias {_cm_mask_count} {
+    #if {$mask_status} {
+        #var _cm_n {>2};
+    } {
+        #var _cm_n {};
+    };
+};
+
+#alias {_cm_cooler_corpse} {
+    #NOP Storage only — empty corpse before cooler;
+    #if {"$guild" == "necromancer"} {
+        qtrance get corpse;
+    } {
+        get corpse;
+    };
+    get all from corpse;
+    cooler corpse;
+};
+
+#NOP mask_status: 0=off 1=on 2=active — restore saved mode, never force mask on;
+#alias {_cm_mask_begin} {
+    #var _cm_mask_saved {$mask_status};
+    #if {$_cm_mask_saved == 1} {mask active};
+};
+
+#alias {_cm_mask_restore} {
+    #if {$_cm_mask_saved == 1} {mask on};
+    #elseif {$_cm_mask_saved == 2} {mask active};
+    #unvar _cm_mask_saved;
+};
+
+#alias {_cm_masked_delay} {
+    #if {$mask_status} {
+        _cm_mask_begin;
+        #delay 2 {%1;_cm_mask_restore};
+    } {
+        %1;
+    };
+};
+
+#alias {_cm_preserve_minion} {
+    _cm_mask_count;
+    #if {$my[corpse][minion][current] < $followermax} {
+        _cm_masked_delay {qtrance preserve remains/=get preservation$_cm_n};
+    } {
+        _cm_masked_delay {qtrance preserve remains/get preservation$_cm_n};
+    };
+};
+
+#alias {_cm_preserve_self} {
+    _cm_mask_count;
+    _cm_masked_delay {qtrance get corpse/preserve remains/get preservation$_cm_n};
+};
+
+#alias {_cm_preserve_freezer} {
+    _cm_mask_count;
+    deslab;
+    _cm_masked_delay {qtrance preserve remains/get corpse$_cm_n};
+};
+
+#alias {_cm_necro_preserve} {
+    #if {$minion[inroom]} {
+        _cm_preserve_minion;
+    };
+    #elseif {$inventory[corpse] || $inventory[freezer]} {
+        _cm_preserve_self;
+    };
+    #elseif {$corpses[freezer] > 0 && "$freezer" == "on"} {
+        _cm_preserve_freezer;
+    } {
+        _cm_preserve_self;
+    };
+};
 
 #alias {corpsemanager} {
-	#if  {$inventory[freezer] && $corpses[freezer] < 50} {
-		slab;
-	};
-	#elseif {$corpses[freezer] == 50 && $inventory[cooler] && $corpses[cooler] < 50} {
-		#if {"$guild" == "necromancer"} {qtrance get corpse/get all from corpse/cooler corpse;};
-		#else {get corpse;get all from corpse;cooler corpse;};
-	};
-	#else {
-		#if {"$guild" == "gentech"} {
-			#if {$corpses[coffin] < $coffinmax} {
-				wrap;
-			};
-			#else {
-				reclaim;
-			};
-		};
-		#if {"$guild" == "necromancer"} {
-			#if {$corpses[coffin] < $coffinmax} {
-				wrap;
-			};
-			#elseif {$my[corpse][minion][current] < $followermax && $corpses[coffin] == $coffinmax} {
-				#if {$mask_status} {
-					mask active;
-					#DELAY {2} {qtrance preserve remains/=get preservation>2};
-					#DELAY {4} {mask on};
-				};
-				#else {qtrance preserve remains/=get preservation};
-			};
-			#elseif {$corpses[coffin] == $coffinmax && $my[corpse][minion][current] == $followermax} {
-				#if {$mask_status} {
-					mask active;
-					#DELAY {2} {qtrance preserve remains/get preservation>2};
-					#DELAY {4} {mask on};
-				};
-				#else {qtrance preserve remains/get preservation;};
-			};
-		};
-		#if {"$guild" == "fremen"} {
-			#if {$corpses[coffin] < $coffinmax} {wrap};
-			#elseif {$corpses[coffin] >= 38 && $my[gp1][current] < 3000} {reclaim};
-			#elseif {$corpses[coffin] >= 38 && $my[gp1][current] > 3000} {fai};
-		};
-		#if {"$guild" == "mage"} {
-			#if {$corpses[coffin] < 10} {wrap;};
-			#ELSEIF {$corpses[coffin] == 10} {cast spelltap;cast corpse explosion;};
-		};
-	};
+    #NOP --- Storage only: slab, wrap, cooler — never preserve ---;
+    #if {$inventory[freezer] && $corpses[freezer] < 50} {
+        slab;
+    };
+    #elseif {$corpses[freezer] == 50 && $inventory[cooler] && $corpses[cooler] < 50} {
+        _cm_cooler_corpse;
+    };
+    #elseif {"$guild" == "mage"} {
+        #if {$corpses[coffin] < 10} {
+            wrap;
+        };
+        #elseif {$corpses[coffin] == 10} {
+            cast spelltap;
+            cast corpse explosion;
+        };
+    };
+    #elseif {$corpses[coffin] < $coffinmax} {
+        wrap;
+    };
+    #elseif {"$guild" == "gentech"} {
+        reclaim;
+    };
+    #NOP --- Coffin full: preserve only (mask => get 2, not 1) ---;
+    #elseif {"$guild" == "necromancer" && $corpses[coffin] >= $coffinmax} {
+        _cm_necro_preserve;
+    };
+    #elseif {"$guild" == "fremen" && $corpses[coffin] >= $coffinmax} {
+        #if {$my[gp1][current] < 3000} {
+            reclaim;
+        } {
+            fai;
+        };
+    };
 };
 
 #action {{Coffin\s+\[\s+\d+\/\s+(\d+).*}} {
-	#show %2;
-	#var {coffinmax} {%2};
+    #var coffinmax {%2};
 };
 
 #class custom_corpse_manager close

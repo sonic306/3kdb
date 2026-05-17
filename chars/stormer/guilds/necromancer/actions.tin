@@ -2,10 +2,41 @@
 #class {player_actions_necromancer} {open}
 
 #NOP --- Player specific actions;
-#NOP Minion following tracking
-#action {Your valithyn finds its way around the magical barrier} {#var minion[following] 1} {1};
-#action {Some magic blocks your valithyn from following you here} {#var minion[following] 0} {1};
-#action {A valithyn drifts in on a ghostly vapor.} {#var minion[inroom] 1} {1};
+
+#NOP Minion follow state: 0 after you move until valithyn enter emote fires;
+#var minion[following] 0
+#var minion[inroom] 0
+#var minion[last_room] {}
+
+#alias {_minion_reset} {
+    #var minion[following] 0;
+    #var minion[inroom] 0;
+};
+
+#alias {_minion_arrived} {
+    #var minion[following] 1;
+    #var minion[inroom] 1;
+};
+
+#NOP MIP room change (primary — works with or without mapper);
+#event {VARIABLE UPDATE room[name]} {
+    #if {"$guild" == "necromancer" && "$room[name]" != "" && "$room[name]" != "$minion[last_room]"} {
+        #var minion[last_room] {$room[name]};
+        _minion_reset;
+    };
+};
+
+#NOP Mapper room enter (backup when mapping is on);
+#event {MAP ENTER ROOM} {
+    #if {"$guild" == "necromancer"} {
+        _minion_reset;
+    };
+};
+
+#NOP Valithyn caught up or blocked;
+#action {Your valithyn finds its way around the magical barrier} {_minion_arrived} {1};
+#action {Some magic blocks your valithyn from following you here} {_minion_reset} {1};
+#action {A valithyn drifts in on a ghostly vapor.} {_minion_arrived} {1};
 
 #action {It is too dark} {create light;glance} {2};
 
