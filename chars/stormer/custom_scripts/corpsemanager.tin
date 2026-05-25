@@ -74,7 +74,8 @@
     };
     #elseif {$corpses[freezer] > 0 && "$freezer" == "on"} {
         _cm_preserve_freezer;
-    } {
+    };
+    #else {
         _cm_preserve_self;
     };
 };
