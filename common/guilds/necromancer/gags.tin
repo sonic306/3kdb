@@ -18,14 +18,14 @@
 
 
 #NOP {Alpha}
-#gag {^\/\\\/\\\/\\\/\\\/*};
-#gag {^C:D=};
-#gag {^B:D=};
-#gag {^C:\/\\};
-#gag {^B:\/\\};
-#gag {^D=};
-#gag {^C:-,};
-#gag {^C:O=};
-#gag {^>>C:HSN};
+#gag {\/\\\/\\\/\\\/\\\/*};
+#gag {C:D=};
+#gag {B:D=};
+#gag {C:\/\\};
+#gag {B:\/\\};
+#gag {D=};
+#gag {C:-,};
+#gag {C:O=};
+#gag {>>C:HSN};
 
 #class guild_gags close
