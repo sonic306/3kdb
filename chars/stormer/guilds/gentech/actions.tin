@@ -1,5 +1,5 @@
-#class {player_aliases_gentech} {kill}
-#class {player_aliases_gentech} {open}
+#class {player_actions_gentech} {kill}
+#class {player_actions_gentech} {open}
 
 #NOP --- Player specific actions;
 #NOP --- GENTECH POWERS;
@@ -9,7 +9,7 @@
 #act {Your cloning was a success!} {=call;=afollow on;=akill on};
 #act {^Timescan %*[Likelihood of Flux: &1\%]$} {#var reset_time %1;#math time {reset_time * 40}say Time until reset: $time};
 #act {%s[[ Energy Field Collapse Imminent. ]]%s} {efield;efield};
-#act {Bias Conformation Toggled Off} {biaslock};
+#act {[[ Bias Conformation Toggled Off ]]} {biaslock};
 
 
 #var corpse_delay 0;
@@ -49,4 +49,4 @@
 #ACTION {%* points %* and yells: OI!!! NUTTER!!!!!.} {autokill} {6};
 #action {^%w quacks at you.} {#format temp {%l} {%1};powerfeed $temp};
 
-#class {player_aliases_gentech} {close}
+#class {player_actions_gentech} {close}
