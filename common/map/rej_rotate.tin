@@ -1,55 +1,77 @@
 #class {rej_rotate} {kill}
 #class {rej_rotate} {open}
 
-#NOP -- When this first loads, it'll be the first room of the maze
+#NOP -- When this first loads, it'll be the first room of the maze;
 #NOP -- Based on the room[exit] - we'll set it to the first rejected_game[color];
-#NOP -- The map rotation goes clockwise,  n -> e -> s -> w;
+#NOP -- The map rotation goes clockwise: n -> e -> s -> w (one rrotate per step);
 
 #delay .5 {#ECHO {UPDATING MAP ORIENTATION -- PLEASE STAY STILL FOR 3 SECONDS}};
 
+#NOP -- Seed the tracked color so fixRJColor can compute the correct delta on runtime changes;
+#var rej_prev_color $rejected_game[color];
+
+#NOP -- Color-to-index for delta rotation: green=0 blue=1 red=2 magenta=3;
+#var rej_cidx[green] 0;
+#var rej_cidx[blue] 1;
+#var rej_cidx[red] 2;
+#var rej_cidx[magenta] 3;
+
 #delay 2 {
 	#map get roomexits tempExits;
-	#if {$tempExits[e]} {#var startMap green};
-	#if {$tempExits[w]} {#var startMap red};
-	#if {$tempExits[n]} {#var startMap magenta};
-	#if {$tempExits[s]} {#var startMap blue};
+
+	#NOP -- elseif chain: only the first matching exit wins;
+	#if {$tempExits[n]} {
+		#var startMap magenta;
+	} {#if {$tempExits[e]} {
+		#var startMap green;
+	} {#if {$tempExits[s]} {
+		#var startMap blue;
+	} {#if {$tempExits[w]} {
+		#var startMap red;
+	}}}};
 
 	#if {"$room[exits]" == "n"} {
 		#var rejected_game[color] magenta;
-		#if {"$startMap" == "red"} {rrotate};
-		#if {"$startMap" == "blue"} {rrotate;rrotate};
-		#if {"$startMap" == "green"} {rrotate;rrotate;rrotate};
+		#if {"$startMap" == "red"}     {rrotate 1};
+		#if {"$startMap" == "blue"}    {rrotate 2};
+		#if {"$startMap" == "green"}   {rrotate 3};
 	};
 	#if {"$room[exits]" == "e"} {
 		#var rejected_game[color] green;
-		#if {"$startMap" == "magenta"} {rrotate};
-		#if {"$startMap" == "red"} {rrotate;rrotate};
-		#if {"$startMap" == "blue"} {rrotate;rrotate;rrotate};
+		#if {"$startMap" == "magenta"} {rrotate 1};
+		#if {"$startMap" == "red"}     {rrotate 2};
+		#if {"$startMap" == "blue"}    {rrotate 3};
 	};
 	#if {"$room[exits]" == "s"} {
 		#var rejected_game[color] blue;
-		#if {"$startMap" == "green"} {rrotate};
-		#if {"$startMap" == "magenta"} {rrotate;rrotate};
-		#if {"$startMap" == "red"} {rrotate;rrotate;rrotate};
+		#if {"$startMap" == "green"}   {rrotate 1};
+		#if {"$startMap" == "magenta"} {rrotate 2};
+		#if {"$startMap" == "red"}     {rrotate 3};
 	};
 	#if {"$room[exits]" == "w"} {
 		#var rejected_game[color] red;
-		#if {"$startMap" == "magenta"} {rrotate};
-		#if {"$startMap" == "green"} {rrotate;rrotate};
-		#if {"$startMap" == "blue"} {rrotate;rrotate;rrotate};
+		#if {"$startMap" == "blue"}    {rrotate 1};
+		#if {"$startMap" == "green"}   {rrotate 2};
+		#if {"$startMap" == "magenta"} {rrotate 3};
 	};
-	#delay 1 {rating;#ECHO {MAP ORIENTED... THANK YOU COME AGAIN!}};
+
+	#NOP -- Anchor rej_prev_color to the confirmed orientation before handing off to fixRJColor;
+	#var rej_prev_color $rejected_game[color];
+	#delay 1 {rating;#ECHO {MAP ORIENTED... THANK YOU COME AGAIN!};..};
 };
 
 
 #NOP -- We call it inductor whether you're going to crack or not;
 #alias fixRJColor {
-	#if {$bot[active]} {
+	#if $bot[active] {
 		#var {bot[path]} {$bot[inductor][${rejected_game[color]}]};
 		#unvar bot[steps];
 		#list bot[steps] create $bot[path];
 	};
-	rrotate;
+	#NOP -- Rotate the map by exactly the delta between previous and new color (0-3 steps);
+	#math rot_delta {($rej_cidx[$rejected_game[color]] - $rej_cidx[$rej_prev_color] + 4) % 4};
+	#if {$rot_delta > 0} {rrotate $rot_delta};
+	#var rej_prev_color $rejected_game[color];
 };
 
 #NOP -- Fix color if the map rotates;
@@ -62,7 +84,7 @@
 			#delay {fixColor} {fixRJColor;#var rj_rotate 1} {2};
 		};
 	} {
-		#NOP -- If we're not longer in the rejected game, kill the class;
+		#NOP -- If we're no longer in the rejected game, kill the class;
 		#class rej_rotate kill;
 	};
 };
@@ -88,51 +110,48 @@
 
 #NOP Vnums are 27662-28934 30131-30174;
 #alias {rrotate} {
-	#echo {rotating map};
-	#NOP Update the color;
-	#if {"$rejected_game[color]" == "green"} {#var rej_color <228>};
-	#if {"$rejected_game[color]" == "blue"} {#var rej_color <148>};
-	#if {"$rejected_game[color]" == "red"} {#var rej_color <218>};
+	#var rcount {%1};
+	#if {"$rcount" == ""} {#var rcount 1};
+
+	#echo {rotating map x$rcount};
+
+	#NOP -- Update the room color to match the new orientation;
+	#if {"$rejected_game[color]" == "green"}   {#var rej_color <228>};
+	#if {"$rejected_game[color]" == "blue"}    {#var rej_color <148>};
+	#if {"$rejected_game[color]" == "red"}     {#var rej_color <218>};
 	#if {"$rejected_game[color]" == "magenta"} {#var rej_color <258>};
 	#if {"${rej_color}" === ""} {#var rej_color  };
+
+	#NOP -- Precompute direction mapping once before the loop instead of switching per-room;
+	#var dirmap {};
+	#if {$rcount == 1} {
+		#var dirmap[n] e;#var dirmap[e] s;#var dirmap[s] w;#var dirmap[w] n;
+		#var dirmap[ne] se;#var dirmap[se] sw;#var dirmap[sw] nw;#var dirmap[nw] ne;
+	};
+	#if {$rcount == 2} {
+		#var dirmap[n] s;#var dirmap[e] w;#var dirmap[s] n;#var dirmap[w] e;
+		#var dirmap[ne] sw;#var dirmap[se] nw;#var dirmap[sw] ne;#var dirmap[nw] se;
+	};
+	#if {$rcount == 3} {
+		#var dirmap[n] w;#var dirmap[e] n;#var dirmap[s] e;#var dirmap[w] s;
+		#var dirmap[ne] nw;#var dirmap[se] ne;#var dirmap[sw] se;#var dirmap[nw] sw;
+	};
 
 	#loop 27662 30174 cnt {
 		#map get {roomarea} {rarea} {$cnt};
 		#if {"$rarea" == "The Rejected Game"} {
-			#NOP Set new rotation roomcolor;
 			#map at $cnt {#map set roomcolor $rej_color};
-
-			#NOP Get rexits;
 			#map at $cnt {#map get roomexits rexits};
-
-			#NOP Reset new room exits array for each vnum;
 			#var nrexits {};
 
-			#NOP loop through exits and rotate 90°;
 			#foreach {*rexits[]} {rexit} {
-				#NOP Reset keep exit variable for non-rotatable exits;
-				#var kexit no;
-				#NOP Set vnum or new room exit;
-				#switch {"$rexit"} {
-					#case {"n"}	{#var nrexits[e]  $rexits[n]};
-					#case {"e"}	{#var nrexits[s]  $rexits[e]};
-					#case {"s"}	{#var nrexits[w]  $rexits[s]};
-					#case {"w"}	{#var nrexits[n]  $rexits[w]};
-					#case {"ne"}	{#var nrexits[se] $rexits[ne]};
-					#case {"se"}	{#var nrexits[sw] $rexits[se]};
-					#case {"sw"}	{#var nrexits[nw] $rexits[sw]};
-					#case {"nw"}	{#var nrexits[ne] $rexits[nw]};
-					#default	{#var kexit yes}
-				};
-				#NOP Check if non-rotatable exit to keep;
-				#if {"$kexit" == "no"} {
-					#NOP Unlink old direction;
-					#map at $cnt {#map unlink $rexit}
+				#if {"$dirmap[$rexit]" != ""} {
+					#var nrexits[$dirmap[$rexit]] $rexits[$rexit];
+					#map at $cnt {#map unlink $rexit};
 				};
 			};
-			#NOP Link new directions;
 			#foreach {*nrexits[]} {rexit} {
-				#map at $cnt {#map link $rexit $nrexits[$rexit]}
+				#map at $cnt {#map link $rexit $nrexits[$rexit]};
 			};
 		};
 	};

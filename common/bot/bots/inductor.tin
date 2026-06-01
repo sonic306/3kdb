@@ -34,4 +34,5 @@ look;
 
 #class {bot} {close}
 #read common/bot/generic.tin;
+.pause;
 #read common/map/rej_rotate.tin;
