@@ -86,7 +86,6 @@
 			strategy iprime;
 			strategy bloodarc;
 			strategy harvest;
-			strategy call;
 
 		};
 		#case {"fremen"} {

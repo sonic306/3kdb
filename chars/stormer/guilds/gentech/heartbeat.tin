@@ -1,5 +1,5 @@
-#class {player_heartbeat} {kill}
-#class {player_heartbeat} {open}
+#class {player_heartbeat_gentech} {kill}
+#class {player_heartbeat_gentech} {open}
 
 #NOP -- These actions are called every round (every 2 seconds);
 #NOP -- Make sure all actions are INSIDE the !$idle_flag {} section or the deadman will not apply to those actions;
@@ -35,4 +35,4 @@
 };
 
 
-#class {player_heartbeat} {close}
+#class {player_heartbeat_gentech} {close}

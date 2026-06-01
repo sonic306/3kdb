@@ -19,7 +19,7 @@
 };
 
 #NOP MIP room change (primary — works with or without mapper);
-#event {VARIABLE UPDATE room[name]} {
+#event {VARIABLE UPDATED room[name]} {
     #if {"$guild" == "necromancer" && "$room[name]" != "" && "$room[name]" != "$minion[last_room]"} {
         #var minion[last_room] {$room[name]};
         _minion_reset;
