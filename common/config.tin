@@ -9,7 +9,7 @@
 #config {log mode} {plain};
 #config connect_retry 60;
 
-#log {/home/sonic306/3kai.log};
+#log {append} {/home/sonic306/3kai.log};
 
 #info env save;
 #info system save;
