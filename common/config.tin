@@ -8,6 +8,8 @@
 #config {repeat enter} on;
 #config log plain;
 #config connect_retry 60;
+#config {log mode} {plain}
+#log {/home/sonic306/3kai.log}
 
 #info env save;
 #info system save;
