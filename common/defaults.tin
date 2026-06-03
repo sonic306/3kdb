@@ -9,7 +9,7 @@
 #CONFIG           {COMMAND ECHO}	{ON}
 #CONFIG           {CONNECT RETRY}	{15}
 #CONFIG           {HISTORY SIZE}	{1000}
-#CONFIG           {LOG MODE}		{RAW}
+#CONFIG           {LOG MODE}		{PLAIN}
 #CONFIG           {MOUSE}		    {OFF}
 #CONFIG           {PACKET PATCH}	{0.25}
 #CONFIG           {REPEAT CHAR}		{!}
