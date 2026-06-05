@@ -27,6 +27,7 @@
 	#if {"$mapping" == "on"} {
 		mapupdate;
 	}
+	#script {echo "3KAI_VNUM: %0" >> /home/sonic306/3kai.log};
 }
 
 #event {MAP EXIT ROOM} {

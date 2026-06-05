@@ -2,5 +2,6 @@
     "search.useIgnoreFiles": false,
     "githubPullRequests.ignoredPullRequestBranches": [
         "master"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }

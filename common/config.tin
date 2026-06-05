@@ -8,7 +8,8 @@
 #config {repeat enter} on;
 #config connect_retry 60;
 
-#log {TIMESTAMP} {[%H:%M:%S] | }
+#log {TIMESTAMP} {[%H:%M:%S] | };
+#log {remove} {/home/sonic306/3kai.log};
 #log {append} {/home/sonic306/3kai.log};
 
 #info env save;
