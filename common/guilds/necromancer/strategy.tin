@@ -38,10 +38,19 @@
 
 #NOP -- Actions to perform at any time in the fight;
 #alias {_strategy_guild} {
-    #if {$mip[round] > 7 && $enemy[kill_rate_avg] >= 30 && $mip[round] < 15} {
+    #NOP -- iprime/bloodarc are kept outside the < 15 round window so a mid-combat repower (which can re-enable them past round 15 in a long fight) still gets recast;
+    #if {$mip[round] > 7 && $enemy[kill_rate_avg] >= 30} {
         #if {$iprime_round && $my[necromancer][invoke-prime] > 0} {
             checkStrategy {iprime} {#var iprime_round 0;ip1;#delay 10 {#var iprime_round 1}};
         };
+        #if {$my[necromancer][bloodarc] > 0 && !$mob[bloodarc]} {
+            checkStrategy {bloodarc} {
+                #if $vaf[numbers] {bloodarc $enemy[name_numbers]} {bloodarc $enemy[target]};
+            };
+        };
+    };
+
+    #if {$mip[round] > 7 && $enemy[kill_rate_avg] >= 30 && $mip[round] < 15} {
         #if {$my[necromancer][diurnum] > 0 || $my[necromancer][nocturnum] > 0} {
             checkStrategy {diurnum} {diurnum prime;#var my[necromancer][diurnum] 0;#var my[necromancer][nocturnum] 0};
             checkStrategy {nocturnum} {nocturnum prime;#var my[necromancer][diurnum] 0;#var my[necromancer][nocturnum] 0};
@@ -64,12 +73,6 @@
             checkStrategy {soulbind} {soulbind};
         };
 
-        #if {$my[necromancer][bloodarc] > 0 && !$mob[bloodarc]} {
-            checkStrategy {bloodarc} {
-                #if $vaf[numbers] {bloodarc $enemy[name_numbers]} {bloodarc $enemy[target]};
-            };
-        };
-            
         #if {$my[necromancer][harvest] > 0} {
             checkStrategy {harvest} {harvest};
         };
