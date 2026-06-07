@@ -39,11 +39,11 @@
 #NOP -- Actions to perform at any time in the fight;
 #alias {_strategy_guild} {
     #NOP -- iprime/bloodarc are kept outside the < 15 round window so a mid-combat repower (which can re-enable them past round 15 in a long fight) still gets recast;
-    #if {$mip[round] > 7 && $enemy[kill_rate_avg] >= 30} {
+    #if {$mip[round] > 7 && $enemy[kill_rate_avg] >= 20} {
         #if {$iprime_round && $my[necromancer][invoke-prime] > 0} {
             checkStrategy {iprime} {#var iprime_round 0;ip1;#delay 10 {#var iprime_round 1}};
         };
-        #if {$my[necromancer][bloodarc] > 0 && !$mob[bloodarc]} {
+        #if {$my[necromancer][bloodarc] > 0 && !$mob[bloodarc] && $enemy[hp] >= 30 && $enemy[kill_rate_avg] >= 30} {
             checkStrategy {bloodarc} {
                 #if $vaf[numbers] {bloodarc $enemy[name_numbers]} {bloodarc $enemy[target]};
             };
