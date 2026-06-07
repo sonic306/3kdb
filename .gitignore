@@ -28,6 +28,8 @@ sftp.json
 event_test.tin
 *.log
 tmp/
+stormer.tin
+
 
 
 notes/
