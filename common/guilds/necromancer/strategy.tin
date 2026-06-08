@@ -82,7 +82,7 @@
         };
 
         #if {$my[necromancer][conjure_undead] > 0 && $_nukeUndead} {
-            #if {$my[gp1][current] < 50000} {
+            #if {$my[gp1][current] < 90000} {
                 checkStrategy {conjure} {nukeUndeadAbs};
                 checkStrategy {conjure1} {nukeUndead_noUG_Abs};
                 checkStrategy {conjure2} {nukeUndead_noUG_Abs;#delay 2 {rapture undead};#delay 4 {unholy armour undead}};
