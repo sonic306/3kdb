@@ -324,6 +324,7 @@
 #NOP -------------------------- Science Steppers ----------------------------------;
 
 #list botlist add {{{file} {aegis} {alias} {aegis} {desc} {Aegis Global: Lvls 1-6} {start_vnum} {2476} {loop} {0} {playercheck} {0}}};
+#list botlist add {{{file} {aegis-gear} {alias} {aegis-gear} {desc} {Aegis Global: Fast run to get Shield/Body Armor} {start_vnum} {2476} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {aegis-14} {alias} {aegis-14} {desc} {Aegis Global: Lvls 1-4} {start_vnum} {2476} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {aegis-15} {alias} {aegis-15} {desc} {Aegis Global: Lvls 1-5} {start_vnum} {2476} {loop} {0} {playercheck} {0}}};
 #list botlist add {{{file} {sectionz} {alias} {sectionz} {desc} {Section Z Long Path} {start_vnum} {24787} {loop} {0} {playercheck} {0} {rating} {Section Z}}};
