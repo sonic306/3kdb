@@ -22,6 +22,15 @@
 				#delay {absorb} {mu 9} {0.5};
 			};
         };
+
+        #if {$corpses[total] <= 80 && !$my[necromancer][conjure_undead] && !$_active_conjure} {
+            #var _active_conjure 1;
+            strategy conjure;
+        };
+        #elseif {$corpses[total] >= 120  && $my[necromancer][conjure_undead] && $_active_conjure} {
+            #var _active_conjure 0;
+            strategy conjure;
+        };
     
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
