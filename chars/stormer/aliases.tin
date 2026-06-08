@@ -141,7 +141,7 @@
 };
 
 #alias {poweron} {
-	#IF {$guild == "necromancer"} {comtrance invoke psionic;};
+	#IF {"$guild" == "necromancer"} {comtrance invoke psionic;};
 	strat $guild;
 	(toggle eradication;
 };
