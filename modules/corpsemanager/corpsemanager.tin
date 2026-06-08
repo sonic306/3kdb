@@ -332,7 +332,7 @@
 #alias {.corpses_inventory %+1D%+1..3d} {
 	#if {"%1" == "+"} {
 		#math corpses[inventory] {$corpses[inventory] + %2};
-		#delay presKeep {keep all preservation} {.2};
+		#NOP #delay presKeep {keep all preservation} {.2};
 	};
 	#if {"%1" == "-"} {
 		#math corpses[inventory] {$corpses[inventory] - %2};
