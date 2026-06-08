@@ -22,3 +22,4 @@
 #NOP -- Load specific profession for this character;
 #NOP -- You want to call other modules as well.  If you are a reforger, you would load:
 #read modules/professions/reforger.tin
+#read modules/crafting/assemble.tin;
