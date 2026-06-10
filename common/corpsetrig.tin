@@ -506,6 +506,7 @@
 
 
 #alias corpse_trig {
+    #if {"$guild" == "fremen"} {_fremen_suspend_on_kill};
     #if $corpsetrigStatus {
         #if {&corpseActions[] > 0} {
             #loop 1 &corpseActions[] item {
