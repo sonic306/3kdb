@@ -507,6 +507,13 @@
 
 
 #alias corpse_trig {
+    #NOP -- fremen: check corpseActions for 'suspend' entry and fire pre-loop so bot[paused]=1 when 'delay' is;
+    #NOP -- encountered, causing pauseCorpseActionBot=1 which suppresses .unpause in the delay continuation;
+    #if {"$guild" == "fremen"} {
+        #loop 1 &corpseActions[] _ct_idx {
+            #if {"$corpseActions[$_ct_idx][name]" == "suspend"} {_fremen_suspend_on_kill;#break};
+        };
+    };
     #if $corpsetrigStatus {
         #if {&corpseActions[] > 0} {
             #loop 1 &corpseActions[] item {
@@ -521,7 +528,10 @@
                     #math nextItem {$item + 1};
                     #break;
                 } {
-                    $corpseActions[$item][action];
+                    #NOP -- suspend is handled pre-loop; skip it here to avoid double-call;
+                    #if {"$corpseActions[$item][name]" != "suspend"} {
+                        $corpseActions[$item][action];
+                    };
                 };
             };
             #if {$pauseCorpseAction} {

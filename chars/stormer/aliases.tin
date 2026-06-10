@@ -72,6 +72,10 @@
 	};
 };
 
+#alias {skset} {
+	setonkill $guild;
+};
+
 #alias {strat} {
 	#SWITCH {"%0"} {
 	 	#CASE {"necromancer"} {
