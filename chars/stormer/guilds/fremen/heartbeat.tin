@@ -14,6 +14,22 @@
         #if {$my[gp1][current] < 1000} {
             #delay {reclaim} {mu} {0.1};
         };
+        #if {$bot[active] && "$pausedtoregen" == "1" && "$my[litany][focus]" == "Wracked"} {
+                .pause;
+                #var pausedtoregen 0;
+                #var suspend_toggle 1;
+            };
+            #if {"$mip[round]" == "0" && "$suspend_toggle" == "1" && "$pausedtoregen" == "0"} {
+                #send {!suspend};
+            };
+            #if {"$pausedtoregen" == "0" && "$my[litany][focus]" == "Luminous"} {
+                #if {$bot[paused]} {.unpause};
+                #if {$bot[active]} {..};
+                #var pausedtoregen 1;
+                #var suspend_toggle 1;
+            };
+        };
+
 
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
