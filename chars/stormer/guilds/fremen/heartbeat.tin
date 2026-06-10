@@ -28,15 +28,11 @@
                 #var pausedtoregen 1;
                 #var suspend_toggle 1;
             };
-        };
-
 
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
             #NOP
         };
-
-    
     #NOP -- All actions above this line;
     } {#NOP};
 };
