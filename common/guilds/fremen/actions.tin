@@ -116,7 +116,7 @@
 
 #action {You shock your body out of its catalepsis and awaken to this world.} {
     #if {!$idle_flag} {
-        #var suspend_toggle 1;
+        #var suspend_toggle 0;
     };
 } {2};
 
