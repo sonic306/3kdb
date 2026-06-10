@@ -8,7 +8,6 @@
 #NOP -- Conditions can be combined like so - to cast heal if you have a certain amount of spell points.
 #NOP --   #if {$my[hp][current] < 500 && $my[sp][current] > 1000} {cast heal};
 
-#var pausedtoregen 1;
 
 #alias {_player_heartbeat} {
     #if !$idle_flag {
@@ -16,21 +15,12 @@
         #if {$my[gp1][current] < 1000} {
             #delay {reclaim} {mu} {0.1};
         };
-        #if {$bot[active] && "$pausedtoregen" == "1" && "$my[litany][focus]" == "Wracked"} {
+        #if {$bot[active] && !$bot[paused] && "$my[litany][focus]" == "Wracked"} {
                 .pause;
-                #var pausedtoregen 0;
-                #var suspend_toggle 1;
-            };
-            #if {"$mip[round]" == "0" && "$suspend_toggle" == "1" && "$pausedtoregen" == "0"} {
-                #send {!suspend};
-            };
-            #if {"$pausedtoregen" == "0" && "$my[litany][focus]" == "Luminous"} {
-                #if {$bot[paused]} {.unpause};
-                #if {$bot[active]} {..};
-                #var pausedtoregen 1;
-                #var suspend_toggle 1;
-            };
-
+        };
+        #if {"$mip[round]" == "0" && "$suspend_toggle" == "0" && $bot[paused]} {
+            #send {!suspend};
+        };
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
             #NOP
