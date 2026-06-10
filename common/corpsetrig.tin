@@ -496,7 +496,6 @@
 #list corpseList add {{{name} {hide1} {guild} {fremen} {action} {hide} {active} {0} {description} {Fremen: Hide in the shadows before ambushing mob}}};
 #list corpseList add {{{name} {poison1} {guild} {fremen} {action} {poison} {active} {0} {description} {Fremen: Add poison to your weapon}}};
 #list corpseList add {{{name} {fbelt} {guild} {fremen} {action} {fill all;donate all} {active} {0} {description} {Fremen: fill and donate literjons from afar (requires belt vaf perk)}}};
-#list corpseList add {{{name} {suspend} {guild} {fremen} {action} {_fremen_suspend_on_kill} {active} {0} {description} {Fremen: Suspend after kill when Wracked to refocus}}};
 
 #NOP -- monk;
 #list corpseList add {{{name} {study} {guild} {monk} {action} {study corpse} {active} {0} {description} {Monk: Study Corpse}}};
@@ -507,13 +506,6 @@
 
 
 #alias corpse_trig {
-    #NOP -- fremen: check corpseActions for 'suspend' entry and fire pre-loop so bot[paused]=1 when 'delay' is;
-    #NOP -- encountered, causing pauseCorpseActionBot=1 which suppresses .unpause in the delay continuation;
-    #if {"$guild" == "fremen"} {
-        #loop 1 &corpseActions[] _ct_idx {
-            #if {"$corpseActions[$_ct_idx][name]" == "suspend"} {_fremen_suspend_on_kill;#break};
-        };
-    };
     #if $corpsetrigStatus {
         #if {&corpseActions[] > 0} {
             #loop 1 &corpseActions[] item {
@@ -528,10 +520,7 @@
                     #math nextItem {$item + 1};
                     #break;
                 } {
-                    #NOP -- suspend is handled pre-loop; skip it here to avoid double-call;
-                    #if {"$corpseActions[$item][name]" != "suspend"} {
-                        $corpseActions[$item][action];
-                    };
+                    $corpseActions[$item][action];
                 };
             };
             #if {$pauseCorpseAction} {
