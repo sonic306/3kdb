@@ -496,6 +496,7 @@
 #list corpseList add {{{name} {hide1} {guild} {fremen} {action} {hide} {active} {0} {description} {Fremen: Hide in the shadows before ambushing mob}}};
 #list corpseList add {{{name} {poison1} {guild} {fremen} {action} {poison} {active} {0} {description} {Fremen: Add poison to your weapon}}};
 #list corpseList add {{{name} {fbelt} {guild} {fremen} {action} {fill all;donate all} {active} {0} {description} {Fremen: fill and donate literjons from afar (requires belt vaf perk)}}};
+#list corpseList add {{{name} {suspend} {guild} {fremen} {action} {_fremen_suspend_on_kill} {active} {0} {description} {Fremen: Suspend after kill when Wracked to refocus}}};
 
 #NOP -- monk;
 #list corpseList add {{{name} {study} {guild} {monk} {action} {study corpse} {active} {0} {description} {Monk: Study Corpse}}};
@@ -506,7 +507,6 @@
 
 
 #alias corpse_trig {
-    #if {"$guild" == "fremen"} {_fremen_suspend_on_kill};
     #if $corpsetrigStatus {
         #if {&corpseActions[] > 0} {
             #loop 1 &corpseActions[] item {

@@ -168,19 +168,17 @@
 
 
 #alias {_fremen_suspend_on_kill} {
-    checkStrategy {suspend} {
-        #if {$bot[active] && "$my[litany][focus]" == "Wracked"} {
-            .pause;
-            suspend;
-            #line oneshot #action {You shock your body out of its catalepsis and awaken to this world.} {
-                #unaction {Having regained your mental focus completely, you emerge from the Bindu};
-                ..;
-            } {2};
-            #line oneshot #action {Having regained your mental focus completely, you emerge from the Bindu} {
-                #unaction {You shock your body out of its catalepsis and awaken to this world.};
-                ..;
-            } {2};
-        };
+    #if {$bot[active] && "$my[litany][focus]" == "Wracked"} {
+        .pause;
+        suspend;
+        #line oneshot #action {You shock your body out of its catalepsis and awaken to this world.} {
+            #unaction {Having regained your mental focus completely, you emerge from the Bindu};
+            ..;
+        } {2};
+        #line oneshot #action {Having regained your mental focus completely, you emerge from the Bindu} {
+            #unaction {You shock your body out of its catalepsis and awaken to this world.};
+            ..;
+        } {2};
     };
 };
 
