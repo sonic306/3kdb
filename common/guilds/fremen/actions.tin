@@ -122,7 +122,7 @@
 
 #action {Having regained your mental focus completely, you emerge from the Bindu} {
     #if {!$idle_flag} {
-        #var suspend_toggle 01;
+        #var suspend_toggle 0;
         #if {$bot[paused]} {.unpause};
         #if {$bot[active]} {..};
     };
