@@ -1,6 +1,6 @@
-#class {player_aliases} {kill}
-#class {player_aliases} {open}
+#class {player_aliases_mage} {kill}
+#class {player_aliases_mage} {open}
 
 #NOP -- Player specific aliases;
 
-#class {player_aliases} {close}
+#class {player_aliases_mage} {close}

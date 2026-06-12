@@ -1,7 +1,7 @@
-#class {player_actions} {kill}
-#class {player_actions} {open}
+#class {player_actions_mage} {kill}
+#class {player_actions_mage} {open}
 
 #NOP --- Player specific actions;
 
 
-#class {player_actions} {close}
+#class {player_actions_mage} {close}
