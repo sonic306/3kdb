@@ -149,7 +149,15 @@
 #list fremen_mod_list add {high+};
 #list fremen_mod_list add {all};
 
-#NOP -- fmod: set fremen modes using numeric shortcuts eg: fmod litany:13 prana:17 pain:5;
+#NOP -- Fremen attacks shorthand: 1=normal, 2=quick, 3=fast, 4=lightning, 5=blinding;
+#list fremen_attacks_list create;
+#list fremen_attacks_list add {normal};
+#list fremen_attacks_list add {quick};
+#list fremen_attacks_list add {fast};
+#list fremen_attacks_list add {lightning};
+#list fremen_attacks_list add {blinding};
+
+#NOP -- fmod: set fremen modes using numeric shortcuts eg: fmod litany:13 prana:17 pain:5 attacks:3;
 #alias {fmod} {
     #local tmpInput {%*};
     #local tmpResult {};
@@ -164,11 +172,20 @@
         #regexp {$tmpToken} {^(\w+):(\d+)$} {
             #local tmpMode {%%1};
             #local tmpVal {%%2};
-            #if {$tmpVal >= 1 && $tmpVal <= 17} {
-                #local tmpName {$fremen_mod_list[$tmpVal]};
-                #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
+            #if {"$tmpMode" == "attacks" || "$tmpMode" == "reflexes"} {
+                #if {$tmpVal >= 1 && $tmpVal <= 5} {
+                    #local tmpName {$fremen_attacks_list[$tmpVal]};
+                    #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
+                } {
+                    #local tmpResult {$tmpResult$tmpSep$tmpToken};
+                };
             } {
-                #local tmpResult {$tmpResult$tmpSep$tmpToken};
+                #if {$tmpVal >= 1 && $tmpVal <= 17} {
+                    #local tmpName {$fremen_mod_list[$tmpVal]};
+                    #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
+                } {
+                    #local tmpResult {$tmpResult$tmpSep$tmpToken};
+                };
             };
         } {
             #local tmpResult {$tmpResult$tmpSep$tmpToken};
