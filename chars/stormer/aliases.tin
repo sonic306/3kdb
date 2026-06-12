@@ -113,6 +113,7 @@
 		#case {"mage"} {
 			strategy spelltap;
 			strategy golem_defend;
+			strategy no_ash;
 		};
 		#case {"rolm"} {
 			strategy rolm1;
@@ -122,6 +123,25 @@
 		};
 		#DEFAULT {
 			{#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}};
+		};
+	};
+};
+
+#alias sref {
+	reflex clear;
+	refset $guild;
+};
+
+
+#alias refset {
+	#SWITCH {"%0"} {
+	 	#CASE {"mage"} {
+			reflex add gp2 >85% cast summon config deactivate;
+			reflex add gp2 >85% shoo;
+			reflex add gp2 <10% cast summon config activate;
+		};
+		#CASE {"necromancer"} {
+			reflex add hp <95% dream 16;
 		};
 	};
 };
