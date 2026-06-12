@@ -83,6 +83,10 @@
 	setonkill $guild;
 };
 
+#alias {stratset} {
+	strat $guild;
+};
+
 #alias {strat} {
 	#SWITCH {"%0"} {
 	 	#CASE {"necromancer"} {
@@ -108,7 +112,6 @@
 		};
 		#case {"mage"} {
 			strategy spelltap;
-			strategy soulburn;
 			strategy golem_defend;
 		};
 		#case {"rolm"} {

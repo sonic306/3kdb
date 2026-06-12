@@ -6,28 +6,31 @@
 #alias {_guild_miphp} {
 
 	#if {$my[literjons][filled] < $my[literjons][max]} {
-		#var str_literjons <dff>Literjons: <cfe>$my[literjons][filled]<088>
+		#var str_literjons \e[36mLiterjons:\e[31m$my[literjons][filled]
 	} {
-		#var str_literjons <dff>Literjons: <cff>$my[literjons][filled]<088>
+		#var str_literjons \e[36mLiterjons:\e[37m$my[literjons][filled]
 	};
 
 	#if {$my[literjons][carrying] < $my[literjons][max]} {
-		#cat str_literjons {/<cfe>$my[literjons][carrying]<088>};
+		#cat str_literjons {/\e[31m$my[literjons][carrying]\e[0m};
 	} {
-		#cat str_literjons {/<cff>$my[literjons][carrying]<088>};
+		#cat str_literjons {/\e[37m$my[literjons][carrying]\e[0m};
 	};
-	
+
 	#format {ehealth} {%p} {$ehealth};
 	#format {my[water][round]} {%p} {$my[water][round]};
 	#format {my[mode][attacks]} {%p} {$my[mode][attacks]};
 	#format {my[mode][reflexes]} {%p} {$my[mode][reflexes]};
 
+	#var hp_color \e[32m;
+	#var sp_color \e[96m;
+
 	#list temp clear;
-	#list temp add {<eeb>HP:<ffe>$my[hp][current]/$my[hp][max] <eeb>SP:<ffe>$my[sp][current]/$my[sp][max] <eeb>Water:<ffe>$my[gp1][current]/$my[gp1][max]  <eeb>Wcycle:<ffe>$my[gp2][current]/$my[gp2][max]  <eeb>E:<ffe>$ehealth<088>};
-	#list temp add {H:$my[hp][graph] S:$my[sp][graph] Water:$my[gp1][graph] Wcycle:$my[gp2][graph] E:$enemy[graph]};
-	#list temp add {<dea>L:<fff>$my[limberness]% <dea>P:<fff>$my[fremen][poisons]/$my[poisons][reset]% <dea>A:<fff>$my[attackers] <dea>Li:<fff>$my[litany][focus] <dea>S:<fff>$my[spice][status] ($spiceBeers) <dea>Pa:<fff>$my[pain][stored]% <dea>M:<fff>$my[maula][pistol] ($my[maula][clips]) <dea>St:<fff>$my[sandtrout][reset] <dea>Wr:<fff>$my[water][round]<088>};
-	#list temp add {<caf>Pr:<fff>$my[mode][prana] <caf>Bi:<fff>$my[mode][bindu] <caf>As:<fff>$my[mode][assault] <caf>Pn:<fff>$my[mode][pain] <caf>Lt:<fff>$my[mode][litany] <caf>Wd:<fff>$my[mode][weirding] <caf>At:<fff>$my[mode][attacks] <caf>Rf:<fff>$my[mode][reflexes]<088>};
-	#list temp add {$str_literjons | <eeb>Gxp $my[gxp][str_time]: <dea>$my[gxp][str_t30_per_hr]/AvgHr <dfe>| <dea>$my[gxp][last_round]/Rnd <dfe>| <dea>$my[fremen][gxp][spend]<088>};
+	#list temp add {<bfa>\e[32m╔═[\e[36mHP:\e[0m${hp_color}$my[hp][current]\e[0m/\e[32m$my[hp][max]\e[0m  \e[36mSP:\e[0m${sp_color}$my[sp][current]\e[0m/\e[96m$my[sp][max]\e[0m  \e[36mWater:\e[34m$my[gp1][current]\e[0m/\e[34m$my[gp1][max]\e[0m  \e[36mWcycle:\e[35m$my[gp2][current]\e[0m/\e[35m$my[gp2][max]\e[0m  \e[36mE:\e[37m$ehealth\e[32m]\e[0m};
+	#list temp add {<bfa>║ <088>\e[32mHP:\e[0m${hp_color}$my[hp][graph]\e[0m  \e[96mSP:\e[0m${sp_color}$my[sp][graph]\e[0m  \e[34mWater:\e[0m$my[gp1][graph]\e[0m  \e[35mWcycle:\e[0m$my[gp2][graph]\e[0m  \e[37mE:\e[0m$enemy[graph]\e[0m};
+	#list temp add {<bfa>║ <088>\e[36mL:\e[37m$my[limberness]%  \e[36mP:\e[37m$my[fremen][poisons]/$my[poisons][reset]%  \e[36mA:\e[37m$my[attackers]  \e[36mLi:\e[37m$my[litany][focus]  \e[36mS:\e[37m$my[spice][status] ($spiceBeers)  \e[36mPa:\e[37m$my[pain][stored]%  \e[36mM:\e[37m$my[maula][pistol] ($my[maula][clips])  \e[36mSt:\e[37m$my[sandtrout][reset]  \e[36mWr:\e[37m$my[water][round]\e[0m};
+	#list temp add {<bfa>║ <088>\e[36mPr:\e[37m$my[mode][prana]  \e[36mBi:\e[37m$my[mode][bindu]  \e[36mAs:\e[37m$my[mode][assault]  \e[36mPn:\e[37m$my[mode][pain]  \e[36mLt:\e[37m$my[mode][litany]  \e[36mWd:\e[37m$my[mode][weirding]  \e[36mAt:\e[37m$my[mode][attacks]  \e[36mRf:\e[37m$my[mode][reflexes]\e[0m};
+	#list temp add {<dda>╚═ $str_literjons  \e[36m|\e[0m  \e[36mGxp\e[37m $my[gxp][str_time]:  \e[36mAvgHr:\e[37m$my[gxp][str_t30_per_hr]  \e[36mRnd:\e[37m$my[gxp][last_round]  \e[36mSpend:\e[37m$my[fremen][gxp][spend]\e[0m<088>};
 	#var hpbar[prompt] $temp;
 };
 

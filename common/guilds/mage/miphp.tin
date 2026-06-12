@@ -42,12 +42,15 @@
 	#if {$ash == 1} {#var ash_string <ACA><fff>PLYRS<088>};
 	#if {$ash == 2} {#var ash_string <ACA><fff>ALL<088>};
 
+	#var hp_color \e[32m;
+	#var sp_color \e[96m;
+
 	#list temp clear;
-	#list temp add {<eeb>HP:<ffe>$hp/$hp_max <eeb>SP:<ffe>$sp/$sp_max <eeb>Sat:<ffe>$gp1/$gp1_max  <eeb>C:<ffe>$gp2/$gp2_max  <eeb>E:<ffe>$ehealth<088>};
-	#list temp add {H:$my[hp][graph] S:$my[sp][graph] Sat:$my[gp1][graph] C:$my[gp2][graph] E:$enemy[graph]<088>};
-	#list temp add {<eeb>Prots: <ffe>$prots_show <eeb>Gem: <ffe>$my[gem]%  <eeb>MC: <ffe>$my[mental_cognition]% ASH: $ash_string<088>};
-	#list temp add {<eeb>Golem: $my[golem][current]/$my[golem][reset]%  <eeb>Super: <ffe>$my[super][current]/$my[super][reset]%  <eeb>I: <ffe>$immersion_string <eeb>ST: <ffe>$my[spelltap][bonus]/$my[spelltap][corpses] <eeb>G2N: <ffe>@thousandsFormatNumber{$my[g2n]}<088>};
-	#list temp add {<eeb>Gxp $my[gxp][str_time]: <dea>$my[gxp][str_t30_per_hr] T-30 <dfe>|<dea> $my[gxp][str_average_per_hr]/Hr <dfe>|<dea> $my[gxp][str_total] Total<088>};
+	#list temp add {<bfa>\e[32m╔═[\e[36mHP:\e[0m${hp_color}$hp\e[0m/\e[32m$hp_max\e[0m  \e[36mSP:\e[0m${sp_color}$sp\e[0m/\e[96m$sp_max\e[0m  \e[36mSat:\e[33m$gp1\e[0m/\e[33m$gp1_max\e[0m  \e[36mC:\e[35m$gp2\e[0m/\e[35m$gp2_max\e[0m  \e[36mE:\e[37m$ehealth\e[32m]\e[0m};
+	#list temp add {<bfa>║ <088>\e[32mHP:\e[0m${hp_color}$my[hp][graph]\e[0m  \e[96mSP:\e[0m${sp_color}$my[sp][graph]\e[0m  \e[33mSat:\e[0m$my[gp1][graph]\e[0m  \e[35mC:\e[0m$my[gp2][graph]\e[0m  \e[35mE:\e[0m$enemy[graph]\e[0m};
+	#list temp add {<bfa>║ <088>\e[36mProts:\e[37m $prots_show  \e[36mGem:\e[37m$my[gem]%  \e[36mMC:\e[37m$my[mental_cognition]%  \e[36mASH:\e[0m $ash_string\e[0m};
+	#list temp add {<bfa>║ <088>\e[36mGolem:\e[37m$my[golem][current]/$my[golem][reset]%  \e[36mSuper:\e[37m$my[super][current]/$my[super][reset]%  \e[36mI:\e[37m$immersion_string  \e[36mST:\e[37m$my[spelltap][bonus]/$my[spelltap][corpses]  \e[36mG2N:\e[37m@thousandsFormatNumber{$my[g2n]}\e[0m};
+	#list temp add {<dda>╚═ \e[36mGxp\e[37m $my[gxp][str_time]:  \e[36mT-30:\e[37m$my[gxp][str_t30_per_hr]  \e[36mAvg:\e[37m$my[gxp][str_average_per_hr]/Hr  \e[36mTotal:\e[37m$my[gxp][str_total]\e[0m<088>};
     #if $summoner {#list temp add {$summon_string}};
 
 	#var hpbar[prompt] $temp;
