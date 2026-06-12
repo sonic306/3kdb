@@ -195,4 +195,37 @@
     mode $tmpResult;
 };
 
+#NOP -- fmodall: set all 8 modes positionally, pass 0 to skip;
+#NOP -- order: assault bindu litany prana pain weirding attacks reflexes;
+#NOP -- eg: fmodall 17 1 17 17 5 17 2 5;
+#alias {fmodall} {
+    #local tmpResult {};
+    #local tmpSep {};
+    #local tmpName {};
+    #local tmpModes {assault;bindu;litany;prana;pain;weirding;attacks;reflexes};
+    #local tmpArgs {%1;%2;%3;%4;%5;%6;%7;%8};
+    #local tmpIdx 0;
+
+    #foreach {$tmpModes} tmpMode {
+        #math tmpIdx {$tmpIdx + 1};
+        #local tmpVal $tmpArgs[$tmpIdx];
+        #if {$tmpVal > 0} {
+            #if {"$tmpResult" == ""} {#local tmpSep {}} {#local tmpSep { }};
+            #if {"$tmpMode" == "attacks" || "$tmpMode" == "reflexes"} {
+                #if {$tmpVal >= 1 && $tmpVal <= 5} {
+                    #local tmpName {$fremen_attacks_list[$tmpVal]};
+                    #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
+                };
+            } {
+                #if {$tmpVal >= 1 && $tmpVal <= 17} {
+                    #local tmpName {$fremen_mod_list[$tmpVal]};
+                    #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
+                };
+            };
+        };
+    };
+    #echo {<cff>fmodall => mode $tmpResult<088>};
+    mode $tmpResult;
+};
+
 #class {guild_aliases} {close};
