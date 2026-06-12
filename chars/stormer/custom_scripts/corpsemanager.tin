@@ -89,10 +89,10 @@
         _cm_cooler_corpse;
     };
     #elseif {"$guild" == "mage"} {
-        #if {$corpses[coffin] < 10} {
+        #if {$corpses[coffin] < $coffinmax} {
             wrap;
         };
-        #elseif {$corpses[coffin] == 10} {
+        #elseif {$corpses[coffin] == $coffinmax} {
             cast spelltap;
             cast corpse explosion;
         };
