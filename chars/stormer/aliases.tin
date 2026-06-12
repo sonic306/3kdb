@@ -139,7 +139,7 @@
 }
 
 #alias {powerdown} {
-	comtrance clear;
+	#IF {"$guild" == "necromancer"} {comtrance clear;};
 	strategy-clear;
 	(toggle eradication;
 };

@@ -3,7 +3,7 @@
 
 #NOP -- Set Player specific variables;
 #var user stormer;
-#var guild elemental;
+#var guild mage;
 
 #read chars/$user/vars.tin;
 #read chars/$user/custom_scripts/corpsemanager.tin;
