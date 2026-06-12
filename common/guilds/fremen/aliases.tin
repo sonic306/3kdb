@@ -202,28 +202,15 @@
     #local tmpResult {};
     #local tmpSep {};
     #local tmpName {};
-    #local tmpModes {assault;bindu;litany;prana;pain;weirding;attacks;reflexes};
-    #local tmpArgs {%1;%2;%3;%4;%5;%6;%7;%8};
-    #local tmpIdx 0;
 
-    #foreach {$tmpModes} tmpMode {
-        #math tmpIdx {$tmpIdx + 1};
-        #local tmpVal $tmpArgs[$tmpIdx];
-        #if {$tmpVal > 0} {
-            #if {"$tmpResult" == ""} {#local tmpSep {}} {#local tmpSep { }};
-            #if {"$tmpMode" == "attacks" || "$tmpMode" == "reflexes"} {
-                #if {$tmpVal >= 1 && $tmpVal <= 5} {
-                    #local tmpName {$fremen_attacks_list[$tmpVal]};
-                    #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
-                };
-            } {
-                #if {$tmpVal >= 1 && $tmpVal <= 17} {
-                    #local tmpName {$fremen_mod_list[$tmpVal]};
-                    #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
-                };
-            };
-        };
-    };
+    #if {%1 >= 1 && %1 <= 17} {#local tmpName {assault:$fremen_mod_list[%1]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%2 >= 1 && %2 <= 17} {#local tmpName {bindu:$fremen_mod_list[%2]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%3 >= 1 && %3 <= 17} {#local tmpName {litany:$fremen_mod_list[%3]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%4 >= 1 && %4 <= 17} {#local tmpName {prana:$fremen_mod_list[%4]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%5 >= 1 && %5 <= 17} {#local tmpName {pain:$fremen_mod_list[%5]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%6 >= 1 && %6 <= 17} {#local tmpName {weirding:$fremen_mod_list[%6]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%7 >= 1 && %7 <= 5}  {#local tmpName {attacks:$fremen_attacks_list[%7]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
+    #if {%8 >= 1 && %8 <= 5}  {#local tmpName {reflexes:$fremen_attacks_list[%8]};#local tmpResult {$tmpResult$tmpSep$tmpName};#local tmpSep { }};
     #echo {<cff>fmodall => mode $tmpResult<088>};
     mode $tmpResult;
 };
