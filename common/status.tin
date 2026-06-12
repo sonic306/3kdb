@@ -291,10 +291,14 @@
     };
 
     #alias reset_gxp {
+        #list my[gxp][t30] clear;
         #var my[gxp][hour] 0;
         #var my[gxp][total] 0;
         #var my[gxp][last_round] 0;
         #var my[gxp][average] 0;
+        #var my[gxp][t30_average] 0;
+        #var my[gxp][t30_total] 0;
+        #var my[gxp][t30_per_hr] 0;
         #var my[gxp][rounds_tracked] 0;
         #var my[gxp][starting_round] $total_rounds;
         #format {my[gxp][start-time]} {%T} {};

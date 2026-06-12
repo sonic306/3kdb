@@ -127,4 +127,55 @@
     #foreach *fremenskill[] key {#echo $key};
 };
 
+#NOP -- Fremen numeric mod shorthand: 1=none, 2=none+, 3=low, 4=low+, 5=some, 6=some+;
+#NOP -- 7=minor, 8=minor+, 9=half, 10=half+, 11=major, 12=major+, 13=most, 14=most+;
+#NOP -- 15=high, 16=high+, 17=all;
+#list fremen_mod_list create;
+#list fremen_mod_list add {none};
+#list fremen_mod_list add {none+};
+#list fremen_mod_list add {low};
+#list fremen_mod_list add {low+};
+#list fremen_mod_list add {some};
+#list fremen_mod_list add {some+};
+#list fremen_mod_list add {minor};
+#list fremen_mod_list add {minor+};
+#list fremen_mod_list add {half};
+#list fremen_mod_list add {half+};
+#list fremen_mod_list add {major};
+#list fremen_mod_list add {major+};
+#list fremen_mod_list add {most};
+#list fremen_mod_list add {most+};
+#list fremen_mod_list add {high};
+#list fremen_mod_list add {high+};
+#list fremen_mod_list add {all};
+
+#NOP -- fmod: set fremen modes using numeric shortcuts eg: fmod litany:13 prana:17 pain:5;
+#alias {fmod} {
+    #local tmpInput {%*};
+    #local tmpResult {};
+    #local tmpToken {};
+    #local tmpMode {};
+    #local tmpVal {};
+    #local tmpName {};
+    #local tmpSep {};
+
+    #foreach {$tmpInput} tmpToken {
+        #if {"$tmpResult" == ""} {#local tmpSep {}} {#local tmpSep { }};
+        #regexp {$tmpToken} {^(\w+):(\d+)$} {
+            #local tmpMode {%%1};
+            #local tmpVal {%%2};
+            #if {$tmpVal >= 1 && $tmpVal <= 17} {
+                #local tmpName {$fremen_mod_list[$tmpVal]};
+                #local tmpResult {$tmpResult$tmpSep$tmpMode:$tmpName};
+            } {
+                #local tmpResult {$tmpResult$tmpSep$tmpToken};
+            };
+        } {
+            #local tmpResult {$tmpResult$tmpSep$tmpToken};
+        };
+    };
+    #echo {<cff>fmod => mode $tmpResult<088>};
+    mode $tmpResult;
+};
+
 #class {guild_aliases} {close};
