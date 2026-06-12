@@ -23,6 +23,7 @@
         #case {"gentech"} {reflex stop;gagsoff;gswap gentech;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap gentech}};
         #case {"fremen"} {reflex stop;gagsoff;gswap fremen;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap fremen}};
 		#case {"jedi"} {reflex stop;gagsoff;gswap jedi;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap jedi}};
+		#case {"mage"} {reflex stop;gagsoff;gswap mage;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap mage}};
 		#case {"priest"} {reflex stop;gagsoff;gswap priest;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap priest}};
 		#case {"necromancer"} {reflex stop;gagsoff;gswap necromancer;#delay {6} {get all;keep all;wear all;wield rod;wield shard;hold rock;hold tome;get coin;.gswap necromancer}};
         #case {""} {#echo {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>}};
@@ -66,6 +67,11 @@
 			corpsetrig+ cocoon500;
 			corpsetrig+ poison1;
 		};
+		#CASE {"mage"} {
+			corpsetrig+ customonkill;
+			corpsetrig+ delay;
+			corpsetrig+ divvy;
+			corpsetrig+ cocoon500;
 	 	#DEFAULT {
 			#ECHO {<efb>==========<088> <faa>NO GUILD PROVIDED!!!<088> <efb>==========<088>};
 		};
@@ -98,6 +104,11 @@
 			strategy voicehold;
 			strategy voicefeeble;
 			strategy suspend;
+		};
+		#case {"mage"} {
+			strategy spelltap;
+			strategy soulburn;
+			strategy golem_defend;
 		};
 		#case {"rolm"} {
 			strategy rolm1;
