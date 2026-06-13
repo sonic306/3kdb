@@ -35,6 +35,7 @@
 		#if $defs[pg] {#if !$my[prots][PG] {cast protection from good} {#nop}};
 		#if $defs[shield] {#if !$my[prots][S] {cast shield} {#nop}};
 		#if $defs[blink] {#if !$my[prots][B] {cast blink} {#nop}};
+        #if $defs[blur] {#if !$my[prots][blur] {cast blur} {#nop}};
 
 		#if !$deeppocket {#if {$my[sp][current] > 500} {cast extension 3;cast deeppockets}};
 	} {#NOP;};
