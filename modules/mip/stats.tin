@@ -270,7 +270,7 @@
 		#REGEX {$mip[gline][2]}	{S: %d\/%d\%}		{#VAR {my[super][current]}		{&1};
 													 #VAR {my[super][reset]}		{&2}};
 		#REGEX {$mip[gline][2]}	{G2N:%d\%}			{#VAR {my[g2n]}					{&1}};
-		#REGEX {$mip[gline][2]}	{G2N:-%d\%}			{#math {my[g2n]}				{&1 * -1}};
+		#REGEX {$mip[gline][2]}	{G2N:-%d\%}			{#var {my[g2n]}					{-&1}};
 		#REGEX {$mip[gline][2]}	{I: %d}				{#VAR {my[immersion][count]}	{&1}};
 
 	}; #ELSE {
