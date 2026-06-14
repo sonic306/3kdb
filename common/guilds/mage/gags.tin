@@ -10,6 +10,9 @@
         #gag {A %* hit for %* damage.$};
         #gag {^Phoenix emits a high-pitched shriek as she dives towards %*!$};
         #gag {^Phoenix fans her wings at %*!$};
+        
+        #NOP {Spell's Gags};
+        #gag {^A magic missile shoots out and strikes %*!$};
         #class mage_gags close;
         
     } {
