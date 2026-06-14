@@ -113,7 +113,11 @@
 		#case {"mage"} {
 			strategy spelltap;
 			strategy golem_defend;
-			strategy no_ash;
+			strategy summon_haste;
+			strategy super_sub;
+			strategy super_er;
+			strategy gstrength;
+			
 		};
 		#case {"rolm"} {
 			strategy rolm1;
