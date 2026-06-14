@@ -1,4 +1,11 @@
 #function {thousandsFormatNumber} {
-  #format result {%M} {%1};
-  #replace result {G} {B};
+  #if {%1 < 0} {
+    #math result {%1 * -1};
+    #format result {%M} {$result};
+    #replace result {G} {B};
+    #var result {-$result};
+  } {
+    #format result {%M} {%1};
+    #replace result {G} {B};
+  };
 };
