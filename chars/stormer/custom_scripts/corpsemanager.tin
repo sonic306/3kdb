@@ -93,7 +93,7 @@
             wrap;
         };
         #elseif {$corpses[coffin] == $coffinmax} {
-            cast spell tap;
+            cast spell tap on corpse;
             cast corpse blast;
         };
     };
