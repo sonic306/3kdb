@@ -1,10 +1,4 @@
 #function {thousandsFormatNumber} {
-  #var result {%1};
-  #NOP -- capture sign, strip minus and any decimal portion before formatting;
-  #if {$result < 0} {#var neg 1} {#var neg 0};
-  #replace result {-} {};
-  #replace result {.%d} {};
-  #format result {%M} {$result};
+  #format result {%M} {%1};
   #replace result {G} {B};
-  #if {$neg} {#var result {-$result}};
 };
