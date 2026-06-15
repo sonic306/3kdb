@@ -73,7 +73,7 @@
 	#list temp add {<bfa>║  <088>\e[32mHP:\e[0m${hp_color}$my[hp][graph]\e[0m   \e[96mSP:\e[0m${sp_color}$my[sp][graph]\e[0m   \e[33mSat:\e[0m$my[gp1][graph]\e[0m \e[35mC:\e[0m$my[gp2][graph]\e[0m \e[35mE:\e[0m$enemy[graph]\e[0m};
 	#list temp add {<bfa>║  <088>\e[36mProts:\e[37m $prots_show  \e[36mGem:\e[37m$my[gem]%  \e[36mMC:\e[37m$my[mental_cognition]%  \e[36mASH:\e[0m $ash_string\e[0m};
 	#list temp add {<bfa>║  <088>\e[36mGolem:\e[37m$my[golem][current]/$my[golem][reset]%  \e[36mSuper:\e[37m$my[super][current]/$my[super][reset]%  \e[36mI:\e[37m$immersion_string  \e[36mST:\e[37m$my[spelltap][bonus]/$my[spelltap][corpses]  \e[36mG2N:\e[37m@thousandsFormatNumber{$my[g2n]}  \e[36mETA:\e[37m$my[gxp][str_eta]\e[0m};
-	#list temp add {<dda>╚═ \e[36mGxp\e[37m $my[gxp][str_time]:  \e[36mT-30:\e[37m$my[gxp][str_t30_per_hr]  \e[36mRnd:\e[37m$my[gxp][str_average_per_rnd]  \e[36mAvg:\e[37m$my[gxp][str_average_per_hr]/Hr  \e[36mTotal:\e[37m$my[gxp][str_total]\e[0m<088>};
+	#list temp add {<dda>╚═ \e[36mGxp\e[37m $my[gxp][str_time]:  \e[36mT-30:\e[37m$my[gxp][str_t30_per_hr]  \e[36mRnd:\e[37m$my[gxp][str_last_round]  \e[36mAvg:\e[37m$my[gxp][str_average_per_hr]/Hr  \e[36mTotal:\e[37m$my[gxp][str_total]\e[0m<088>};
     #if $summoner {#list temp add {$summon_string}};
 
 	#var hpbar[prompt] $temp;
