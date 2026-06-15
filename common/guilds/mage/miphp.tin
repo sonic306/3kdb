@@ -45,9 +45,9 @@
 	#var hp_color \e[32m;
 	#var sp_color \e[96m;
 
-	#NOP -- ETA to next guild level using t30 rate;
-	#if {$my[gxp][t30_per_hr] > 0} {
-		#math my[gxp][eta_hours] {$my[gxp][g2n][current] * 1.00 / $my[gxp][t30_per_hr]};
+	#NOP -- ETA to next guild level using current round GXP rate;
+	#if {$my[gxp][last_round] > 0} {
+		#math my[gxp][eta_hours] {$my[gxp][g2n][current] * 1.00 / ($my[gxp][last_round] * 1800)};
 		#if {$my[gxp][eta_hours] < 1} {
 			#math my[gxp][eta_display] {$my[gxp][eta_hours] * 60};
 			#var my[gxp][str_eta] {$my[gxp][eta_display] Mins};
