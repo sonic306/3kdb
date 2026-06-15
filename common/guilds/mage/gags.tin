@@ -11,10 +11,18 @@
         #gag {^Phoenix emits a high-pitched shriek as she dives towards %*!$};
         #gag {^Phoenix fans her wings at %*!$};
         
-        #NOP {Spell's Gags};
+        #NOP { =========== Spell's Gags =========== };
+        #gag {^[%d]%*!$};
+
+        #NOP {Magic Missile Gags};
         #gag {^A magic missile shoots out and strikes %*!$};
+        #gag {^You pelt %* with magic missiles!};
         #class mage_gags close;
         
+        #NOP { =========== Summon Gags =========== };
+        #gag {^Owlbear grabs %* with both claws!$};
+        #gag {^The Owlbear emits a deafening roar that reverberates through the air};
+        #gag {^instilling fear in %* and weakening their resolve.$};
     } {
         #ECHO {======== TURNING OFF MAGE GAGS ========};
         #var mage_gag 0;
