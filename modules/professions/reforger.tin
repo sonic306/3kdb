@@ -3,6 +3,11 @@
 #var reforger 1;
 #act {You can currently reforge %d items.} {#var my[reforger] %1};
 
+#alias {refburn} {
+	go reforge;
+	#delay {4} {#12 refs;};
+};
+
 #alias {refk} {
 	buy knife;
 	reforge knife with little from edged to critical;

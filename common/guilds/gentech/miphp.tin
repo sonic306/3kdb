@@ -5,40 +5,43 @@
 
 #alias {_guild_miphp} {
 
-	#math	{gxp[last]}		{$gentech[gxp][last] + $gentech[rc][last]};
-	#math	{gxp[rnds]}		{$gentech[gxp][tnlamt] / $gentech[gxp][last]};
-	#if	{$gxp[rnds] < 30}	{
-		#var gxp[time]		{<128>${gxp[rnds]}<228>s<088>}
-	}; #elseif {$gxp[rnds] < 1800}	{
-		#math {gxp[min]}	{$gxp[rnds] / 30};
-		#math {gxp[sec]}	{$gxp[rnds] % 30};
-		#var  {gxp[time]}	{<128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
-	}; #elseif {$gxp[rnds] < 43200}	{
-		#math {gxp[hr]}		{$gxp[rnds] / 1800};
-		#math {gxp[min]}	{$gxp[rnds] % 1800 / 30};
-		#math {gxp[sec]}	{$gxp[rnds] % 1800 % 30};
-		#var  {gxp[time]}	{<128>${gxp[hr]}<228>h <128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
-	}; #else {
-		#math {gxp[day]}	{$gxp[rnds] / 43200};
-		#math {gxp[hr]}		{$gxp[rnds] % 43200 / 1800};
-		#math {gxp[min]}	{$gxp[rnds] % 43200 % 1800 / 30};
-		#math {gxp[sec]}	{$gxp[rnds] % 43200 % 1800 % 30};
-		#var  {gxp[time]}	{<128>${gxp[day]}<228>d <128>${gxp[hr]}<228>h <128>${gxp[min]}<228>m <128>${gxp[sec]}<228>s<088>}
-	};	
+	#math {gxp[last]}	{$gentech[gxp][last] + $gentech[rc][last]};
+
+	#if {$gxp[last] > 0} {
+		#math {gxp[rnds]}	{$gentech[gxp][tnlamt] / $gxp[last]};
+		#if {$gxp[rnds] < 30} {
+			#var gxp[time] {${gxp[rnds]}s};
+		}; #elseif {$gxp[rnds] < 1800} {
+			#math {gxp[min]}	{$gxp[rnds] / 30};
+			#math {gxp[sec]}	{$gxp[rnds] % 30};
+			#var  {gxp[time]}	{${gxp[min]}m ${gxp[sec]}s};
+		}; #elseif {$gxp[rnds] < 43200} {
+			#math {gxp[hr]}		{$gxp[rnds] / 1800};
+			#math {gxp[min]}	{$gxp[rnds] % 1800 / 30};
+			#var  {gxp[time]}	{${gxp[hr]}h ${gxp[min]}m};
+		}; #else {
+			#math {gxp[day]}	{$gxp[rnds] / 43200};
+			#math {gxp[hr]}		{$gxp[rnds] % 43200 / 1800};
+			#var  {gxp[time]}	{${gxp[day]}d ${gxp[hr]}h};
+		};
+	} {
+		#var gxp[time] {--};
+	};
 
 	#format {attack_ionbeam}	{%p}	{$my[attacks][ionbeam]};
 	#format {attack_ddb}		{%p}	{$my[attacks][ddb]};
 	#format {attack_synthorg}	{%p}	{$my[attacks][synthorg]};
-	#format {tot_last}			{%+3s}  {$gxp[last]};
-	#format {gxp_time}			{%-15s} {$gxp[time]};
-	#format {my[g2n]}			{%g} {$my[g2n]};
-	
+
+	#var hp_color \e[32m;
+	#var sp_color \e[96m;
+	#var pu_color \e[33m;
+
 	#list temp clear;
-	#list temp add {HP:$hp/$hp_max SP:$sp/$sp_max PU:$gp1/$gp1_max($gp2) E:$ehealth};
-	#list temp add {H:$my[hp][graph] S:$my[sp][graph] PU:$my[gp1][graph] SU:$my[gp2][graph] G: $gentech[gxp][graph] E:$enemy[graph]};	
-	#list temp add {G:$gentech[gxp][num]/$gentech[gxp][tnlamt]($gentech[gxp][per]%) RC:$gentech[rc][num] Bias:( $gentech[bias][atk]% | $gentech[bias][def]% ) TS:$gentech[ts][current]/$gentech[ts][max]($gentech[reset]%) GL:$gentech[gxp][last] RL:$gentech[rc][last] TL:${tot_last} ${gxp_time}};
-	#list temp add {EField[$gentech[efield][num] $gentech[efield][unit]] EDNA[$gentech[edna][num] $gentech[edna][unit]] Synth[$gentech[synthorg]] EFF:$gentech[geneff]|$gentech[techeff] HG: $gentech[hg][num]($gentech[hg][time] $gentech[hg][unit])};
-	#list temp add {I-Beam .: $attack_ionbeam :. DDB .: $attack_ddb :.  Synth .: $attack_synthorg :.};
+	#list temp add {<bfa>\e[32m╔═[\e[36mHP:\e[0m${hp_color}$hp\e[0m/\e[32m$hp_max\e[0m  \e[36mSP:\e[0m${sp_color}$sp\e[0m/\e[96m$sp_max\e[0m  \e[36mPU:\e[0m${pu_color}$gp1\e[0m/\e[33m$gp1_max\e[0m(\e[33m$gp2\e[0m)  \e[36mE:\e[37m$ehealth\e[32m]\e[0m};
+	#list temp add {<bfa>║  <088>\e[32mHP:\e[0m${hp_color}$my[hp][graph]\e[0m   \e[96mSP:\e[0m${sp_color}$my[sp][graph]\e[0m   \e[33mPU:\e[0m$my[gp1][graph]\e[0m  \e[33mSU:\e[0m$my[gp2][graph]\e[0m  \e[35mG:\e[0m$gentech[gxp][graph]\e[0m  \e[35mE:\e[0m$enemy[graph]\e[0m};
+	#list temp add {<bfa>║  <088>\e[36mGXP:\e[37m$gentech[gxp][num]/$gentech[gxp][tnlamt]($gentech[gxp][per]%)  \e[36mRC:\e[37m$gentech[rc][num]  \e[36mBias:\e[37m$gentech[bias][atk]%/$gentech[bias][def]%  \e[36mTS:\e[37m$gentech[ts][current]/$gentech[ts][max]($gentech[reset]%)  \e[36mETA:\e[37m$gxp[time]\e[0m};
+	#list temp add {<bfa>║  <088>\e[36mEField:\e[37m$gentech[efield][num] $gentech[efield][unit]  \e[36mEDNA:\e[37m$gentech[edna][num] $gentech[edna][unit]  \e[36mSynth:\e[37m$gentech[synthorg]  \e[36mEFF:\e[37m$gentech[geneff]|$gentech[techeff]  \e[36mHG:\e[37m$gentech[hg][num]($gentech[hg][time] $gentech[hg][unit])\e[0m};
+	#list temp add {<dda>╚═ \e[36mGL:\e[37m$gentech[gxp][last]  \e[36mRL:\e[37m$gentech[rc][last]  \e[36mTL:\e[37m$gxp[last]  \e[36mI-Beam:\e[37m$attack_ionbeam  \e[36mDDB:\e[37m$attack_ddb  \e[36mSynth:\e[37m$attack_synthorg\e[0m<088>};
 
 	#var hpbar[prompt] $temp;
 };

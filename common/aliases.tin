@@ -437,6 +437,13 @@
     #read chars/$user/miphp.tin;
     #read chars/$user/private.tin;
     #read chars/$user/tickers.tin;
+
+    #read chars/$user/guilds/$guild/actions.tin;
+    #read chars/$user/guilds/$guild/aliases.tin;
+    #read chars/$user/guilds/$guild/config.tin;
+    #read chars/$user/guilds/$guild/heartbeat.tin;
+    #read chars/$user/guilds/$guild/miphp.tin;
+    #read chars/$user/guilds/$guild/tickers.tin;
     
     #NOP -- Initialize everything except postload;
     mipon;
