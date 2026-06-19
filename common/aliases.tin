@@ -25,13 +25,17 @@
             repower;
         };
     };
+    setconfig;
+    go cot;
+};
+
+#alias {setconfig} {
     gagsoff;
     gagson;
     skset;
     stratset;
     sref;
 };
-
 
 #NOP -- calculator;
 #alias {calc} {

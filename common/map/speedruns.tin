@@ -414,6 +414,7 @@
 
 .add_speedrun {mage_shop} {misc} {53389} {Mage Guild: Guild Shop};
 .add_speedrun {mage_box} {misc} {53386} {Mage Guild: Guild Box};
+.add_speedrun {mage_pollyne} {misc} {53316} {Mage Guild: Platinum Star - Pollyne};
 
 .add_speedrun {knight_box} {misc} {1970} {Knight Guild: Guild Box};
 .add_speedrun {knights} {misc} {137} {Knight Guild: Entrance};

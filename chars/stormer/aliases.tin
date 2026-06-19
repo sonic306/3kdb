@@ -40,10 +40,6 @@
 	gag+ combat_area;
 };
 
-#alias {stratoff} {
-	strategy-clear;
-};
-
 #alias {setonkill} {
 	#SWITCH {"%0"} {
 	 	#CASE {"gentech"} {
@@ -80,11 +76,31 @@
 };
 
 #alias {skset} {
+	corpsetrig-clear;
 	setonkill $guild;
 };
 
 #alias {stratset} {
+	strat clear;
 	strat $guild;
+};
+
+#alias sref {
+	reflex clear;
+	refset $guild;
+};
+
+#alias refset {
+	#SWITCH {"%0"} {
+	 	#CASE {"mage"} {
+			reflex add gp2 >85% cast summon config deactivate;
+			reflex add gp2 >85% shoo;
+			reflex add gp2 <10% cast summon config activate;
+		};
+		#CASE {"necromancer"} {
+			reflex add hp <95% dream 16;
+		};
+	};
 };
 
 #alias {strat} {
@@ -112,7 +128,7 @@
 		};
 		#case {"mage"} {
 			strategy spelltap;
-			strategy golem_defend;
+			strategy golem_assist;
 			strategy summon_haste;
 			strategy super_sub;
 			strategy super_er;
@@ -131,24 +147,7 @@
 	};
 };
 
-#alias sref {
-	reflex clear;
-	refset $guild;
-};
 
-
-#alias refset {
-	#SWITCH {"%0"} {
-	 	#CASE {"mage"} {
-			reflex add gp2 >85% cast summon config deactivate;
-			reflex add gp2 >85% shoo;
-			reflex add gp2 <10% cast summon config activate;
-		};
-		#CASE {"necromancer"} {
-			reflex add hp <95% dream 16;
-		};
-	};
-};
 
 #alias {kt} {
 	#SWITCH {"%0"} {

@@ -1,33 +1,35 @@
 #class {guild_gags} {kill}
 #class {guild_gags} {open}
 
-#var mage_gag 1;
-#alias mage_gag {
-    #if !$mage_gag {
-        #var mage_gag 1;
-        #ECHO {======== TURNING ON MAGE GAGS ========};
-        #class mage_gags open;
-        #gag {A %* hit for %* damage.$};
-        #gag {^Phoenix emits a high-pitched shriek as she dives towards %*!$};
-        #gag {^Phoenix fans her wings at %*!$};
-        
-        #NOP { =========== Spell's Gags =========== };
-        #gag {^[%d]%*!$};
+#NOP #var mage_gag 1;
+#NOP #alias mage_gag {
+#NOP     #if !$mage_gag {
+#NOP         #var mage_gag 1;
+#NOP         #ECHO {======== TURNING ON MAGE GAGS ========};
+#NOP         #class mage_gags kill;
+#NOP         #class mage_gags open;
+#NOP 
+#NOP     } {
+#NOP         #ECHO {======== TURNING OFF MAGE GAGS ========};
+#NOP         #var mage_gag 0;
+#NOP         #class mage_gags close;
+#NOP     };
+#NOP };
+#gag {You already have a shield operating.};
+#gag {A %* hit for %* damage.$};
+#gag {^Phoenix emits a high-pitched shriek as she dives towards %*!$};
+#gag {^Phoenix fans her wings at %*!$};
 
-        #NOP {Magic Missile Gags};
-        #gag {^A magic missile shoots out and strikes %*!$};
-        #gag {^You pelt %* with magic missiles!};
-        #class mage_gags close;
-        
-        #NOP { =========== Summon Gags =========== };
-        #gag {^Owlbear grabs %* with both claws!$};
-        #gag {^The Owlbear emits a deafening roar that reverberates through the air};
-        #gag {^instilling fear in %* and weakening their resolve.$};
-    } {
-        #ECHO {======== TURNING OFF MAGE GAGS ========};
-        #var mage_gag 0;
-        #class mage_gags kill;
-    };
-};
+#NOP { =========== Spell's Gags =========== };
+#gag {^[%d]%*!$};
+
+#NOP {Magic Missile Gags};
+#gag {^A magic missile shoots out and strikes %*!$};
+#gag {^You pelt %* with magic missiles!};
+
+#NOP { =========== Summon Gags =========== };
+#gag {^Owlbear grabs %* with both claws!$};
+#gag {^The Owlbear emits a deafening roar that reverberates through the air};
+#gag {^instilling fear in %* and weakening their resolve.$};
 
 #class {guild_gags} {close}
