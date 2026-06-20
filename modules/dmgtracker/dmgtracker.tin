@@ -361,7 +361,7 @@ dreset;
         #if {!$ewell_round && !$fry_round} {
             #if {$summon_dmg[round_total] > 0} {
                 #format tempSummonDmgFmt {%g} {$summon_dmg[round_total]};
-                #echo {<128>[DMG]:<088> <178>Your Summons hit<088> <138>$summon_dmg[round_hits]<088> <178>times for<088> <158>$tempSummonDmgFmt<088> <178>damage.<088>};
+                #echo {<128>[DMG]:<088> <178>Your <168>Summons<088> <178>hit<088> <138>$summon_dmg[round_hits]<088> <178>times for<088> <158>$tempSummonDmgFmt<088> <178>damage.<088>};
             };
             #var tempHighSummonDmg $summon_dmg[round_total];
             #if {$tempHighSummonDmg > $summon_dmg[high]} {
