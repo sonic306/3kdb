@@ -5,7 +5,7 @@
 
 #alias {refburn} {
 	go reforge;
-	#delay {4} {#12 refs;};
+	#delay {4} {#12 refk;};
 };
 
 #alias {refk} {
