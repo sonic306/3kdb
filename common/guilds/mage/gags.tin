@@ -1,20 +1,6 @@
 #class {guild_gags} {kill}
 #class {guild_gags} {open}
 
-#NOP #var mage_gag 1;
-#NOP #alias mage_gag {
-#NOP     #if !$mage_gag {
-#NOP         #var mage_gag 1;
-#NOP         #ECHO {======== TURNING ON MAGE GAGS ========};
-#NOP         #class mage_gags kill;
-#NOP         #class mage_gags open;
-#NOP 
-#NOP     } {
-#NOP         #ECHO {======== TURNING OFF MAGE GAGS ========};
-#NOP         #var mage_gag 0;
-#NOP         #class mage_gags close;
-#NOP     };
-#NOP };
 #gag {You already have a shield operating.};
 #gag {A %* hit for %* damage.$};
 #gag {^Phoenix emits a high-pitched shriek as she dives towards %*!$};
