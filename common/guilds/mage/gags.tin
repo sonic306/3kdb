@@ -2,10 +2,10 @@
 #class {guild_gags} {open}
 
 #gag {You already have a shield operating.};
-#gag {A %* hit for %* damage.$};
-#gag {An %* hit for %* damage.$};
-#gag {%* (%w Golem) hit for %* damage.$};
-#gag {0 hit for %* damage.$};
+#gag {^A %* hit for %* damage!$};
+#gag {^An %* hit for %* damage!$};
+#gag {^%* (%w Golem) hit for %* damage!$};
+#gag {^0 hit for %* damage!$};
 #gag {^Phoenix emits a high-pitched shriek as she dives towards %*!$};
 #gag {^Phoenix fans her wings at %*!$};
 

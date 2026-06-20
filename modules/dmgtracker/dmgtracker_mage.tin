@@ -6,6 +6,8 @@
 #unvar summon_dmg;
 #unvar spell_dmg;
 #var summon_dmg[first_round] $total_rounds;
+#var summon_dmg[round_total] 0;
+#var summon_dmg[round_hits] 0;
 #var spell_dmg[first_round] $total_rounds;
 
 #delay 10 {summonDmg-clear;spellDmg-clear};
@@ -189,6 +191,9 @@
             #var summonDmgNewRound 0;
             #math summon_dmg[rnd] {$summon_dmg[rnd] + 1};
         };
+        #format _sdmg {%d} {%2};
+        #math summon_dmg[round_total] {$summon_dmg[round_total] + $_sdmg};
+        #math summon_dmg[round_hits] {$summon_dmg[round_hits] + 1};
 
         #var foundItem 0;
         #format summonType {%p} {%1};

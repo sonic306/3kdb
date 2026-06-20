@@ -358,22 +358,19 @@ dreset;
     #var dmgTrackerNewRound 1;
     #if {"$guild" == "mage"} {
         #var summonDmgNewRound 1;
-        #var tempHighSummonDmg 0;
-        #var tempSummonHits 0;
         #if {!$ewell_round && !$fry_round} {
-            #foreach *summon_dmg[vaf][%*] tmpSummonItem {
-                #math tempHighSummonDmg {$tempHighSummonDmg + $summon_dmg[vaf][$tmpSummonItem][round][damage]};
-                #math tempSummonHits {$tempSummonHits + $summon_dmg[vaf][$tmpSummonItem][round][hits]};
+            #if {$summon_dmg[round_total] > 0} {
+                #format tempSummonDmgFmt {%g} {$summon_dmg[round_total]};
+                #echo {<128>[DMG]:<088> <178>Your Summons hit<088> <138>$summon_dmg[round_hits]<088> <178>times for<088> <158>$tempSummonDmgFmt<088> <178>damage.<088>};
             };
-            #if {$tempHighSummonDmg > 0} {
-                #format tempSummonDmgFmt {%g} {$tempHighSummonDmg};
-                #echo {<128>[DMG]:<088> <178>Your Summons hit<088> <138>$tempSummonHits<088> <178>times for<088> <158>$tempSummonDmgFmt<088> <178>damage.<088>};
-            };
+            #var tempHighSummonDmg $summon_dmg[round_total];
             #if {$tempHighSummonDmg > $summon_dmg[high]} {
                 #var summon_dmg[high] $tempHighSummonDmg;
                 #echo {<eaa>NEW BEST SUMMON ROUND: $tempHighSummonDmg<088>};
             };
         };
+        #var summon_dmg[round_total] 0;
+        #var summon_dmg[round_hits] 0;
         #foreach *summon_dmg[vaf][%*] tmpSummonItem {
             #var summon_dmg[vaf][$tmpSummonItem][round][damage] 0;
             #var summon_dmg[vaf][$tmpSummonItem][round][hits] 0;
