@@ -266,13 +266,18 @@
         #return;
     };
     #echo {<cbf>GLVL target set to $my[glvl_target][level]. Capturing current GXP...<088>};
-    #line oneshot #action {^  Total GXP : %d %sGXP to next level: %d %sPerc: %d%%} {
-        #format my[glvl_target][total_gxp] {%%d} {%%%%1};
-        #format my[glvl_target][g2n_snapshot] {%%d} {%%%%3};
-        .glvl_target_calc;
-    };
+    #var _glvl_target_pending 1;
     gs;
 };
+
+#action {^  Total GXP : %1 %2GXP to next level: %3 %4Perc: %5} {
+    #if {$_glvl_target_pending} {
+        #format my[glvl_target][total_gxp] {%d} {%1};
+        #format my[glvl_target][g2n_snapshot] {%d} {%3};
+        #var _glvl_target_pending 0;
+        .glvl_target_calc;
+    };
+} {2};
 
 #alias {.glvl_target_calc} {
     #local _tgt_gxp 0;

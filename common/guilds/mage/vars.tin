@@ -5,6 +5,7 @@
 #var go_fetch 0;
 
 #NOP -- GLVL Target Tracker defaults;
+#var _glvl_target_pending 0;
 #if {!"$my[glvl_target][level]"} {#var my[glvl_target][level] 0};
 #if {!"$my[glvl_target][gxp_remaining]"} {#var my[glvl_target][gxp_remaining] 0};
 #if {!"$my[glvl_target][str_eta]"} {#var my[glvl_target][str_eta] {}};
