@@ -83,17 +83,17 @@
 				};
 				#if {$my[glvl_target][eta_hours] < 1} {
 					#math my[glvl_target][eta_display] {$my[glvl_target][eta_hours] * 60};
-					#var my[glvl_target][str_eta] {$my[glvl_target][eta_display] Mins};
+					#var my[glvl_target][str_eta] {$my[glvl_target][eta_display] Cmbt Mins};
 				} {
 					#if {$my[glvl_target][eta_hours] < 24} {
-						#var my[glvl_target][str_eta] {$my[glvl_target][eta_hours] Hrs};
+						#var my[glvl_target][str_eta] {$my[glvl_target][eta_hours] Cmbt Hrs};
 					} {
 						#if {$my[glvl_target][eta_hours] < 168} {
 							#math my[glvl_target][eta_display] {$my[glvl_target][eta_hours] / 24};
-							#var my[glvl_target][str_eta] {$my[glvl_target][eta_display] Days};
+							#var my[glvl_target][str_eta] {$my[glvl_target][eta_display] Cmbt Days};
 						} {
 							#math my[glvl_target][eta_display] {$my[glvl_target][eta_hours] / 168};
-							#var my[glvl_target][str_eta] {$my[glvl_target][eta_display] Wks};
+							#var my[glvl_target][str_eta] {$my[glvl_target][eta_display] Cmbt Wks};
 						};
 					};
 				};
@@ -108,7 +108,7 @@
 	#list temp add {<bfa>║  <088>\e[32mHP:\e[0m${hp_color}$my[hp][graph]\e[0m   \e[96mSP:\e[0m${sp_color}$my[sp][graph]\e[0m   \e[33mSat:\e[0m$my[gp1][graph]\e[0m \e[35mC:\e[0m$my[gp2][graph]\e[0m \e[35mE:\e[0m$enemy[graph]\e[0m};
 	#list temp add {<bfa>║  <088>\e[36mProts:\e[37m $prots_show  \e[36mGem:\e[37m$my[gem]%  \e[36mMC:\e[37m$my[mental_cognition]%  \e[36mASH:\e[0m $ash_string\e[0m};
 	#if {$my[glvl_target][level] > 0} {
-		#var _glvl_tgt_str {  \e[33mTGL:\e[37m$my[glvl_target][level]  \e[33mLeft:\e[37m@thousandsFormatNumber{$my[glvl_target][gxp_remaining]}  \e[33mTETA:\e[37m$my[glvl_target][str_eta]};
+		#var _glvl_tgt_str {  \e[36mTGL:\e[37m$my[glvl_target][level]  \e[36mLeft:\e[37m@thousandsFormatNumber{$my[glvl_target][gxp_remaining]}  \e[36mTETA:\e[37m$my[glvl_target][str_eta]};
 	} {
 		#var _glvl_tgt_str {};
 	};
