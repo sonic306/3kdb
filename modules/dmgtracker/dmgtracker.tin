@@ -359,14 +359,24 @@ dreset;
     #if {"$guild" == "mage"} {
         #var summonDmgNewRound 1;
         #var tempHighSummonDmg 0;
+        #var tempSummonHits 0;
         #if {!$ewell_round && !$fry_round} {
             #foreach *summon_dmg[vaf][%*] tmpSummonItem {
                 #math tempHighSummonDmg {$tempHighSummonDmg + $summon_dmg[vaf][$tmpSummonItem][round][damage]};
+                #math tempSummonHits {$tempSummonHits + $summon_dmg[vaf][$tmpSummonItem][round][hits]};
+            };
+            #if {$tempHighSummonDmg > 0} {
+                #format tempSummonDmgFmt {%g} {$tempHighSummonDmg};
+                #echo {<128>[DMG]:<088> <178>Your Summons hit<088> <138>$tempSummonHits<088> <178>times for<088> <158>$tempSummonDmgFmt<088> <178>damage.<088>};
             };
             #if {$tempHighSummonDmg > $summon_dmg[high]} {
                 #var summon_dmg[high] $tempHighSummonDmg;
                 #echo {<eaa>NEW BEST SUMMON ROUND: $tempHighSummonDmg<088>};
             };
+        };
+        #foreach *summon_dmg[vaf][%*] tmpSummonItem {
+            #var summon_dmg[vaf][$tmpSummonItem][round][damage] 0;
+            #var summon_dmg[vaf][$tmpSummonItem][round][hits] 0;
         };
     };
     #if {"$guild" == "necromancer" && "%2" == "Undead"} {#NOP} {
