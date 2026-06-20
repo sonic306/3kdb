@@ -4,4 +4,9 @@
 #var toggle_find_familiar 1;
 #var go_fetch 0;
 
+#NOP -- GLVL Target Tracker defaults;
+#if {!"$my[glvl_target][level]"} {#var my[glvl_target][level] 0};
+#if {!"$my[glvl_target][gxp_remaining]"} {#var my[glvl_target][gxp_remaining] 0};
+#if {!"$my[glvl_target][str_eta]"} {#var my[glvl_target][str_eta] {}};
+
 #class {guild_vars} close

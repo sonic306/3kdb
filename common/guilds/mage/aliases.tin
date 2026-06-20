@@ -51,6 +51,7 @@
     }
 };
 
+#NOP -- Greater Contingency Aliases;
 #alias gc_ss {cast greater contingency as stoneskin#cast stoneskin};
 #alias gc_mg {cast greater contingency as major globe#cast major globe};
 #alias gc_shield {cast greater contingency as shield#cast magnificent shield};
@@ -60,7 +61,10 @@
 #alias gc_mantle {cast greater contingency as mantle#$mage[contingencies][mantle]#cast mantle};
 #alias gc_ps {cast greater contingency as prismatic sphere#$mage[contingencies][sphere]#cast prismatic sphere};
 
+#NOP -- Contingency Aliases;
+#alias c_ss {cast contingency as stoneskin#cast stoneskin};
 #alias c_rs {cast contingency as stoneskin#cast rhino skin};
+#alias c_mjg {cast contingency as major globe#cast major globe};
 #alias c_mg {cast contingency as minor globe#cast minor globe};
 #alias c_shield {cast contingency as shield#cast shield};
 #alias c_mshield {cast contingency as shield#cast magnificent shield}
@@ -240,6 +244,64 @@
             #break;
         };
     };
+};
+
+#NOP -- GLVL Target Tracker;
+#NOP -- Usage: glvl_target <target_level> - sets target and captures current GXP via gs;
+#NOP -- Usage: glvl_clear - clears the target;
+#alias {glvl_target} {
+    #if {"%0" == ""} {
+        #if {$my[glvl_target][level] > 0} {
+            #echo {<cbf>Current GLVL target: $my[glvl_target][level]<088>};
+            #echo {<bdc>GXP remaining to target: @thousandsFormatNumber{$my[glvl_target][gxp_remaining]}<088>};
+        } {
+            #echo {<faa>No GLVL target set. Usage: glvl_target <level><088>};
+        };
+        #return;
+    };
+    #format my[glvl_target][level] {%d} {%0};
+    #if {$my[glvl_target][level] < 2 || $my[glvl_target][level] > 182} {
+        #echo {<faa>Target must be between 2 and 182.<088>};
+        #var my[glvl_target][level] 0;
+        #return;
+    };
+    #echo {<cbf>GLVL target set to $my[glvl_target][level]. Capturing current GXP...<088>};
+    #line oneshot #action {^  Total GXP : %d %sGXP to next level: %d %sPerc: %d%%} {
+        #format my[glvl_target][total_gxp] {%%d} {%%%%1};
+        #format my[glvl_target][g2n_snapshot] {%%d} {%%%%3};
+        .glvl_target_calc;
+    };
+    gs;
+};
+
+#alias {.glvl_target_calc} {
+    #local _tgt_gxp 0;
+    #local _cur_glvl 0;
+    #local _found 0;
+    #loop 1 182 _i {
+        #if {!$_found && $mage_gxp_table[$_i] > $my[glvl_target][total_gxp]} {
+            #math _cur_glvl {$_i - 1};
+            #var _found 1;
+        };
+    };
+    #if {!$_found} {#var _cur_glvl 182};
+    #var my[glvl_target][current_glvl] $_cur_glvl;
+    #if {$my[glvl_target][level] <= $_cur_glvl} {
+        #echo {<faa>Target level $my[glvl_target][level] is at or below your current level $_cur_glvl.<088>};
+        #var my[glvl_target][level] 0;
+        #return;
+    };
+    #math my[glvl_target][gxp_remaining] {$mage_gxp_table[$my[glvl_target][level]] - $my[glvl_target][total_gxp]};
+    #var my[glvl_target][gxp_total_needed] $my[glvl_target][gxp_remaining];
+    #echo {<cbf>Current GLVL: $_cur_glvl -> Target GLVL: $my[glvl_target][level]<088>};
+    #echo {<bdc>Total GXP needed: @thousandsFormatNumber{$my[glvl_target][gxp_remaining]}<088>};
+};
+
+#alias {glvl_clear} {
+    #var my[glvl_target][level] 0;
+    #var my[glvl_target][gxp_remaining] 0;
+    #var my[glvl_target][str_eta] {};
+    #echo {<cbf>GLVL target cleared.<088>};
 };
 
 #class {guild_aliases} {close}
