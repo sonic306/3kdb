@@ -10,3 +10,4 @@
 #read common/guilds/$guild/tickers.tin;
 #read common/guilds/$guild/track_defense.tin;
 #read common/guilds/$guild/vars.tin;
+#read modules/dmgtracker/dmgtracker_mage.tin;
