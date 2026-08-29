@@ -180,6 +180,7 @@
 			#CASE {"fremen"}        {.mipProcessGlineFremen {%1}};
 			#CASE {"gentech"}		{.mipProcessGlineGentech {%1}};
 			#CASE {"juggernaut"}	{.mipProcessGlineJuggernaut {%1}};
+			#CASE {"knight"}		{.mipProcessGlineKnight {%1}};
 			#CASE {"necromancer"}	{.mipProcessGlineNecromancer {%1}};
 			#CASE {"mage"}			{.mipProcessGlineMage {%1}};
 			#CASE {"monk"} 			{.mipProcessGlineMonk {%1}};
@@ -334,7 +335,20 @@
 
 #ALIAS {.mipProcessGlineFremen} {
 	#IF {%1 == 1} {
-		#REGEX {$mip[gline][1]} {FOCUS: %w} {#VAR {my[litany][focus]} {&1}};
+		#REGEX {$mip[gline][1]} {FOCUS: %w} {
+			#VAR {my[litany][focus]} {&1};
+			#switch {"&1"} {
+				#case {"Wracked"} {#var my[litany][points] 9};
+				#case {"Pained"} {#var my[litany][points] 8};
+				#case {"Vexed"} {#var my[litany][points] 7};
+				#case {"Suffering"} {#var my[litany][points] 6};
+				#case {"Hindered"} {#var my[litany][points] 5};
+				#case {"Unhindered"} {#var my[litany][points] 4};
+				#case {"Sharp"} {#var my[litany][points] 3};
+				#case {"Lucid"} {#var my[litany][points] 2};
+				#case {"Luminous"} {#var my[litany][points] 1};
+			};
+		};
 		#REGEX {$mip[gline][1]} {GXP: %d} {
 			#VAR {my[g2n]} {&1};
 			#VAR {my[gxp][last_round]} {&1};
@@ -412,6 +426,60 @@
 		};
 	}; #ELSE {
 		#ECHO {<171> Invalid Gline Number <088>};
+	};
+};
+
+#ALIAS {.mipProcessGlineKnight} {
+	#IF {%1 == 1} {
+		#regex {$mip[gline][1]} {Stance: %w} {
+			#format my[knight][stance] {%n} {&1};
+		};
+		#regex {$mip[gline][1]} {Method: %w} {
+			#format my[knight][method] {%n} {&1};
+		};
+		#regex {$mip[gline][1]} {Morale: %d} {#var my[knight][morale] &1};
+		#regex {$mip[gline][1]} {Sec Wind: %d\.} {#var my[knight][swind] &1};
+	}; #ELSEIF {%1 == 2} {
+		#var tmpList $mip[gline][2];
+		#list tmpList EXPLODE {] [};
+		#loop 1 &tmpList[] i {
+			#var tmpItem $tmpList[$i];
+			#replace tmpItem {[} {};
+			#regex {$tmpItem} {%w} {#var tmpKey &1};
+			#regex {$tmpItem} {:%*\%} {#var tmpValue &1};
+			#format tmpLength {%L} {$tmpKey};
+			#if @checkKstat{$tmpKey} {
+				#var my[kstats][$tmpKey] $tmpValue;
+				#NOP .recordKstatGXP  $tmpKey $tmpValue;
+			};
+		};
+	}; #ELSE {
+		#ECHO {<171> Invalid Gline Number <088>};
+	};
+};
+
+#alias .recordKstatGXP {
+	#if {"%1" == "start" || "%1" == "reset"} {
+		#var kstat[first_round] $total_rounds;
+	};
+	#var kstat[$my[knight][stance]][$my[knight][method]][%1]
+};
+
+#NOP -- We perform this check since MIP is often garbled and we don't want bad keys slipping through;
+#function checkKstat {
+	#var result 0;
+	#switch {"%1"} {
+		#case {"OFN"} {#var result 1};
+		#case {"DFN"} {#var result 1};
+		#case {"HMN"} {#var result 1};
+		#case {"FSN"} {#var result 1};
+		#case {"BCN"} {#var result 1};
+		#case {"PAN"} {#var result 1};
+		#case {"DLN"} {#var result 1};
+		#case {"SBN"} {#var result 1};
+		#case {"SN"}  {#var result 1};
+		#case {"ENN"} {#var result 1};
+		#default {#var result 0};
 	};
 };
 

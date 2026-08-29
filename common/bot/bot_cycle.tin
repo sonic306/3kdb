@@ -9,14 +9,13 @@
 	#NOP -- Check if the bot exists, and if it does, add it;
 	#local tmpIndex 0;
 	#format tmpName {%p} {%0};
-	#list {botlist} indexate alias;
-	#list {botlist} find {$tmpName} {tmpIndex};
+	#list botlist_alias find {$tmpName} {tmpIndex};
 	#if {$tmpIndex > 0} {
 		#list {botcycle} {add} {$tmpName};
 		_caption_data_bot_cycle;
-		#echo {<bfa> +++ +++ <088> <efe>$botcycle[&botcycle[]] added to bot cycle <bfa> +++ +++ <088>};
+		#echo {<bfa> +++ +++ <088> <efe>%0 added to bot cycle <bfa> +++ +++ <088>};
 	} {
-		#echo {<fbb> -+- <088> <fdc>This was not found in the botlist.  Verify the alias <ded>$tmpName<088><fdc> and try again. <fbb> -+- <088>};
+		#echo {<fbb> -+- <088> <fdc>This was not found in the botlist.  Verify the alias <ded>%0<088><fdc> and try again. <fbb> -+- <088>};
 	};
 };
 
@@ -55,16 +54,15 @@
 #alias {nextarea} {
 	#var tmpIndex 0;
 	#list {botcycle} {get} {1} {currentarea};
-	#list {botlist} {get} {$currentarea} {tmpIndex};
+	#list {botlist_alias} {get} {$currentarea} {tmpIndex};
 	
-	#delay {3} {+$currentarea};
+	#delay {16} {+$currentarea};
 
 	#NOP -- If the area is not 'looped' then remove it from the botlist;
-	#if $botlist[$tmpIndex][loop] {#NOP} {
+	#if $botlist_loop[$tmpIndex] {#NOP} {
 		#list botcycle {delete} {1};
-
 	};
-_caption_data_bot_cycle;
+	_caption_data_bot_cycle;
 };
 
 #alias {botclear} {

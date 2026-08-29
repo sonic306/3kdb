@@ -381,6 +381,13 @@
 		#NOP -- Once out of combat, donate coffin;
 		#ticker coffinRun {#if !$$incombat {dcoffin;#unticker coffinRun}} {2};
 	};
+
+	checkStrategy {donate_water1} {
+		.pause;
+		#NOP -- Once out of combat, donate coffin;
+		#ticker waterRun {#if !$$incombat {donate_water2;#unticker waterRun}} {2};
+	};
+
 } {2};
 
 #action {^All your corpses are already bigger than what is here.$} {
@@ -484,6 +491,12 @@
 	} {6};
 	#delay 2 {
 		#var smuggle_update 0;
+	};
+
+	#NOP -- Check spice beers if fremen;
+	#if {"$guild" == "fremen"} {
+		#var my[spice][smuggled] 0;
+		#action {^> Spice Beer$} {#if $smuggle_update {.update_spice smuggled 1}};
 	};
 	
 } {2};

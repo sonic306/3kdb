@@ -501,13 +501,6 @@ dreset;
     }
 } {2};
     
-#act {%1 hits you for %2 damage!} {
-    #var incombat 1;
-    #var dmgt[curr] %2;
-    #math dmgt[dmg] {$dmgt[dmg] + %2};
-    #math dmgt[count] {$dmgt[count] + 1};
-    #math {dmgt[avg]} {$dmgt[dmg] / $dmgt[count]};
-} {2};
 
 
 
