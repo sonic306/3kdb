@@ -78,6 +78,10 @@
     #if {"$guild" == "cyborg"} {
         #var mob[nano] 0;
     };
+
+    #if {"$major_prof" == "trapper"} {
+        #var mob[trap_blind] 0;
+    };
     
     #var mob[ewell] 0;
     #var mob[shred] 0;
@@ -98,6 +102,8 @@
     #unvar enemy[kill_rate];
 
     #var defense[current_mob_attempts] {};
+
+    #var rep_change 0;
 };
 
 #alias stat_record {
@@ -145,6 +151,7 @@
     #var xdeadmanIdleTimeout $deadmanIdleTimeout;
     #var xdeadmanTimeoutActions $deadmanTimeoutActions;
     #var xdeadman_armed $deadman_armed;
+    #var xmajor_prof $major_prof;
 
     #NOP -- These variables are at a minimum used to draw somewhere;
     #var xsplit $split;
@@ -155,9 +162,13 @@
     #var xmap $map;
     #var xdraw_room $draw_room;
 
-    #NOP -- Guild Specific;
+    #NOP -- Class/Guild/Prof/Etc. Specific;
     #if {"$guild" == "knight"} {
         #var xbattlecry $battlecry;
+    };
+
+    #if {"$major_prof" == "trapper"} {
+        #var xscroungeOrder $scroungeOrder;
     };
 
     #class global close;
@@ -173,6 +184,7 @@
     #var mkaActions $xmkaActions;
     #var hpbar $xhpbar;
     #var spiceBeers $xspiceBeers;
+    #var major_prof $xmajor_prof;
     
     #var lastBot $xlastBot;
     #var theme $xtheme;
@@ -205,9 +217,9 @@
     #var map $xmap;
     #var draw_room $xdraw_room;
 
-    #if {"$strategyActive" == "xstrategyActive"} {#var strategyActive {}};
-    #if {"$corpseActions" == "xcorpseActions"} {#var corpseActions {}};
-    #if {"$mkaActions" == "xmkaActions"} {#var mkaActions {}};
+    #if {"$strategyActive" == "$xstrategyActive"} {#var strategyActive {}};
+    #if {"$corpseActions" == "$xcorpseActions"} {#var corpseActions {}};
+    #if {"$mkaActions" == "$xmkaActions"} {#var mkaActions {}};
     #if {"$hpbar" == "$xhpbar"} {#var hpbar {}};
     #if {"$spiceBeers" == "$xspiceBeers"} {#var spiceBeers {$xspiceBeers}};
     #if {"$lastBot" == "$xlastBot"} {#var lastBot {}};
@@ -219,11 +231,17 @@
     #if {"$toggles" == "$xtoggles"} {#var toggles {}};
     #if {"$xdiscordPost" == "" || "$xdiscordPost" == "xdiscordPost"} {#var discordPost 0} {#var discordPost $xdiscordPost};
     #var toggles[discord_post] $discordPost;
-    #if {"$deadmanTimeoutActions" == "xdeadmanTimeoutActions"} {#list deadmanTimeoutActions clear};
+    #if {"$deadmanTimeoutActions" == "$xdeadmanTimeoutActions"} {#list deadmanTimeoutActions clear};
+    #if {"$major_prof" == "$xmajor_prof"} {#var major_prof {}};
 
     #if {"$guild" == "knight"} {
         #var battlecry $xbattlecry;
         #if {"$battlecry" == "$xbattlecry"} {#var battlecry {}};
+    };
+
+    #if {"$major_prof" == "trapper"} {
+        #var scroungeOrder $xscroungeOrder;
+        #if {"$scroungeOrder" == "$xscroungeOrder"} {#var scroungeOrder {}};
     };
 
     _bootVar_import;

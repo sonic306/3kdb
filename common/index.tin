@@ -19,6 +19,7 @@
 #read common/miphp.tin;
 #read common/mob_kill_action.tin;
 #read common/party.tin;
+#read common/reps.tin
 #read common/room.tin;
 #read common/strategy.tin;
 #read common/subs.tin;

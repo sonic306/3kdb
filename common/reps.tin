@@ -1,0 +1,103 @@
+#class area_reps kill;
+#class area_reps open;
+
+#NOP -- For now tracks rep gains in an area, in the future...maybe more;
+#var rep_record 0;
+#var rep_seed 0;
+#var rep_debouncer 1;
+
+#alias .check_reps {
+    #if {"%1" == "start"} {
+        #var rep_record 1;
+        #var rep_seed 1;
+        reps -short;
+    } {
+        #var rep_record 1;
+        #var rep_seed 0;
+        reps -short;
+    };
+} {2};
+
+
+#action {^Your reputation with %* has %*.} {
+    #if $rep_debouncer {
+        #var rep_debouncer 0;
+        #format tmpRepKey {%p} {%1};
+        #list repData indexate rep_key;
+        #list repData find {$tmpRepKey} {tmpRepIx};
+        #if $tmpRepIx {
+            #math repData[$tmpRepIx][rep_moves] {$repData[$tmpRepIx][rep_moves] + 1};
+        };
+        .check_reps;
+    };
+    #delay rep_debouncer .5 1;
+} {2};
+
+
+#action {FACTION LIST :: %*} {
+    #if $rep_record {
+        #line gag;
+        #line oneshot #action {Name                                Reputation     Value} {#line gag} {1};
+        #line oneshot #action {-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-} {#line gag} {1};
+        
+        #action {%*%s{condemned|hated|despised|scorned|disliked|neutral|liked|respected|admired|beloved|idolized}%s%*} {
+            #if $rep_record {
+                #line gag;
+                #format tmpFaction {%p} {%%1};
+                #format tmpRep {%d} {%%5};
+                #var tmpIx 0;
+                #list repData indexate rep_key;
+                #list repData find {$tmpFaction} {tmpIx};
+                #if $tmpIx {
+                    #if $rep_seed {
+                        #var repData[$tmpIx][start_value] $tmpRep;
+                        #var repData[$tmpIx][current_value] $tmpRep;
+                        #var repData[$tmpIx][last_value] $tmpRep;
+                    } {
+                        #var repData[$tmpIx][last_value] $repData[$tmpIx][current_value];
+                        #var repData[$tmpIx][current_value] $tmpRep;
+                    };
+                };
+                #if {"$tmpFaction" == "$tmpRepKey" && !$rep_seed} {
+                    #var rep_change 0;
+                    #math rep_change {$repData[$tmpRepIx][current_value] - $repData[$tmpRepIx][last_value]};
+                    #if {$rep_change > 0} {
+                        #echo {  <eed>=== REPS REPORT === Your rep with $tmpRepKey <dfd>increased by $rep_change<088> ===};
+                        #var deathReport[reps] $rep_change;
+                    };
+                    #if {$rep_change < 0} {
+                        #echo {  <eed>=== REPS REPORT === Your rep with $tmpRepKey <fab>decreased by $rep_change<088> ===};
+                        #var deathReport[reps] $rep_change;
+                    };
+                };
+            };
+        } {2};
+    };
+    #delay .5 {
+        #var rep_record 0;
+        #var rep_seed 0;
+    };
+} {2};
+
+#NOP -- Rep database;
+#list repData add {{{rep_key} {Aegis Global} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Cow Haters Anonymous} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Cowville} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Deep Mountain Duergar} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Dundee Poachers} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Illithid Enclave} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Mahjongg} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Pinnacle Tower} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {The City of Westersea} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {The Mercenaries of Thiras} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {The Order of Lost Knights} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {The Vigilant} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Wheel of Dragons} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Zodiacs of Aeonos} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {Zodiacs of Zephyrak} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+#list repData add {{{rep_key} {fe dar Shad} {start_value} {} {current_value} {} {last_value} {} {rep_moves} {0}}};
+
+#list repData indexate rep_key
+
+
+#class area_reps close;

@@ -386,4 +386,6 @@
     }
 } {2};
 
+#action {^You have been offered the mission %*.} {mission accept} {2};
+
 #class {common_room} {close};
