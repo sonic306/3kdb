@@ -56,6 +56,8 @@
     #var fakeKill 0;
     _kbCheckIgnore;
     #if !$kbIgnore {
+        #NOP -- Types any rep gained around now as Combat Based - see common/reps.tin;
+        .reps_combat_mark;
         #line oneshot #action {^%* dealt the killing blow to %*.} {
             #var deathReport[mob_killer] %%1;
             _killerCheckIgnore;
