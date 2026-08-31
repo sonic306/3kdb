@@ -164,8 +164,7 @@
 #NOP -- Deadman timer: if the focus state doesn't relinquish again within 12 seconds, re-suspend since it was interrupted;
 #action {^Your focus turns inward, relinquishing its %w state.$} {
     #if {!$idle_flag} {
-        #undelay suspendTimeout;
-        #delay suspendTimeout {#if {"$$suspend_toggle" == "1"} {suspend}} {12};
+        #delay suspendTimeout {suspend} {12};
     };
 } {2};
 
