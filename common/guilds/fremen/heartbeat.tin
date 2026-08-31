@@ -26,7 +26,7 @@
                         #unticker suspendResume;
                         #undelay suspendTimeout;
                     } {
-                        #if {"$$suspend_toggle" == "0"} {suspend};
+                        #if {"$$suspend_toggle" == "1"} {suspend};
                     };
                 } {2};
             };
