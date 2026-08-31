@@ -124,7 +124,6 @@
 			strategy stun;
 			strategy voicehold;
 			strategy voicefeeble;
-			strategy suspend;
 		};
 		#case {"mage"} {
 			strategy spelltap;
