@@ -119,19 +119,38 @@
     #line oneshot #action {^Available gxp to spend:  %*       Total gxp spent:  %*} {
         #var tmpList $fremenskill;
         #var cheapestSkill_cost 100000000;
+        #list tmpSkillsByCost create;
         #foreach *tmpList[] key {
-            #if {$tmpList[$key][cost] < $cheapestSkill_cost} {
-                #var cheapestSkill_cost $tmpList[$key][cost];
-                #var cheapestSkill_name $key;
+            #if {"$key" != "total"} {
+                #list tmpSkillsByCost add {{{skill} {$key} {cost} {$tmpList[$key][cost]}}};
+                #if {$tmpList[$key][cost] < $cheapestSkill_cost} {
+                    #var cheapestSkill_cost $tmpList[$key][cost];
+                    #var cheapestSkill_name $key;
+                };
             };
         };
+        #NOP -- Sort ascending by cost so the N cheapest DISTINCT skills can be summed below;
+        #list tmpSkillsByCost index cost;
+        #list tmpSkillsByCost order;
+
         #var fremenskill[total][current] {$fremenskill[total][rank]};
         #math fremenskill[glvl][current] {$fremenskill[total][current] / 6};
         #math fremenskill[total][next_glvl] {($fremenskill[glvl][current] + 1) * 6};
         #math fremenskill[total][remaining_til_glvl] {$fremenskill[total][next_glvl] - $fremenskill[total][current]};
+
+        #NOP -- Each of the N needed points is bought from a DIFFERENT skill at its own current
+        #NOP -- (not-yet-inflated) cost, rather than repeatedly training one skill whose cost
+        #NOP -- would climb with each point spent;
+        #var tmpGxpNeeded 0;
+        #loop 1 $fremenskill[total][remaining_til_glvl] tmpIdx {
+            #math tmpGxpNeeded {$tmpGxpNeeded + $tmpSkillsByCost[+$tmpIdx][cost]};
+        };
+        #var fremenskill[total][gxp_to_glvl] $tmpGxpNeeded;
+
         #delay .1 {
             #echo {<bfe>Total Skill Points: $fremenskill[total][rank] | Current GLVL: $fremenskill[glvl][current] | Next GLVL in $fremenskill[total][remaining_til_glvl] skill points<088>};
             #echo {<bfe>Cheapest to train: $cheapestSkill_name<088>};
+            #echo {<bfe>Estimated gxp to next GLVL (cheapest $fremenskill[total][remaining_til_glvl] distinct skills): $fremenskill[total][gxp_to_glvl]<088>};
         };
         #class {fremen_skills} {kill};
     };
