@@ -15,12 +15,12 @@
         #if {$my[gp1][current] < 1000} {
             #delay {reclaim} {mu} {0.1};
         };
-        #if {$bot[active] && !$bot[paused] && "$my[litany][focus]" == "Wracked"} {
-                .pause;
-        };
-        #if {$bot[paused] && !$suspend_toggle && "$my[litany][focus]" != "Luminous"} {
-            #send {!suspend};
-        };
+        #NOP #if {$bot[active] && !$bot[paused] && "$my[litany][focus]" == "Wracked"} {
+        #NOP         .pause;
+        #NOP };
+        #NOP #if {$bot[paused] && !$suspend_toggle && "$my[litany][focus]" != "Luminous" && !$incombat} {
+        #NOP     #send {!suspend};
+        #NOP };
         #NOP -- Actions to only attempt once/round go in this section;
         #if {$action_round < $mip[round]} {
             #NOP
